@@ -1,3 +1,3 @@
 export default function Page() {
-  return <div className="min-h-screen bg-neutral-800"></div>;
+  return <div className="flex-1 bg-neutral-900/98"></div>;
 }

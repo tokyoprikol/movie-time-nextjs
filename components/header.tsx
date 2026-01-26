@@ -1,10 +1,7 @@
-import Link from "next/link";
-
 import NavMenu from "./navbar/nav-menu";
 import NavLogo from "./navbar/nav-logo";
 import NavSearchBar from "./navbar/nav-searchbar";
-
-import { Button } from "./ui/button";
+import NavAuth from "./navbar/nav-auth";
 
 export default function Header() {
   return (
@@ -13,15 +10,10 @@ export default function Header() {
         <NavLogo />
         <NavMenu />
       </div>
+
       <NavSearchBar />
-      <div className="flex gap-2">
-        <Button variant="outline" className="">
-          <Link href={"/sign-in"}>Sign In</Link>
-        </Button>
-        <Button variant="outline" className="">
-          <Link href={"/sign-up"}>Sign Up</Link>
-        </Button>
-      </div>
+
+      <NavAuth />
     </header>
   );
 }
