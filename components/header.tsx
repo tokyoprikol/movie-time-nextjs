@@ -1,0 +1,27 @@
+import Link from "next/link";
+
+import NavMenu from "./navbar/nav-menu";
+import NavLogo from "./navbar/nav-logo";
+import NavSearchBar from "./navbar/nav-searchbar";
+
+import { Button } from "./ui/button";
+
+export default function Header() {
+  return (
+    <header className="flex items-center justify-between bg-neutral-900 px-15 py-5">
+      <div className="flex items-center gap-15">
+        <NavLogo />
+        <NavMenu />
+      </div>
+      <NavSearchBar />
+      <div className="flex gap-2">
+        <Button variant="outline" className="">
+          <Link href={"/sign-in"}>Sign In</Link>
+        </Button>
+        <Button variant="outline" className="">
+          <Link href={"/sign-up"}>Sign Up</Link>
+        </Button>
+      </div>
+    </header>
+  );
+}
