@@ -16,7 +16,7 @@ export default function SignUp() {
     <div className="flex flex-1 items-center justify-center bg-neutral-900/98">
       <Card className="w-full max-w-lg border-neutral-700 bg-neutral-800 text-neutral-200">
         <CardHeader>
-          <CardTitle>Sign Up</CardTitle>
+          <CardTitle className="text-2xl font-bold">Sign Up</CardTitle>
           <CardDescription className="text-neutral-300">
             Enter your credentials below to create account
           </CardDescription>
