@@ -1,0 +1,54 @@
+export interface People {
+  gender: number;
+  id: number;
+  known_for: {
+    media_type: string;
+    title: string;
+  };
+  name: string;
+  profile_path: string;
+
+  biography?: string;
+  birthday?: string;
+  deathday?: string;
+  place_of_birth?: string;
+}
+
+export interface Movie {
+  backdrop_path: string;
+  poster_path: string;
+  id: number;
+  overview: string;
+  title: string;
+  release_date: string;
+  vote_average: number;
+  vote_count: number;
+
+  genre_ids?: number[];
+  genres?: Genre[];
+  tagline?: string;
+}
+
+export interface TvSeries {
+  backdrop_path: string;
+  poster_path: string;
+  id: number;
+  name: string;
+  overview: string;
+  first_air_date: string;
+  vote_average: number;
+  vote_count: number;
+
+  genre_ids?: number[];
+  genres?: Genre[];
+  created_by?: {
+    name: string;
+  }[];
+  number_of_episodes?: number;
+  number_of_seasons?: number;
+}
+
+interface Genre {
+  id: number;
+  name: string;
+}

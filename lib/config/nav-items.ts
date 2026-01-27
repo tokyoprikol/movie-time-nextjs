@@ -28,7 +28,7 @@ export const NAV_ITEMS: NavMenu[] = [
   },
 
   {
-    title: "Actors",
-    items: [{ title: "Popular", href: "/actors/popular" }],
+    title: "People",
+    items: [{ title: "Popular", href: "/people/popular" }],
   },
 ];
