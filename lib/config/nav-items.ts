@@ -12,9 +12,9 @@ export const NAV_ITEMS: NavMenu[] = [
   {
     title: "Movies",
     items: [
-      { title: "Popular", href: "/movies/popular" },
-      { title: "Top Rated", href: "/movies/top-rated" },
-      { title: "Upcoming", href: "/movies/upcoming" },
+      { title: "Popular", href: "/movie/popular" },
+      { title: "Top Rated", href: "/movie/top-rated" },
+      { title: "Upcoming", href: "/movie/upcoming" },
     ],
   },
 

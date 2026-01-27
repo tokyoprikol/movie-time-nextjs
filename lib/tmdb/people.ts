@@ -1,12 +1,18 @@
 import { fetchTmdb } from "./client";
-import type { People } from "./types";
+import type { People, MediaResponse } from "./types";
 
-export async function getPopularPeople(language = "en-US", page = 1) {
-  return fetchTmdb<{ results: People[] }>(
+export async function getPopularPeople(
+  language: string = "en-US",
+  page: number = 1,
+): Promise<MediaResponse<People>> {
+  return fetchTmdb<MediaResponse<People>>(
     `/person/popular?language=${language}&page=${page}`,
   );
 }
 
-export async function getPersonById(language = "en-US", id: string) {
-  return fetchTmdb<{ results: People[] }>(`/person/${id}?language=${language}`);
+export async function getPersonById(
+  language: string = "en-US",
+  id: string,
+): Promise<People> {
+  return fetchTmdb<People>(`/person/${id}?language=${language}`);
 }
