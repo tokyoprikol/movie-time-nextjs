@@ -1,5 +1,5 @@
 import { fetchTmdb } from "./client";
-import type { Movie, MediaResponse } from "./types";
+import type { Movie, Genre, MediaResponse } from "./types";
 
 export async function getPopularMovies(
   language: string = "en-US",
@@ -35,4 +35,12 @@ export async function getMovieById(
 ): Promise<Movie> {
   const query = append ? `&append_to_response=${append}` : "";
   return fetchTmdb<Movie>(`/movie/${id}?language=${language}${query}`);
+}
+
+export async function getAllMovieGenres(
+  language: string = "en-US",
+): Promise<{ genres: Genre[] }> {
+  return fetchTmdb<{ genres: Genre[] }>(
+    `/genre/movie/list?language=${language}`,
+  );
 }

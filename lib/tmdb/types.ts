@@ -55,7 +55,7 @@ export interface TvSeries {
   number_of_seasons?: number;
 }
 
-interface Genre {
+export interface Genre {
   id: number;
   name: string;
 }

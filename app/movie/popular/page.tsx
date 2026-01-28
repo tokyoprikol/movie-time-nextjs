@@ -1,36 +1,53 @@
-import { getPopularMovies } from "@/lib/tmdb/movies";
 import type { Movie } from "@/lib/tmdb/types";
+import { getAllMovieGenres, getPopularMovies } from "@/lib/tmdb/movies";
 import { getPoster } from "@/lib/tmdb/getPoster";
+import { convertDate } from "@/lib/tmdb/convertDate";
 import Image from "next/image";
-import dayjs from "dayjs";
+
+import { Button } from "@/components/ui/button";
+import FilterAccordion from "@/components/filter-accordion";
 
 export default async function MoviesPopular() {
   const { results: movies, page, total_pages } = await getPopularMovies();
+
   console.log(movies);
   return (
-    <div className="grid flex-1 grid-cols-5 gap-10 bg-neutral-900/98 px-15 py-15 text-white">
-      {movies.map((movie: Movie) => (
-        <div
-          key={movie.id}
-          className="overflow-hidden rounded-lg border border-neutral-700 bg-neutral-800 shadow-2xl"
-        >
-          <div className="relative aspect-2/3 w-full">
-            <Image
-              src={getPoster("w342", movie.poster_path)}
-              fill
-              alt="Poster"
-              className="object-cover"
-            />
-          </div>
+    <div className="flex-1 space-y-10 bg-neutral-900/98 px-15 py-15 text-white">
+      <h1 className="text-5xl font-bold text-neutral-200">Popular Movies</h1>
 
-          <div className="space-y-2 p-3">
-            <h1 className="font-semibold">{movie.title}</h1>
-            <h3 className="text-neutral-400">
-              {dayjs(movie.release_date).format("MMM D, YYYY")}
-            </h3>
-          </div>
+      <div className="flex justify-between space-x-10">
+        <div className="flex w-full max-w-60 flex-col space-y-5">
+          <FilterAccordion />
+          <Button className="border border-neutral-800 bg-neutral-900 py-5">
+            Search
+          </Button>
         </div>
-      ))}
+        <div className="grid grid-cols-5 gap-10">
+          {movies.map((movie: Movie) => (
+            <div
+              key={movie.id}
+              className="cursor-pointer overflow-hidden rounded-lg border border-neutral-700 bg-neutral-800 shadow-2xl"
+            >
+              <div className="relative aspect-2/3 w-full">
+                <Image
+                  src={getPoster("w342", movie.poster_path)}
+                  fill
+                  sizes=""
+                  alt="Poster"
+                  className="object-cover"
+                />
+              </div>
+
+              <div className="space-y-2 p-3">
+                <h1 className="font-semibold">{movie.title}</h1>
+                <h3 className="text-neutral-400">
+                  {convertDate(movie.release_date)}
+                </h3>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
