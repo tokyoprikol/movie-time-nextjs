@@ -9,15 +9,17 @@ import FilterAccordion from "@/components/filter-accordion";
 
 export default async function MoviesPopular() {
   const { results: movies, page, total_pages } = await getPopularMovies();
+  const { genres } = await getAllMovieGenres();
 
   console.log(movies);
+  console.log(genres);
   return (
     <div className="flex-1 space-y-10 bg-neutral-900/98 px-15 py-15 text-white">
       <h1 className="text-5xl font-bold text-neutral-200">Popular Movies</h1>
 
       <div className="flex justify-between space-x-10">
         <div className="flex w-full max-w-60 flex-col space-y-5">
-          <FilterAccordion />
+          <FilterAccordion genres={genres} />
           <Button className="border border-neutral-800 bg-neutral-900 py-5">
             Search
           </Button>

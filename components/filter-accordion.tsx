@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Accordion,
   AccordionContent,
@@ -6,12 +8,20 @@ import {
 } from "@/components/ui/accordion";
 
 import SelectSort from "@/components/select-sort";
-import { getAllMovieGenres } from "@/lib/tmdb/movies";
 import { Button } from "./ui/button";
 import { Genre } from "@/lib/tmdb/types";
+import { useState } from "react";
 
-export default async function FilterAccordion() {
-  const { genres } = await getAllMovieGenres();
+export default function FilterAccordion({ genres }: { genres: Genre[] }) {
+  const [selectedGenres, setSelectedGenres] = useState<Genre[]>([]);
+
+  const handleSelectGenre = (genre: Genre) => {
+    setSelectedGenres((prev) =>
+      prev.some((g) => g.id === genre.id)
+        ? prev.filter((g) => g.id != genre.id)
+        : [...prev, genre],
+    );
+  };
 
   return (
     <Accordion
@@ -36,12 +46,13 @@ export default async function FilterAccordion() {
         <AccordionContent>
           <h1 className="mb-3 text-neutral-400">Genres</h1>
           <div className="flex flex-wrap gap-2">
-            {genres.map((g: Genre) => (
+            {genres.map((genre: Genre) => (
               <Button
-                key={g.id}
-                className="border border-neutral-700 bg-neutral-800"
+                key={genre.id}
+                onClick={() => handleSelectGenre(genre)}
+                className={`border border-neutral-700 bg-neutral-800 ${selectedGenres.some((g) => g.id === genre.id) ? "border-neutral-800 bg-neutral-900" : "bg-neutral-800"}`}
               >
-                {g.name}
+                {genre.name}
               </Button>
             ))}
           </div>
