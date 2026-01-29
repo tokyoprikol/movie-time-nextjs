@@ -3,7 +3,6 @@ import { getPoster } from "@/lib/tmdb/getPoster";
 import { convertDate } from "@/lib/tmdb/convertDate";
 
 import Image from "next/image";
-import { Suspense } from "react";
 
 export default function MediaListPage({
   title,
@@ -26,26 +25,27 @@ export default function MediaListPage({
 
       <div className="grid grid-cols-5 gap-10">
         {data.map((dataItem: Movie | TvSeries) => (
-          <Suspense key={dataItem.id} fallback={<div></div>}>
-            <div className="cursor-pointer overflow-hidden rounded-lg border border-neutral-700 bg-neutral-800 shadow-2xl">
-              <div className="relative aspect-2/3 w-full">
-                <Image
-                  src={getPoster("w342", dataItem.poster_path)}
-                  fill
-                  sizes=""
-                  alt="Poster"
-                  className="object-cover"
-                />
-              </div>
-
-              <div className="space-y-2 p-3">
-                <h1 className="font-semibold">{getMediaTitle(dataItem)}</h1>
-                <h3 className="text-neutral-400">
-                  {convertDate(getMediaDate(dataItem))}
-                </h3>
-              </div>
+          <div
+            key={dataItem.id}
+            className="cursor-pointer overflow-hidden rounded-lg border border-neutral-700 bg-neutral-800 shadow-2xl"
+          >
+            <div className="relative aspect-2/3 w-full">
+              <Image
+                src={getPoster("w342", dataItem.poster_path)}
+                fill
+                sizes=""
+                alt="Poster"
+                className="object-cover"
+              />
             </div>
-          </Suspense>
+
+            <div className="space-y-2 p-3">
+              <h1 className="font-semibold">{getMediaTitle(dataItem)}</h1>
+              <h3 className="text-neutral-400">
+                {convertDate(getMediaDate(dataItem))}
+              </h3>
+            </div>
+          </div>
         ))}
       </div>
     </div>

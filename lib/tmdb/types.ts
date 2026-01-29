@@ -10,8 +10,9 @@ export interface People {
   id: number;
   known_for: {
     media_type: string;
-    title: string;
-  };
+    title?: string;
+    name?: string;
+  }[];
   name: string;
   profile_path: string;
 
