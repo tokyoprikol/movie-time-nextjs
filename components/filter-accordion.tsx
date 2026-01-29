@@ -50,7 +50,11 @@ export default function FilterAccordion({ genres }: { genres: Genre[] }) {
               <Button
                 key={genre.id}
                 onClick={() => handleSelectGenre(genre)}
-                className={`border border-neutral-700 bg-neutral-800 ${selectedGenres.some((g) => g.id === genre.id) ? "border-neutral-800 bg-neutral-900" : "bg-neutral-800"}`}
+                className={`border border-neutral-700 bg-neutral-800 hover:bg-neutral-100 hover:text-neutral-950 ${
+                  selectedGenres.some((g) => g.id === genre.id)
+                    ? "border-neutral-500 bg-neutral-100 text-neutral-950"
+                    : "bg-neutral-800"
+                }`}
               >
                 {genre.name}
               </Button>
