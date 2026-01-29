@@ -24,7 +24,7 @@ export default function NavMenu() {
             className="border-neutral-700 bg-neutral-800 text-neutral-200"
           >
             {menuItem.items.map((item) => (
-              <DropdownMenuItem key={item.title}>
+              <DropdownMenuItem key={item.title} asChild>
                 <Link href={item.href}>{item.title}</Link>
               </DropdownMenuItem>
             ))}
