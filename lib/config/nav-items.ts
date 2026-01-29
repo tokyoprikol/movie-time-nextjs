@@ -23,7 +23,7 @@ export const NAV_ITEMS: NavMenu[] = [
     items: [
       { title: "Popular", href: "/tv/popular" },
       { title: "Top Rated", href: "/tv/top-rated" },
-      { title: "On TV", href: "/tv/on-tv" },
+      { title: "On TV", href: "/tv/on-the-air" },
     ],
   },
 
