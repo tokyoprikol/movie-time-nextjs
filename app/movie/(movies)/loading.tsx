@@ -8,7 +8,10 @@ export default function Loading() {
 
         <div className="grid grid-cols-5 gap-10">
           {Array.from({ length: 10 }).map((_, i) => (
-            <div className="cursor-pointer overflow-hidden rounded-lg border border-neutral-700 bg-neutral-800 shadow-2xl">
+            <div
+              key={i}
+              className="cursor-pointer overflow-hidden rounded-lg border border-neutral-700 bg-neutral-800 shadow-2xl"
+            >
               <Skeleton className="aspect-2/3 w-full rounded-b-none" />
 
               <div className="space-y-2 p-3">

@@ -28,7 +28,7 @@ export default async function Page() {
             </div>
 
             <div className="space-y-2 p-3">
-              <p>{person.name}</p>
+              <p className="font-semibold">{person.name}</p>
               <div className="text-xs text-neutral-300">
                 {person.known_for
                   .map((item) => item.title || item.name)

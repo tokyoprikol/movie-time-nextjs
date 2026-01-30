@@ -35,6 +35,18 @@ export interface Movie {
   genre_ids?: number[];
   genres?: Genre[];
   tagline?: string;
+  release_dates?: {
+    results: {
+      iso_3166_1: string;
+      release_dates: {
+        certification: string;
+      }[];
+    }[];
+  };
+  runtime?: number;
+  production_companies?: {
+    name: string;
+  }[];
 }
 
 export interface TvSeries {
