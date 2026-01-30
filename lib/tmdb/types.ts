@@ -47,6 +47,23 @@ export interface Movie {
   production_companies?: {
     name: string;
   }[];
+
+  credits?: {
+    cast: {
+      cast_id: number;
+      character: string;
+      name: string;
+      profile_path: string;
+    }[];
+  };
+
+  status?: string;
+  original_language?: string;
+  budget?: number;
+  revenue?: number;
+  keywords: {
+    keywords: { id: number; name: string }[];
+  };
 }
 
 export interface TvSeries {

@@ -1,6 +1,7 @@
 import { Movie, TvSeries } from "@/lib/tmdb/types";
 import { getPoster } from "@/lib/tmdb/getPoster";
 import { convertDate } from "@/lib/utils/convertDate";
+import { slugify } from "@/lib/utils/slugify";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -35,7 +36,9 @@ export default function MediaListPage({
             key={dataItem.id}
             className="cursor-pointer overflow-hidden rounded-lg border border-neutral-700 bg-neutral-800 shadow-2xl"
           >
-            <Link href={`/${checkMediaType(dataItem)}/${dataItem.id}`}>
+            <Link
+              href={`/${checkMediaType(dataItem)}/${dataItem.id}-${slugify(getMediaTitle(dataItem))}`}
+            >
               <div className="relative aspect-2/3 w-full">
                 <Image
                   src={getPoster("w342", dataItem.poster_path)}

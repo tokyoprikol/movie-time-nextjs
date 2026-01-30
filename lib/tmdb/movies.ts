@@ -31,7 +31,7 @@ export async function getUpcomingMovies(
 export async function getMovieById(
   id: string,
   language: string = "en-US",
-  append: string = "credits,reviews,release_dates",
+  append: string = "credits,reviews,release_dates,keywords",
 ): Promise<Movie> {
   const query = append ? `&append_to_response=${append}` : "";
   return fetchTmdb<Movie>(`/movie/${id}?language=${language}${query}`);
