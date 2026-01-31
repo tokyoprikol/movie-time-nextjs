@@ -35,12 +35,15 @@ export default function Reviews({ movie }: { movie: Movie }) {
                   A review by {review.author}
                 </h1>
                 <div className="flex items-center gap-4">
-                  <div className="flex items-center gap-1 rounded-lg border-2 px-2">
-                    <Star fill="white" size={15} />
-                    <span className="text-md font-bold">
-                      {review.author_details.rating}
-                    </span>
-                  </div>
+                  {review.author_details.rating && (
+                    <div className="flex items-center gap-1 rounded-lg border-2 px-2">
+                      <Star fill="white" size={15} />
+                      <span className="text-md font-bold">
+                        {review.author_details.rating}
+                      </span>
+                    </div>
+                  )}
+
                   <div className="text-sm text-neutral-400">
                     Written by{" "}
                     <span className="text-neutral-50">{review.author}</span> on{" "}

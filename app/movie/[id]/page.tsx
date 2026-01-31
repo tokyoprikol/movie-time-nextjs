@@ -41,7 +41,7 @@ export default async function SingleMoviePage({
           <Medias movie={movie} />
         </div>
 
-        <div className="w-full max-w-xs pl-10">
+        <div className="w-xs pl-10">
           <AdditionalInfo movie={movie} />
           <Separator className="my-10 bg-neutral-600" />
         </div>

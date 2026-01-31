@@ -2,6 +2,7 @@ import { getPoster } from "@/lib/tmdb/getPoster";
 import { Movie } from "@/lib/tmdb/types";
 import Image from "next/image";
 import Link from "next/link";
+import { ImageOff } from "lucide-react";
 
 export default function Cast({ movie }: { movie: Movie }) {
   return (
@@ -14,13 +15,19 @@ export default function Cast({ movie }: { movie: Movie }) {
             className="w-full max-w-43 rounded-lg bg-neutral-900 shadow-2xl"
           >
             <div className="relative aspect-3/4 w-full">
-              <Image
-                src={getPoster("w342", item.profile_path)}
-                fill
-                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 16vw"
-                alt="profile"
-                className="rounded-t-lg object-cover object-top"
-              />
+              {item.profile_path ? (
+                <Image
+                  src={getPoster("w342", item.profile_path)}
+                  fill
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 16vw"
+                  alt="profile"
+                  className="rounded-t-lg object-cover object-top"
+                />
+              ) : (
+                <div className="flex justify-center pt-20">
+                  <ImageOff size={80} />
+                </div>
+              )}
             </div>
 
             <div className="space-y-3 p-3">

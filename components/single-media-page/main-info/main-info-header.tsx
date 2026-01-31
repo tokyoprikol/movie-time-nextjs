@@ -18,9 +18,12 @@ export default function MainInfoHeader({ movie }: { movie: Movie }) {
         </p>
       </div>
       <div className="flex gap-4 font-medium">
-        <p className="rounded border-2 border-neutral-400 px-1 text-neutral-300">
-          {usCertification}
-        </p>
+        {usCertification && (
+          <p className="rounded border-2 border-neutral-400 px-1 text-neutral-300">
+            {usCertification}
+          </p>
+        )}
+
         <p className="flex items-center gap-1">
           <CalendarDays size={20} />
           {convertDate(movie.release_date)}

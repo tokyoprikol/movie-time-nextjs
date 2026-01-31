@@ -59,7 +59,7 @@ export default function Medias({ movie }: { movie: Movie }) {
         </Button>
       </div>
       <ScrollArea>
-        <div className="mb-3 flex flex-nowrap gap-2">
+        <div className="mb-3 flex flex-nowrap justify-center gap-2">
           {selectedTab === "videos" &&
             movie.videos.results
               ?.filter(
