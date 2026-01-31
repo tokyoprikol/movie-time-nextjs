@@ -99,6 +99,34 @@ export interface Movie {
       id: number;
     }[];
   };
+
+  videos: {
+    results: {
+      id: string;
+      key: string;
+      name: string;
+      site: string;
+      type: string;
+    }[];
+  };
+
+  images: {
+    backdrops: {
+      file_path: string;
+      width: string;
+      height: string;
+    }[];
+    logos: {
+      file_path: string;
+      width: string;
+      height: string;
+    }[];
+    posters: {
+      file_path: string;
+      width: string;
+      height: string;
+    }[];
+  };
 }
 
 export interface TvSeries {

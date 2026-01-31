@@ -9,9 +9,11 @@ import Image from "next/image";
 import { Star, CircleUserRound } from "lucide-react";
 
 import dayjs from "dayjs";
-import ReviewContent from "@/components/single-media-page/main-info/review-content";
+import ReviewContent from "@/components/single-media-page/review-content";
 import Link from "next/link";
-import Reviews from "@/components/single-media-page/main-info/reviews";
+import Reviews from "@/components/single-media-page/reviews";
+import { Button } from "@/components/ui/button";
+import Medias from "@/components/single-media-page/medias";
 
 export default async function SingleMoviePage({
   params,
@@ -24,14 +26,19 @@ export default async function SingleMoviePage({
   console.log(movie);
 
   return (
-    <div className="flex-1 space-y-10 bg-neutral-900/98 text-white">
+    <div className="flex-1 space-y-10 bg-neutral-900/98 pb-20 text-white">
       <MainInfo movie={movie} />
       <div className="flex justify-between px-15">
-        <div className="w-full">
+        <div className="w-full max-w-6xl">
           <Cast movie={movie} />
+
           <Separator className="my-10 bg-neutral-600 px-10" />
+
           <Reviews movie={movie} />
+
           <Separator className="my-10 bg-neutral-600 px-10" />
+
+          <Medias movie={movie} />
         </div>
 
         <div className="w-full max-w-xs pl-10">
