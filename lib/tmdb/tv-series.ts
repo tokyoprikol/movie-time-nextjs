@@ -29,9 +29,9 @@ export async function getOnTheAirTvSeries(
 }
 
 export async function getTvSeriesById(
-  language: string = "en-US",
   id: string,
-  append: string = "aggregate_credits,reviews",
+  language: string = "en-US",
+  append: string = "aggregate_credits,reviews,content_ratings,keywords,images,videos",
 ): Promise<TvSeries> {
   const query = append ? `&append_to_response=${append}` : "";
   return fetchTmdb<TvSeries>(`/tv/${id}?language=${language}${query}`);

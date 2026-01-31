@@ -1,4 +1,4 @@
-import { getMovieById } from "@/lib/tmdb/movies";
+import { getTvSeriesById } from "@/lib/tmdb/tv-series";
 
 import SingleMediaPage from "@/components/single-media-page/single-media-page";
 
@@ -8,9 +8,9 @@ export default async function SingleMoviePage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const movie = await getMovieById(id);
+  const tvseries = await getTvSeriesById(id);
 
-  console.log(movie);
+  console.log(tvseries);
 
-  return <SingleMediaPage movie={movie} />;
+  return <SingleMediaPage data={tvseries} />;
 }

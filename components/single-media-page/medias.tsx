@@ -1,13 +1,13 @@
 "use client";
 
-import { Movie } from "@/lib/tmdb/types";
+import { Movie, TvSeries } from "@/lib/tmdb/types";
 import { Button } from "../ui/button";
 import Image from "next/image";
 import { getPoster } from "@/lib/tmdb/getPoster";
 import { ScrollArea, ScrollBar } from "../ui/scroll-area";
 import { useState } from "react";
 
-export default function Medias({ movie }: { movie: Movie }) {
+export default function Medias({ data }: { data: Movie | TvSeries }) {
   const [selectedTab, setSelectedTab] = useState("videos");
 
   return (
@@ -61,7 +61,7 @@ export default function Medias({ movie }: { movie: Movie }) {
       <ScrollArea>
         <div className="mb-3 flex flex-nowrap justify-center gap-2">
           {selectedTab === "videos" &&
-            movie.videos.results
+            data.videos.results
               ?.filter(
                 (item) =>
                   item.site === "YouTube" && ["Trailer"].includes(item.type),
@@ -83,7 +83,7 @@ export default function Medias({ movie }: { movie: Movie }) {
                 </div>
               ))}
           {selectedTab === "backdrops" &&
-            movie.images.backdrops?.slice(0, 8).map((i) => (
+            data.images.backdrops?.slice(0, 8).map((i) => (
               <div key={i.file_path} className="relative aspect-video min-h-70">
                 <Image
                   src={getPoster("w500", i.file_path)}
@@ -95,7 +95,7 @@ export default function Medias({ movie }: { movie: Movie }) {
             ))}
 
           {selectedTab === "posters" &&
-            movie.images.posters?.slice(0, 8).map((i) => (
+            data.images.posters?.slice(0, 8).map((i) => (
               <div key={i.file_path} className="relative aspect-2/3 min-h-70">
                 <Image
                   src={getPoster("w500", i.file_path)}

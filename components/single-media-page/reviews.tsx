@@ -1,17 +1,17 @@
 import { getPoster } from "@/lib/tmdb/getPoster";
-import { Movie } from "@/lib/tmdb/types";
+import { Movie, TvSeries } from "@/lib/tmdb/types";
 import dayjs from "dayjs";
 import { CircleUserRound, Star } from "lucide-react";
 import ReviewContent from "./review-content";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Reviews({ movie }: { movie: Movie }) {
+export default function Reviews({ data }: { data: Movie | TvSeries }) {
   return (
     <div className="space-y-5">
       <h1 className="text-3xl font-bold">Reviews</h1>
       <div className="space-y-12">
-        {movie.reviews.results.slice(0, 3).map((review) => (
+        {data.reviews.results.slice(0, 3).map((review) => (
           <div
             key={review.id}
             className="space-y-5 rounded-2xl bg-neutral-900 p-6 shadow-xl"

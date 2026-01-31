@@ -42,6 +42,8 @@ export interface People {
 }
 
 export interface Movie {
+  mediaType: "movie";
+
   backdrop_path: string;
   poster_path: string;
   id: number;
@@ -130,6 +132,8 @@ export interface Movie {
 }
 
 export interface TvSeries {
+  mediaType: "tv";
+
   backdrop_path: string;
   poster_path: string;
   id: number;
@@ -146,6 +150,82 @@ export interface TvSeries {
   }[];
   number_of_episodes?: number;
   number_of_seasons?: number;
+  tagline: string;
+
+  content_ratings: {
+    results: {
+      iso_3166_1: string;
+      rating: string;
+    }[];
+  };
+
+  production_companies?: {
+    name: string;
+  }[];
+
+  reviews: {
+    page: number;
+    results: {
+      author: string;
+      author_details: {
+        avatar_path: string;
+        name: string;
+        rating: number;
+        username: string;
+      };
+      content: string;
+      created_at: string;
+      id: number;
+    }[];
+  };
+
+  videos: {
+    results: {
+      id: string;
+      key: string;
+      name: string;
+      site: string;
+      type: string;
+    }[];
+  };
+
+  images: {
+    backdrops: {
+      file_path: string;
+      width: string;
+      height: string;
+    }[];
+    logos: {
+      file_path: string;
+      width: string;
+      height: string;
+    }[];
+    posters: {
+      file_path: string;
+      width: string;
+      height: string;
+    }[];
+  };
+
+  status: string;
+  original_language: string;
+
+  keywords: {
+    results: { id: number; name: string }[];
+  };
+}
+
+export interface CreditsCast {
+  id?: number;
+  cast_id: number;
+  character: string;
+  name: string;
+  profile_path: string;
+
+  roles?: {
+    character: string;
+    episode_count: number;
+  }[];
 }
 
 export interface Genre {
