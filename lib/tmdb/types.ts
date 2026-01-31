@@ -1,3 +1,22 @@
+export interface ImageResponse {
+  backdrops: {
+    file_path: string;
+    width: string;
+    height: string;
+  }[];
+  id: number;
+  logos: {
+    file_path: string;
+    width: string;
+    height: string;
+  }[];
+  posters: {
+    file_path: string;
+    width: string;
+    height: string;
+  }[];
+}
+
 export interface MediaResponse<T> {
   page: number;
   results: T[];

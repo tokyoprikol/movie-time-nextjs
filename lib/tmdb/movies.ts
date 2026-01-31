@@ -1,5 +1,5 @@
 import { fetchTmdb } from "./client";
-import type { Movie, Genre, MediaResponse } from "./types";
+import type { Movie, Genre, MediaResponse, ImageResponse } from "./types";
 
 export async function getPopularMovies(
   language: string = "en-US",
@@ -31,7 +31,7 @@ export async function getUpcomingMovies(
 export async function getMovieById(
   id: string,
   language: string = "en-US",
-  append: string = "credits,reviews,release_dates,keywords",
+  append: string = "credits,reviews,release_dates,keywords,images,videos",
 ): Promise<Movie> {
   const query = append ? `&append_to_response=${append}` : "";
   return fetchTmdb<Movie>(`/movie/${id}?language=${language}${query}`);
@@ -44,3 +44,10 @@ export async function getAllMovieGenres(
     `/genre/movie/list?language=${language}`,
   );
 }
+
+// export async function getAllMovieImages(
+//   id: string,
+//   language: string = "en-US",
+// ): Promise<ImageResponse> {
+//   return fetchTmdb<ImageResponse>(`/movie/${id}/images?language=${language}`);
+// }
