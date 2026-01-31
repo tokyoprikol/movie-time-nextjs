@@ -64,6 +64,22 @@ export interface Movie {
   keywords: {
     keywords: { id: number; name: string }[];
   };
+
+  reviews: {
+    page: number;
+    results: {
+      author: string;
+      author_details: {
+        avatar_path: string;
+        name: string;
+        rating: number;
+        username: string;
+      };
+      content: string;
+      created_at: string;
+      id: number;
+    }[];
+  };
 }
 
 export interface TvSeries {
