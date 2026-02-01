@@ -39,6 +39,19 @@ export interface People {
   birthday?: string;
   deathday?: string;
   place_of_birth?: string;
+
+  combined_credits: {
+    cast: {
+      id: number;
+      title: string;
+      name: string;
+      poster_path: string;
+      popularity: number;
+      vote_count: number;
+    }[];
+  };
+  known_for_department: string;
+  also_known_as: string[];
 }
 
 export interface Movie {

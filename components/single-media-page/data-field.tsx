@@ -3,7 +3,7 @@ export default function DataField({
   data,
 }: {
   title: string;
-  data: string | number | undefined;
+  data: string | number | boolean | undefined;
 }) {
   return (
     <div>

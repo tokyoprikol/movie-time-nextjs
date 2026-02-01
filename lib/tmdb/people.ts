@@ -11,8 +11,10 @@ export async function getPopularPeople(
 }
 
 export async function getPersonById(
-  language: string = "en-US",
   id: string,
+  language: string = "en-US",
 ): Promise<People> {
-  return fetchTmdb<People>(`/person/${id}?language=${language}`);
+  return fetchTmdb<People>(
+    `/person/${id}?language=${language}&append_to_response=combined_credits`,
+  );
 }

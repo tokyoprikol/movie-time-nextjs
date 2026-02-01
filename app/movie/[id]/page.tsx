@@ -12,5 +12,5 @@ export default async function SingleMoviePage({
 
   console.log(movie);
 
-  return <SingleMediaPage movie={movie} />;
+  return <SingleMediaPage data={movie} />;
 }
