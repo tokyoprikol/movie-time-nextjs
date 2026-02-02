@@ -1,3 +1,9 @@
+"use client";
+
+import { useInfiniteQuery } from "@tanstack/react-query";
+import { useInView } from "react-intersection-observer";
+import { useEffect } from "react";
+
 import { Movie, TvSeries } from "@/lib/tmdb/types";
 import { getPoster } from "@/lib/tmdb/getPoster";
 import { convertDate } from "@/lib/utils/convertDate";

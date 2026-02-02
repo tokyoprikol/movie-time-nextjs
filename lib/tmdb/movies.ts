@@ -2,8 +2,8 @@ import { fetchTmdb } from "./client";
 import type { Movie, Genre, MediaResponse, ImageResponse } from "./types";
 
 export async function getPopularMovies(
-  language: string = "en-US",
   page: number = 1,
+  language: string = "en-US",
 ): Promise<MediaResponse<Movie>> {
   return fetchTmdb<MediaResponse<Movie>>(
     `/movie/popular?language=${language}&page=${page}`,

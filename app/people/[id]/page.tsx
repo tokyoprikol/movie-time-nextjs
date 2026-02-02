@@ -69,7 +69,7 @@ export default async function PersonPage({
               {person.combined_credits.cast
                 .filter(
                   (m, index, self) =>
-                    m.vote_count > 4000 &&
+                    m.vote_count > 3000 &&
                     index === self.findIndex((t) => t.id === m.id),
                 )
                 .sort((a, b) => b.popularity - a.popularity)
