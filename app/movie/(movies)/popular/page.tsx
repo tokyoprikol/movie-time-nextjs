@@ -1,11 +1,13 @@
 import { getPopularMovies } from "@/lib/tmdb/movies";
 
 import MediaListPage from "@/components/media-list-page";
+import InfiniteScroll from "@/components/infinite-scroll";
 
 export default async function MoviesPopular() {
-  const { results: movies, page, total_pages } = await getPopularMovies();
+  const initialData = await getPopularMovies();
 
-  console.log(movies);
+  console.log(initialData.results);
 
-  return <MediaListPage title="Popular Movies" data={movies} />;
+  return <InfiniteScroll title="Popular Movies" initialData={initialData} />;
+  // return <MediaListPage title="Popular Movies" data={initialData} />;
 }

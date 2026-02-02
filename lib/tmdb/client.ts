@@ -10,7 +10,7 @@ export async function fetchTmdb<T>(
     ...options,
     headers: {
       accept: "application/json",
-      Authorization: `Bearer ${process.env.PUBLIC_NEXT_TMDB_API_BEARER}`,
+      Authorization: `Bearer ${process.env.NEXT_PUBLIC_TMDB_API_BEARER}`,
       ...options.headers,
     },
   });
