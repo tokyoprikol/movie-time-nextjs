@@ -11,8 +11,8 @@ export async function getPopularMovies(
 }
 
 export async function getTopRatedMovies(
-  language: string = "en-US",
   page: number = 1,
+  language: string = "en-US",
 ): Promise<MediaResponse<Movie>> {
   return fetchTmdb<MediaResponse<Movie>>(
     `/movie/top_rated?language=${language}&page=${page}`,
@@ -20,8 +20,8 @@ export async function getTopRatedMovies(
 }
 
 export async function getUpcomingMovies(
-  language: string = "en-US",
   page: number = 1,
+  language: string = "en-US",
 ): Promise<MediaResponse<Movie>> {
   return fetchTmdb<MediaResponse<Movie>>(
     `/movie/upcoming?language=${language}&page=${page}`,

@@ -1,63 +1,41 @@
 "use client";
 
-import { useInfiniteQuery, type InfiniteData } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
 
 import { MediaResponse, Movie, TvSeries } from "@/lib/tmdb/types";
-import {
-  getPopularMovies,
-  getTopRatedMovies,
-  getUpcomingMovies,
-} from "@/lib/tmdb/movies";
-
 import { getPoster } from "@/lib/tmdb/getPoster";
 import { convertDate } from "@/lib/utils/convertDate";
 import { slugify } from "@/lib/utils/slugify";
 
 import Image from "next/image";
 import Link from "next/link";
+import { getPopularMovies } from "@/lib/tmdb/movies";
 
 import { LoaderCircle } from "lucide-react";
 
-type Category = "popular" | "top-rated" | "upcoming";
-
-interface InfiniteScrollProps {
-  title: string;
-  initialData: MediaResponse<Movie>;
-  category: Category;
+async function fetchPopularMovies({ pageParam = 1 }) {
+  const data = getPopularMovies(pageParam);
+  return data;
 }
 
-const categoryToFetch = {
-  popular: getPopularMovies,
-  "top-rated": getTopRatedMovies,
-  upcoming: getUpcomingMovies,
-} as const;
-
-export default function InfiniteScrollMovie({
+export default function InfiniteScrollTvSeries({
   title,
   initialData,
-  category,
-}: InfiniteScrollProps) {
-  const fetcher = categoryToFetch[category] as (
-    page: number,
-  ) => Promise<MediaResponse<Movie>>;
-
+}: {
+  title: string;
+  initialData: MediaResponse<TvSeries>;
+}) {
   const { ref, inView } = useInView({
     threshold: 0.1,
     rootMargin: "300px",
   });
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status } =
-    useInfiniteQuery<
-      MediaResponse<Movie>,
-      Error,
-      InfiniteData<MediaResponse<Movie>, number>,
-      ["movies", Category],
-      number
-    >({
-      queryKey: ["movies", category],
-      queryFn: ({ pageParam = 1 }) => fetcher(pageParam),
+    useInfiniteQuery({
+      queryKey: ["popular-movies"],
+      queryFn: fetchPopularMovies,
       initialPageParam: 1,
       getNextPageParam: (lastPage) => {
         const next = lastPage.page + 1;
@@ -77,7 +55,7 @@ export default function InfiniteScrollMovie({
     }
   }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
-  const movies = data?.pages.flatMap((page) => page.results) ?? [];
+  const tv = data?.pages.flatMap((page) => page.results) ?? [];
 
   function getMediaTitle(item: Movie | TvSeries) {
     return "title" in item ? item.title : item.name;
@@ -97,13 +75,13 @@ export default function InfiniteScrollMovie({
       <h1 className="text-5xl font-bold text-neutral-200">{title}</h1>
 
       <div className="grid grid-cols-5 gap-10">
-        {movies.map((dataItem: Movie | TvSeries) => (
+        {tv.map((dataItem: TvSeries) => (
           <div
             key={dataItem.id + crypto.randomUUID()}
             className="cursor-pointer overflow-hidden rounded-lg border border-neutral-700 bg-neutral-800 shadow-2xl"
           >
             <Link
-              href={`/${checkMediaType(dataItem)}/${dataItem.id}-${slugify(getMediaTitle(dataItem))}`}
+              href={`/${checkMediaType(dataItem)}/${dataItem.id}-${slugify(dataItem.name)}`}
             >
               <div className="relative aspect-2/3 w-full">
                 <Image
@@ -116,7 +94,7 @@ export default function InfiniteScrollMovie({
               </div>
 
               <div className="space-y-2 p-3">
-                <h1 className="font-semibold">{getMediaTitle(dataItem)}</h1>
+                <h1 className="font-semibold">{dataItem.name}</h1>
                 <h3 className="text-neutral-400">
                   {convertDate(getMediaDate(dataItem))}
                 </h3>
