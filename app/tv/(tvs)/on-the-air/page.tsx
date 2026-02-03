@@ -1,16 +1,17 @@
-import InfiniteScroll from "@/components/infinite-scroll";
+import InfiniteScrollTv from "@/components/infinite-scroll-tv";
 import MediaListPage from "@/components/media-list-page";
 import { getOnTheAirTvSeries } from "@/lib/tmdb/tv-series";
 
 export default async function MoviesPopular() {
   const initialData = await getOnTheAirTvSeries();
 
-  console.log(tvSeries);
+  console.log(initialData.results);
 
   return (
-    <InfiniteScroll
+    <InfiniteScrollTv
       title="Currently Airing TV Shows"
       initialData={initialData}
+      category="on-the-air"
     />
   );
   // return <MediaListPage title="Currently Airing TV Shows" data={tvSeries} />;

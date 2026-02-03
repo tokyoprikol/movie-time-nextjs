@@ -2,8 +2,8 @@ import { fetchTmdb } from "./client";
 import type { TvSeries, MediaResponse, Genre } from "./types";
 
 export async function getPopularTvSeries(
-  language: string = "en-US",
   page: number = 1,
+  language: string = "en-US",
 ): Promise<MediaResponse<TvSeries>> {
   return fetchTmdb<MediaResponse<TvSeries>>(
     `/tv/popular?language=${language}&page=${page}`,
@@ -11,8 +11,8 @@ export async function getPopularTvSeries(
 }
 
 export async function getTopRatedTvSeries(
-  language: string = "en-US",
   page: number = 1,
+  language: string = "en-US",
 ): Promise<MediaResponse<TvSeries>> {
   return fetchTmdb<MediaResponse<TvSeries>>(
     `/tv/top_rated?language=${language}&page=${page}`,
@@ -20,8 +20,8 @@ export async function getTopRatedTvSeries(
 }
 
 export async function getOnTheAirTvSeries(
-  language: string = "en-US",
   page: number = 1,
+  language: string = "en-US",
 ): Promise<MediaResponse<TvSeries>> {
   return fetchTmdb<MediaResponse<TvSeries>>(
     `/tv/on_the_air?language=${language}&page=${page}`,
