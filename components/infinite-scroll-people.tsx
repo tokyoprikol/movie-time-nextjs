@@ -77,7 +77,7 @@ export default function InfiniteScrollPeople({
       <div className="grid grid-cols-5 gap-10">
         {people.map((person: People) => (
           <div
-            key={person.id}
+            key={person.id + crypto.randomUUID()}
             className="cursor-pointer overflow-hidden rounded-lg border border-neutral-700 bg-neutral-800 shadow-2xl"
           >
             <Link href={`/people/${person.id}-${slugify(person.name)}`}>

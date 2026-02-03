@@ -48,6 +48,9 @@ export interface People {
       poster_path: string;
       popularity: number;
       vote_count: number;
+      release_date: string;
+      first_air_date: string;
+      character: string;
     }[];
   };
   known_for_department: string;
