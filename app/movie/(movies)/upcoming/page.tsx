@@ -1,4 +1,4 @@
-import InfiniteScrollMovie from "@/components/infinite-scroll";
+import InfiniteScrollMovie from "@/components/infinite-scroll-movie";
 import MediaListPage from "@/components/media-list-page";
 import { getUpcomingMovies } from "@/lib/tmdb/movies";
 

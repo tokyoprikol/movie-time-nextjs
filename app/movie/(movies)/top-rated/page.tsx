@@ -1,7 +1,7 @@
 import { getTopRatedMovies } from "@/lib/tmdb/movies";
 
 import MediaListPage from "@/components/media-list-page";
-import InfiniteScrollMovie from "@/components/infinite-scroll";
+import InfiniteScrollMovie from "@/components/infinite-scroll-movie";
 
 export default async function MoviesPopular() {
   const initialData = await getTopRatedMovies();
