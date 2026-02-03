@@ -19,6 +19,11 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { LoaderCircle } from "lucide-react";
+import {
+  getMediaDate,
+  getMediaTitle,
+  getMediaType,
+} from "@/lib/tmdb/media-details";
 
 type Category = "popular" | "top-rated" | "upcoming";
 
@@ -79,19 +84,6 @@ export default function InfiniteScrollMovie({
 
   const movies = data?.pages.flatMap((page) => page.results) ?? [];
 
-  function getMediaTitle(item: Movie | TvSeries) {
-    return "title" in item ? item.title : item.name;
-  }
-
-  function getMediaDate(item: Movie | TvSeries) {
-    return "release_date" in item ? item.release_date : item.first_air_date;
-  }
-
-  function checkMediaType(item: Movie | TvSeries) {
-    if ("title" in item) return "movie";
-    if ("name" in item) return "tv";
-  }
-
   return (
     <div className="space-y-10">
       <h1 className="text-5xl font-bold text-neutral-200">{title}</h1>
@@ -103,7 +95,7 @@ export default function InfiniteScrollMovie({
             className="cursor-pointer overflow-hidden rounded-lg border border-neutral-700 bg-neutral-800 shadow-2xl"
           >
             <Link
-              href={`/${checkMediaType(dataItem)}/${dataItem.id}-${slugify(getMediaTitle(dataItem))}`}
+              href={`/${getMediaType(dataItem)}/${dataItem.id}-${slugify(getMediaTitle(dataItem))}`}
             >
               <div className="relative aspect-2/3 w-full">
                 <Image

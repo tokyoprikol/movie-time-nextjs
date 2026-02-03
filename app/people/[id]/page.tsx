@@ -1,11 +1,14 @@
 import PersonBiography from "@/components/person-biography";
 import DataField from "@/components/single-media-page/data-field";
+import { getMediaTitle, getMediaType } from "@/lib/tmdb/media-details";
 import { getPoster } from "@/lib/tmdb/getPoster";
 import { getPersonById } from "@/lib/tmdb/people";
 import { calculateAge } from "@/lib/utils/calculateAge";
 import { convertDate } from "@/lib/utils/convertDate";
+import { slugify } from "@/lib/utils/slugify";
 import { Circle, Minus } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default async function PersonPage({
   params,
@@ -77,17 +80,21 @@ export default async function PersonPage({
                 .slice(0, 5)
                 .map((m) => (
                   <div key={m.id} className="w-40">
-                    <div className="relative aspect-2/3">
-                      <Image
-                        src={getPoster("w500", m.poster_path)}
-                        alt="Poster"
-                        fill
-                        className="rounded-lg object-top"
-                      />
-                    </div>
-                    <div className="p-4 pt-2 text-center font-semibold">
-                      {m.title || m.name}
-                    </div>
+                    <Link
+                      href={`/${getMediaType(m)}/${m.id}-${slugify(getMediaTitle(m))}`}
+                    >
+                      <div className="relative aspect-2/3">
+                        <Image
+                          src={getPoster("w500", m.poster_path)}
+                          alt="Poster"
+                          fill
+                          className="rounded-lg object-top"
+                        />
+                      </div>
+                      <div className="p-4 pt-2 text-center font-semibold">
+                        {m.title || m.name}
+                      </div>
+                    </Link>
                   </div>
                 ))}
             </div>
@@ -104,12 +111,15 @@ export default async function PersonPage({
                   return isUnique && hasDate && m.vote_count > 500;
                 })
                 .sort((a, b) => {
-                  const dateA = new Date(a.release_date || a.first_air_date);
-                  const dateB = new Date(b.release_date || b.first_air_date);
+                  const dateA = new Date(
+                    a.release_date || a.first_air_date,
+                  ).getTime();
+                  const dateB = new Date(
+                    b.release_date || b.first_air_date,
+                  ).getTime();
 
                   return dateB - dateA || b.popularity - a.popularity;
                 })
-                // .sort((a, b) => b.popularity - a.popularity)
                 .map((m) => (
                   <div
                     key={m.id}
@@ -124,7 +134,12 @@ export default async function PersonPage({
                     </div>
                     <Circle size={15} className="w-full max-w-15" />
                     <div className="w-full">
-                      <h1 className="font-bold">{m.name || m.title}</h1>
+                      <Link
+                        href={`/${getMediaType(m)}/${m.id}-${slugify(getMediaTitle(m))}`}
+                      >
+                        <h1 className="font-bold">{m.name || m.title}</h1>
+                      </Link>
+
                       <p className="text-neutral-200">
                         <span className="text-neutral-400">as </span>
                         {m.character}

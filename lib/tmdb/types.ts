@@ -50,7 +50,7 @@ export interface People {
       vote_count: number;
       release_date: string;
       first_air_date: string;
-      character: string;
+      character?: string;
     }[];
   };
   known_for_department: string;
