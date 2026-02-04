@@ -1,3 +1,10 @@
+export interface MediaResponse<T> {
+  page: number;
+  results: T;
+  total_pages: number;
+  total_results: number;
+}
+
 interface ImageFile {
   file_path: string;
   width: number;
@@ -45,6 +52,7 @@ export interface ProductionCompany {
   origin_country?: string;
 }
 
+//-------------------------------- BASE TYPES ----------------------------------
 interface BaseMediaListItem {
   media_type: "movie" | "tv";
 
@@ -212,4 +220,10 @@ export interface PersonDetails {
   popularity: number;
   also_known_as: string[];
   known_for_department: string;
+
+  combined_credits: {
+    cast: ((MovieListItem | TvListItem)[] & {
+      character: string;
+    })[];
+  };
 }
