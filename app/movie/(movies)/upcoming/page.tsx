@@ -1,5 +1,4 @@
 import InfiniteScrollMovie from "@/components/infinite-scroll-movie";
-import MediaListPage from "@/components/media-list-page";
 import { getUpcomingMovies } from "@/lib/tmdb/movies";
 
 export default async function MoviesPopular() {
@@ -14,5 +13,4 @@ export default async function MoviesPopular() {
       category="upcoming"
     />
   );
-  // return <MediaListPage title="Upcoming Movies" data={movies} />;
 }

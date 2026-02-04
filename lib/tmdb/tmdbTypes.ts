@@ -1,3 +1,7 @@
+export interface Params {
+  params: Promise<{ id: string }>;
+}
+
 export interface MediaResponse<T> {
   page: number;
   results: T;

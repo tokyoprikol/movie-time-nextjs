@@ -1,5 +1,4 @@
 import InfiniteScrollTv from "@/components/infinite-scroll-tv";
-import MediaListPage from "@/components/media-list-page";
 import { getOnTheAirTvSeries } from "@/lib/tmdb/tv-series";
 
 export default async function MoviesPopular() {
@@ -14,5 +13,4 @@ export default async function MoviesPopular() {
       category="on-the-air"
     />
   );
-  // return <MediaListPage title="Currently Airing TV Shows" data={tvSeries} />;
 }

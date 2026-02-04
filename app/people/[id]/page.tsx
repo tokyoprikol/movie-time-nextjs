@@ -9,12 +9,9 @@ import { slugify } from "@/lib/utils/slugify";
 import { Circle, Minus } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { Params } from "@/lib/tmdb/tmdbTypes";
 
-export default async function PersonPage({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
+export default async function PersonPage({ params }: Params) {
   const { id } = await params;
   const person = await getPersonById(id);
 

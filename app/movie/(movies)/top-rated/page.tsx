@@ -1,6 +1,5 @@
 import { getTopRatedMovies } from "@/lib/tmdb/movies";
 
-import MediaListPage from "@/components/media-list-page";
 import InfiniteScrollMovie from "@/components/infinite-scroll-movie";
 
 export default async function MoviesPopular() {
@@ -15,5 +14,4 @@ export default async function MoviesPopular() {
       category="top-rated"
     />
   );
-  // return <MediaListPage title="Top Rated Movies" data={movies} />;
 }
