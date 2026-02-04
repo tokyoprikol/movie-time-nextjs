@@ -1,20 +1,8 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { useState } from "react";
-
-interface Review {
-  author: string;
-  author_details: {
-    avatar_path: string;
-    name: string;
-    rating: number;
-    username: string;
-  };
-  content: string;
-  created_at: string;
-  id: number;
-}
+import { Review } from "@/lib/tmdb/tmdbTypes";
+import { Button } from "@/components/ui/button";
 
 export default function ReviewContent({ review }: { review: Review }) {
   const [isOpen, setIsOpen] = useState(false);

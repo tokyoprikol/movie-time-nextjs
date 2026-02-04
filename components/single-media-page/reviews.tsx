@@ -1,12 +1,16 @@
-import { getPoster } from "@/lib/tmdb/getPoster";
-import { Movie, TvSeries } from "@/lib/tmdb/types";
-import dayjs from "dayjs";
-import { CircleUserRound, Star } from "lucide-react";
-import ReviewContent from "./review-content";
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Reviews({ data }: { data: Movie | TvSeries }) {
+import ReviewContent from "./review-content";
+
+import { MovieDetails, TvDetails } from "@/lib/tmdb/tmdbTypes";
+
+import { getPoster } from "@/lib/tmdb/getPoster";
+import { CircleUserRound, Star } from "lucide-react";
+
+import dayjs from "dayjs";
+
+export default function Reviews({ data }: { data: MovieDetails | TvDetails }) {
   return (
     <div className="space-y-5">
       <h1 className="text-3xl font-bold">Reviews</h1>
