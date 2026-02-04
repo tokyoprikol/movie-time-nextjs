@@ -14,7 +14,7 @@ export default function ProductionCompanies({
       </h1>
       <div className="space-x-5">
         {data.production_companies.map((c) => (
-          <span key={c.name} className="text-neutral-300 italic">
+          <span key={crypto.randomUUID()} className="text-neutral-300 italic">
             {c.name}
           </span>
         ))}

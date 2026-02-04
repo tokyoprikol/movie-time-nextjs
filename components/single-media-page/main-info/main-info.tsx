@@ -15,9 +15,10 @@ export default function MainInfo({ data }: { data: MovieDetails | TvDetails }) {
         <Image
           src={getPoster("original", data.backdrop_path)}
           fill
+          sizes="(max-width: 1280px) 100vw, 1280px"
           alt="Backdrop"
           loading="eager"
-          className="object-cover object-top"
+          className="object-cover"
         />
       ) : (
         <ImageOff />

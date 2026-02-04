@@ -47,19 +47,24 @@ export default async function PersonPage({ params }: Params) {
             <DataField title="Known For" data={person.known_for_department} />
             <DataField
               title="Known Credits"
-              data={person.combined_credits.cast.length}
+              data={person.combined_credits.cast.length ?? "-"}
             />
             <DataField
               title="Gender"
-              data={person.gender === 1 ? "Female" : "Male"}
+              data={
+                person.gender ? (person.gender === 1 ? "Female" : "Male") : "-"
+              }
             />
             <DataField
               title="Birthday"
               data={
-                convertDate(person.birthday ?? "") +
-                ` (${calculateAge(person.birthday ?? "")} years)`
+                person.birthday
+                  ? convertDate(person.birthday ?? "") +
+                    ` (${calculateAge(person.birthday ?? "")} years)`
+                  : "-"
               }
             />
+
             <DataField title="Place of Birth" data={person.place_of_birth} />
 
             <div>
@@ -79,40 +84,47 @@ export default async function PersonPage({ params }: Params) {
           <div className="space-y-2">
             <h1 className="text-2xl font-semibold">Known For</h1>
             <div className="flex gap-10">
-              {person.combined_credits.cast
-                .filter(
-                  (media, index, self) =>
-                    media.vote_count > 3000 &&
-                    index === self.findIndex((t) => t.id === media.id),
-                )
-                .sort((a, b) => b.popularity - a.popularity)
-                .slice(0, 5)
-                .map((media) => (
-                  <div key={media.id} className="w-40">
-                    <Link
-                      href={`/${getMediaType(
-                        media,
-                      )}/${media.id}-${slugify(getMediaTitle(media))}`}
-                    >
-                      {media.poster_path ? (
-                        <div className="relative aspect-2/3">
-                          <Image
-                            src={getPoster("w500", media.poster_path)}
-                            alt="Poster"
-                            fill
-                            className="rounded-lg object-top"
-                          />
-                        </div>
-                      ) : (
-                        <ImageOff />
-                      )}
+              {person.combined_credits.cast.length > 0 ? (
+                person.combined_credits.cast
+                  .filter(
+                    (media, index, self) =>
+                      index === self.findIndex((t) => t.id === media.id),
+                  )
+                  .sort(
+                    (a, b) =>
+                      b.popularity - a.popularity &&
+                      b.vote_count - a.vote_count,
+                  )
+                  .slice(0, 5)
+                  .map((media) => (
+                    <div key={media.id} className="w-40">
+                      <Link
+                        href={`/${getMediaType(
+                          media,
+                        )}/${media.id}-${slugify(getMediaTitle(media))}`}
+                      >
+                        {media.poster_path ? (
+                          <div className="relative aspect-2/3">
+                            <Image
+                              src={getPoster("w500", media.poster_path)}
+                              alt="Poster"
+                              fill
+                              className="rounded-lg object-top"
+                            />
+                          </div>
+                        ) : (
+                          <ImageOff />
+                        )}
 
-                      <div className="p-4 pt-2 text-center font-semibold">
-                        {getMediaTitle(media)}
-                      </div>
-                    </Link>
-                  </div>
-                ))}
+                        <div className="p-4 pt-2 text-center font-semibold">
+                          {getMediaTitle(media)}
+                        </div>
+                      </Link>
+                    </div>
+                  ))
+              ) : (
+                <span className="text-xl text-neutral-400">No Info</span>
+              )}
             </div>
           </div>
 
@@ -124,7 +136,7 @@ export default async function PersonPage({ params }: Params) {
                   const isUnique =
                     index === self.findIndex((t) => t.id === media.id);
                   const hasDate = getMediaDate(media);
-                  return isUnique && hasDate && media.vote_count > 500;
+                  return isUnique && hasDate && media.vote_count > 10;
                 })
                 .sort((a, b) => {
                   const dateA = new Date(getMediaDate(a)).getTime();

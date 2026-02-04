@@ -92,6 +92,7 @@ export default function Medias({ data }: { data: MovieDetails | TvDetails }) {
                   src={getPoster("w500", i.file_path)}
                   alt="image"
                   fill
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 50vw"
                   className="rounded-lg"
                 />
               </div>
@@ -104,6 +105,7 @@ export default function Medias({ data }: { data: MovieDetails | TvDetails }) {
                   src={getPoster("w500", i.file_path)}
                   alt="image"
                   fill
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 16vw"
                   className="rounded-lg"
                 />
               </div>

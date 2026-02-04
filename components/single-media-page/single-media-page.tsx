@@ -13,8 +13,6 @@ export default function SingleMediaPage({
 }: {
   data: MovieDetails | TvDetails;
 }) {
-  console.log(data);
-
   return (
     <div className="flex-1 space-y-10 bg-neutral-900/98 pb-20 text-white">
       <MainInfo data={data} />

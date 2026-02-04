@@ -27,6 +27,7 @@ export default function Reviews({ data }: { data: MovieDetails | TvDetails }) {
                     src={getPoster("w185", review.author_details.avatar_path)}
                     alt="profile"
                     fill
+                    sizes="60px"
                     className="rounded-full object-top"
                   />
                 </div>

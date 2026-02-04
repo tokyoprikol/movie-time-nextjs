@@ -22,33 +22,37 @@ export default function Cast({ data }: { data: MovieDetails | TvDetails }) {
             key={item.id}
             className="w-full max-w-43 rounded-lg bg-neutral-900 shadow-2xl"
           >
-            <div className="relative aspect-3/4 w-full">
-              {item.profile_path ? (
-                <Image
-                  src={getPoster("w342", item.profile_path)}
-                  fill
-                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 16vw"
-                  alt="profile"
-                  className="rounded-t-lg object-cover object-top"
-                />
-              ) : (
-                <div className="flex justify-center pt-20">
-                  <ImageOff size={80} />
-                </div>
-              )}
-            </div>
-
-            <div className="space-y-3 p-3">
-              <div className="text-sm font-semibold">{item.name}</div>
-              <div className="text-xs text-neutral-300">
-                {"character" in item ? item.character : item.roles[0].character}
+            <Link href={`/people/${item.id}`}>
+              <div className="relative aspect-3/4 w-full">
+                {item.profile_path ? (
+                  <Image
+                    src={getPoster("w342", item.profile_path)}
+                    fill
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 16vw"
+                    alt="profile"
+                    className="rounded-t-lg object-cover object-top"
+                  />
+                ) : (
+                  <div className="flex justify-center pt-20">
+                    <ImageOff size={80} />
+                  </div>
+                )}
               </div>
-              {"roles" in item && (
-                <div className="text-xs text-neutral-400">
-                  {item.roles[0].episode_count} Episodes
+
+              <div className="space-y-3 p-3">
+                <div className="text-sm font-semibold">{item.name}</div>
+                <div className="text-xs text-neutral-300">
+                  {"character" in item
+                    ? item.character
+                    : item.roles[0].character}
                 </div>
-              )}
-            </div>
+                {"roles" in item && (
+                  <div className="text-xs text-neutral-400">
+                    {item.roles[0].episode_count} Episodes
+                  </div>
+                )}
+              </div>
+            </Link>
           </div>
         ))}
       </div>
