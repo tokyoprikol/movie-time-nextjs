@@ -1,6 +1,6 @@
-import { Movie, TvSeries } from "@/lib/tmdb/types";
+import { MovieDetails, TvDetails } from "@/lib/tmdb/tmdbTypes";
 
-export default function UserVote({ data }: { data: Movie | TvSeries }) {
+export default function UserVote({ data }: { data: MovieDetails | TvDetails }) {
   return (
     <div className="flex items-center gap-3">
       <p

@@ -4,12 +4,15 @@ import { useInfiniteQuery, type InfiniteData } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
 
-import { MediaResponse, Movie, TvSeries } from "@/lib/tmdb/types";
+import { MediaResponse, MovieListItem } from "@/lib/tmdb/tmdbTypes";
+
+type Category = "popular" | "top-rated" | "upcoming";
+
 import {
   getPopularMovies,
   getTopRatedMovies,
   getUpcomingMovies,
-} from "@/lib/tmdb/movies";
+} from "@/lib/tmdb/API/movies";
 
 import { getPoster } from "@/lib/tmdb/getPoster";
 import { convertDate } from "@/lib/utils/convertDate";
@@ -18,18 +21,11 @@ import { slugify } from "@/lib/utils/slugify";
 import Image from "next/image";
 import Link from "next/link";
 
-import { LoaderCircle } from "lucide-react";
-import {
-  getMediaDate,
-  getMediaTitle,
-  getMediaType,
-} from "@/lib/tmdb/media-details";
-
-type Category = "popular" | "top-rated" | "upcoming";
+import { ImageOff, LoaderCircle } from "lucide-react";
 
 interface InfiniteScrollProps {
   title: string;
-  initialData: MediaResponse<Movie>;
+  initialData: MediaResponse<MovieListItem[]>;
   category: Category;
 }
 
@@ -46,7 +42,7 @@ export default function InfiniteScrollMovie({
 }: InfiniteScrollProps) {
   const fetcher = categoryToFetch[category] as (
     page: number,
-  ) => Promise<MediaResponse<Movie>>;
+  ) => Promise<MediaResponse<MovieListItem[]>>;
 
   const { ref, inView } = useInView({
     threshold: 0.1,
@@ -55,9 +51,9 @@ export default function InfiniteScrollMovie({
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status } =
     useInfiniteQuery<
-      MediaResponse<Movie>,
+      MediaResponse<MovieListItem[]>,
       Error,
-      InfiniteData<MediaResponse<Movie>, number>,
+      InfiniteData<MediaResponse<MovieListItem[]>, number>,
       ["movies", Category],
       number
     >({
@@ -89,28 +85,32 @@ export default function InfiniteScrollMovie({
       <h1 className="text-5xl font-bold text-neutral-200">{title}</h1>
 
       <div className="grid grid-cols-5 gap-10">
-        {movies.map((dataItem: Movie | TvSeries) => (
+        {movies.map((dataItem: MovieListItem) => (
           <div
             key={dataItem.id + crypto.randomUUID()}
             className="cursor-pointer overflow-hidden rounded-lg border border-neutral-700 bg-neutral-800 shadow-2xl"
           >
             <Link
-              href={`/${getMediaType(dataItem)}/${dataItem.id}-${slugify(getMediaTitle(dataItem))}`}
+              href={`/${dataItem.media_type}/${dataItem.id}-${slugify(dataItem.title)}`}
             >
-              <div className="relative aspect-2/3 w-full">
-                <Image
-                  src={getPoster("w342", dataItem.poster_path)}
-                  fill
-                  sizes=""
-                  alt="Poster"
-                  className="object-cover"
-                />
-              </div>
+              {dataItem.poster_path ? (
+                <div className="relative aspect-2/3 w-full">
+                  <Image
+                    src={getPoster("w342", dataItem.poster_path)}
+                    fill
+                    sizes=""
+                    alt="Poster"
+                    className="object-cover"
+                  />
+                </div>
+              ) : (
+                <ImageOff />
+              )}
 
               <div className="space-y-2 p-3">
-                <h1 className="font-semibold">{getMediaTitle(dataItem)}</h1>
+                <h1 className="font-semibold">{dataItem.title}</h1>
                 <h3 className="text-neutral-400">
-                  {convertDate(getMediaDate(dataItem))}
+                  {convertDate(dataItem.release_date)}
                 </h3>
               </div>
             </Link>

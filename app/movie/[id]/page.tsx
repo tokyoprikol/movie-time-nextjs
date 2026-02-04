@@ -1,4 +1,4 @@
-import { getMovieById } from "@/lib/tmdb/movies";
+import { getMovieById } from "@/lib/tmdb/API/movies";
 import { Params } from "@/lib/tmdb/tmdbTypes";
 
 import SingleMediaPage from "@/components/single-media-page/single-media-page";

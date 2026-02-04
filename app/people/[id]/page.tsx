@@ -2,7 +2,7 @@ import PersonBiography from "@/components/person-biography";
 import DataField from "@/components/single-media-page/data-field";
 import { getMediaTitle, getMediaType } from "@/lib/tmdb/media-details";
 import { getPoster } from "@/lib/tmdb/getPoster";
-import { getPersonById } from "@/lib/tmdb/people";
+import { getPersonById } from "@/lib/tmdb/API/people";
 import { calculateAge } from "@/lib/utils/calculateAge";
 import { convertDate } from "@/lib/utils/convertDate";
 import { slugify } from "@/lib/utils/slugify";

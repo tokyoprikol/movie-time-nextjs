@@ -1,5 +1,5 @@
 import InfiniteScrollMovie from "@/components/infinite-scroll-movie";
-import { getUpcomingMovies } from "@/lib/tmdb/movies";
+import { getUpcomingMovies } from "@/lib/tmdb/API/movies";
 
 export default async function MoviesPopular() {
   const initialData = await getUpcomingMovies();

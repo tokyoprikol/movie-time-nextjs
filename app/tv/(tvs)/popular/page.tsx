@@ -1,5 +1,5 @@
 import InfiniteScrollTv from "@/components/infinite-scroll-tv";
-import { getPopularTvSeries } from "@/lib/tmdb/tv-series";
+import { getPopularTvSeries } from "@/lib/tmdb/API/tv-series";
 
 export default async function MoviesPopular() {
   const initialData = await getPopularTvSeries();

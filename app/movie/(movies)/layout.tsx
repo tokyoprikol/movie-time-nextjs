@@ -1,5 +1,5 @@
 import Sidebar from "@/components/sidebar";
-import { getAllMovieGenres } from "@/lib/tmdb/movies";
+import { getAllMovieGenres } from "@/lib/tmdb/API/movies";
 import React from "react";
 
 export default async function MoviesLayout({

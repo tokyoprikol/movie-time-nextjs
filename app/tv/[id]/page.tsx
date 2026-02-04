@@ -1,4 +1,4 @@
-import { getTvSeriesById } from "@/lib/tmdb/tv-series";
+import { getTvSeriesById } from "@/lib/tmdb/API/tv-series";
 import { Params } from "@/lib/tmdb/tmdbTypes";
 
 import SingleMediaPage from "@/components/single-media-page/single-media-page";

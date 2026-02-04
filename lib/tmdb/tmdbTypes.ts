@@ -15,6 +15,13 @@ interface ImageFile {
   height: number;
 }
 
+export interface GenresResponse {
+  genres: {
+    id: number;
+    name: string;
+  }[];
+}
+
 export interface Images {
   backdrops: ImageFile[];
   logos: ImageFile[];
@@ -110,11 +117,15 @@ interface BaseMediaDetails {
 
 //-------------------------------- MOVIE TYPES ----------------------------------
 export interface MovieListItem extends BaseMediaListItem {
+  media_type: "movie";
+
   title: string;
   release_date: string;
 }
 
 export interface MovieDetails extends BaseMediaDetails {
+  media_type: "movie";
+
   title: string;
   release_date: string;
 
@@ -152,11 +163,15 @@ export interface MovieDetails extends BaseMediaDetails {
 
 //-------------------------------- TV TYPES ----------------------------------
 export interface TvListItem extends BaseMediaListItem {
+  media_type: "tv";
+
   name: string;
   first_air_date: string;
 }
 
 export interface TvDetails extends BaseMediaDetails {
+  media_type: "tv";
+
   name: string;
   first_air_date: string;
   last_air_date: string;

@@ -1,4 +1,4 @@
-import { getPopularPeople } from "@/lib/tmdb/people";
+import { getPopularPeople } from "@/lib/tmdb/API/people";
 
 import InfiniteScrollPeople from "@/components/infinite-scroll-people";
 

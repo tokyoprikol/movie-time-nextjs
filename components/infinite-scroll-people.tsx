@@ -4,8 +4,10 @@ import { useInfiniteQuery, type InfiniteData } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
 
-import { MediaResponse, People } from "@/lib/tmdb/types";
-import { getPopularPeople } from "@/lib/tmdb/people";
+import { MediaResponse, PersonListItem } from "@/lib/tmdb/tmdbTypes";
+type Category = "popular";
+
+import { getPopularPeople } from "@/lib/tmdb/API/people";
 
 import { getPoster } from "@/lib/tmdb/getPoster";
 import { slugify } from "@/lib/utils/slugify";
@@ -15,10 +17,9 @@ import Link from "next/link";
 
 import { ImageOff, LoaderCircle } from "lucide-react";
 
-type Category = "popular";
 interface InfiniteScrollProps {
   title: string;
-  initialData: MediaResponse<People>;
+  initialData: MediaResponse<PersonListItem[]>;
   category: Category;
 }
 
@@ -33,7 +34,7 @@ export default function InfiniteScrollPeople({
 }: InfiniteScrollProps) {
   const fetcher = categoryToFetch[category] as (
     page: number,
-  ) => Promise<MediaResponse<People>>;
+  ) => Promise<MediaResponse<PersonListItem[]>>;
 
   const { ref, inView } = useInView({
     threshold: 0.1,
@@ -42,9 +43,9 @@ export default function InfiniteScrollPeople({
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status } =
     useInfiniteQuery<
-      MediaResponse<People>,
+      MediaResponse<PersonListItem[]>,
       Error,
-      InfiniteData<MediaResponse<People>, number>,
+      InfiniteData<MediaResponse<PersonListItem[]>, number>,
       ["people", Category],
       number
     >({
@@ -75,7 +76,7 @@ export default function InfiniteScrollPeople({
     <div className="flex-1 space-y-10 bg-neutral-900/98 px-15 py-15 text-white">
       <h1 className="text-5xl font-bold text-neutral-200">{title}</h1>
       <div className="grid grid-cols-5 gap-10">
-        {people.map((person: People) => (
+        {people.map((person: PersonListItem) => (
           <div
             key={person.id + crypto.randomUUID()}
             className="cursor-pointer overflow-hidden rounded-lg border border-neutral-700 bg-neutral-800 shadow-2xl"
@@ -101,7 +102,9 @@ export default function InfiniteScrollPeople({
                 <p className="font-semibold">{person.name}</p>
                 <div className="text-xs text-neutral-300">
                   {person.known_for
-                    .map((item) => item.title || item.name)
+                    .map((item) =>
+                      item.media_type === "movie" ? item.title : item.name,
+                    )
                     .join(", ")}
                 </div>
               </div>

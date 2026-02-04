@@ -4,12 +4,14 @@ import { useInfiniteQuery, type InfiniteData } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
 
-import { MediaResponse, TvSeries } from "@/lib/tmdb/types";
+import { MediaResponse, TvListItem } from "@/lib/tmdb/tmdbTypes";
+type Category = "popular" | "top-rated" | "on-the-air";
+
 import {
   getPopularTvSeries,
   getTopRatedTvSeries,
   getOnTheAirTvSeries,
-} from "@/lib/tmdb/tv-series";
+} from "@/lib/tmdb/API/tv-series";
 
 import { getPoster } from "@/lib/tmdb/getPoster";
 import { convertDate } from "@/lib/utils/convertDate";
@@ -18,13 +20,11 @@ import { slugify } from "@/lib/utils/slugify";
 import Image from "next/image";
 import Link from "next/link";
 
-import { LoaderCircle } from "lucide-react";
-
-type Category = "popular" | "top-rated" | "on-the-air";
+import { ImageOff, LoaderCircle } from "lucide-react";
 
 interface InfiniteScrollProps {
   title: string;
-  initialData: MediaResponse<TvSeries>;
+  initialData: MediaResponse<TvListItem[]>;
   category: Category;
 }
 
@@ -41,7 +41,7 @@ export default function InfiniteScrollTv({
 }: InfiniteScrollProps) {
   const fetcher = categoryToFetch[category] as (
     page: number,
-  ) => Promise<MediaResponse<TvSeries>>;
+  ) => Promise<MediaResponse<TvListItem[]>>;
 
   const { ref, inView } = useInView({
     threshold: 0.1,
@@ -50,9 +50,9 @@ export default function InfiniteScrollTv({
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status } =
     useInfiniteQuery<
-      MediaResponse<TvSeries>,
+      MediaResponse<TvListItem[]>,
       Error,
-      InfiniteData<MediaResponse<TvSeries>, number>,
+      InfiniteData<MediaResponse<TvListItem[]>, number>,
       ["tv", Category],
       number
     >({
@@ -84,21 +84,25 @@ export default function InfiniteScrollTv({
       <h1 className="text-5xl font-bold text-neutral-200">{title}</h1>
 
       <div className="grid grid-cols-5 gap-10">
-        {tv.map((dataItem: TvSeries) => (
+        {tv.map((dataItem: TvListItem) => (
           <div
             key={dataItem.id + crypto.randomUUID()}
             className="cursor-pointer overflow-hidden rounded-lg border border-neutral-700 bg-neutral-800 shadow-2xl"
           >
             <Link href={`/tv/${dataItem.id}-${slugify(dataItem.name)}`}>
-              <div className="relative aspect-2/3 w-full">
-                <Image
-                  src={getPoster("w342", dataItem.poster_path)}
-                  fill
-                  sizes=""
-                  alt="Poster"
-                  className="object-cover"
-                />
-              </div>
+              {dataItem.poster_path ? (
+                <div className="relative aspect-2/3 w-full">
+                  <Image
+                    src={getPoster("w342", dataItem.poster_path)}
+                    fill
+                    sizes=""
+                    alt="Poster"
+                    className="object-cover"
+                  />
+                </div>
+              ) : (
+                <ImageOff />
+              )}
 
               <div className="space-y-2 p-3">
                 <h1 className="font-semibold">{dataItem.name}</h1>

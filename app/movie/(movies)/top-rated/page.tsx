@@ -1,4 +1,4 @@
-import { getTopRatedMovies } from "@/lib/tmdb/movies";
+import { getTopRatedMovies } from "@/lib/tmdb/API/movies";
 
 import InfiniteScrollMovie from "@/components/infinite-scroll-movie";
 

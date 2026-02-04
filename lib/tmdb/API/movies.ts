@@ -1,11 +1,16 @@
 import { fetchTmdb } from "./client";
-import type { Movie, Genre, MediaResponse, ImageResponse } from "./types";
+import type {
+  MediaResponse,
+  MovieListItem,
+  MovieDetails,
+  GenresResponse,
+} from "../tmdbTypes";
 
 export async function getPopularMovies(
   page: number = 1,
   language: string = "en-US",
-): Promise<MediaResponse<Movie>> {
-  return fetchTmdb<MediaResponse<Movie>>(
+): Promise<MediaResponse<MovieListItem[]>> {
+  return fetchTmdb<MediaResponse<MovieListItem[]>>(
     `/movie/popular?language=${language}&page=${page}`,
   );
 }
@@ -13,8 +18,8 @@ export async function getPopularMovies(
 export async function getTopRatedMovies(
   page: number = 1,
   language: string = "en-US",
-): Promise<MediaResponse<Movie>> {
-  return fetchTmdb<MediaResponse<Movie>>(
+): Promise<MediaResponse<MovieListItem[]>> {
+  return fetchTmdb<MediaResponse<MovieListItem[]>>(
     `/movie/top_rated?language=${language}&page=${page}`,
   );
 }
@@ -22,8 +27,8 @@ export async function getTopRatedMovies(
 export async function getUpcomingMovies(
   page: number = 1,
   language: string = "en-US",
-): Promise<MediaResponse<Movie>> {
-  return fetchTmdb<MediaResponse<Movie>>(
+): Promise<MediaResponse<MovieListItem[]>> {
+  return fetchTmdb<MediaResponse<MovieListItem[]>>(
     `/movie/upcoming?language=${language}&page=${page}`,
   );
 }
@@ -32,22 +37,13 @@ export async function getMovieById(
   id: string,
   language: string = "en-US",
   append: string = "credits,reviews,release_dates,keywords,images,videos",
-): Promise<Movie> {
+): Promise<MovieDetails> {
   const query = append ? `&append_to_response=${append}` : "";
-  return fetchTmdb<Movie>(`/movie/${id}?language=${language}${query}`);
+  return fetchTmdb<MovieDetails>(`/movie/${id}?language=${language}${query}`);
 }
 
 export async function getAllMovieGenres(
   language: string = "en-US",
-): Promise<{ genres: Genre[] }> {
-  return fetchTmdb<{ genres: Genre[] }>(
-    `/genre/movie/list?language=${language}`,
-  );
+): Promise<GenresResponse> {
+  return fetchTmdb<GenresResponse>(`/genre/movie/list?language=${language}`);
 }
-
-// export async function getAllMovieImages(
-//   id: string,
-//   language: string = "en-US",
-// ): Promise<ImageResponse> {
-//   return fetchTmdb<ImageResponse>(`/movie/${id}/images?language=${language}`);
-// }
