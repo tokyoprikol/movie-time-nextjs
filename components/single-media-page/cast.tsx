@@ -10,14 +10,14 @@ import { ImageOff } from "lucide-react";
 export default function Cast({ data }: { data: MovieDetails | TvDetails }) {
   const cast =
     data.media_type === "movie"
-      ? data.credits.cast
-      : data.aggregate_credits.cast;
+      ? data.credits?.cast
+      : data.aggregate_credits?.cast;
 
   return (
     <div className="space-y-5">
       <h1 className="text-3xl font-bold">Cast</h1>
       <div className="flex flex-nowrap justify-center gap-5 overflow-hidden">
-        {cast.slice(0, 6).map((item) => (
+        {cast?.slice(0, 6).map((item) => (
           <div
             key={item.id}
             className="w-full max-w-43 rounded-lg bg-neutral-900 shadow-2xl"

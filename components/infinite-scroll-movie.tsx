@@ -90,9 +90,7 @@ export default function InfiniteScrollMovie({
             key={dataItem.id + crypto.randomUUID()}
             className="cursor-pointer overflow-hidden rounded-lg border border-neutral-700 bg-neutral-800 shadow-2xl"
           >
-            <Link
-              href={`/${dataItem.media_type}/${dataItem.id}-${slugify(dataItem.title)}`}
-            >
+            <Link href={`/movie/${dataItem.id}-${slugify(dataItem.title)}`}>
               {dataItem.poster_path ? (
                 <div className="relative aspect-2/3 w-full">
                   <Image

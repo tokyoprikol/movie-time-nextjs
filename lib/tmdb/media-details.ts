@@ -1,13 +1,15 @@
-import { Movie, TvSeries } from "./types";
+import {
+  MovieDetails,
+  MovieListItem,
+  TvDetails,
+  TvListItem,
+} from "./tmdbTypes";
+type AnyMedia = MovieDetails | MovieListItem | TvDetails | TvListItem;
 
-export function getMediaType(item: Movie | TvSeries) {
-  if ("title" in item) return "movie";
-  if ("name" in item) return "tv";
-}
-export function getMediaTitle(item: Movie | TvSeries) {
-  return "title" in item ? item.title : item.name;
-}
+export const getMediaType = (item: AnyMedia) => item.media_type;
 
-export function getMediaDate(item: Movie | TvSeries) {
-  return "release_date" in item ? item.release_date : item.first_air_date;
-}
+export const getMediaTitle = (item: AnyMedia) =>
+  item.media_type === "movie" ? item.title : item.name;
+
+export const getMediaDate = (item: AnyMedia) =>
+  item.media_type === "movie" ? item.release_date : item.first_air_date;

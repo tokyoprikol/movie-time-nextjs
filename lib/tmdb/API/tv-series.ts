@@ -39,7 +39,10 @@ export async function getTvSeriesById(
   append: string = "aggregate_credits,reviews,content_ratings,keywords,images,videos",
 ): Promise<TvDetails> {
   const query = append ? `&append_to_response=${append}` : "";
-  return fetchTmdb<TvDetails>(`/tv/${id}?language=${language}${query}`);
+  const data = await fetchTmdb<TvDetails>(
+    `/tv/${id}?language=${language}${query}`,
+  );
+  return { ...data, media_type: "tv" };
 }
 
 export async function getAllTvSeriesGenres(

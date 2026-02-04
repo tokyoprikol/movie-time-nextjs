@@ -1,15 +1,22 @@
-import PersonBiography from "@/components/person-biography";
-import DataField from "@/components/single-media-page/data-field";
-import { getMediaTitle, getMediaType } from "@/lib/tmdb/media-details";
-import { getPoster } from "@/lib/tmdb/getPoster";
+import Image from "next/image";
+import Link from "next/link";
+
+import { Params } from "@/lib/tmdb/tmdbTypes";
 import { getPersonById } from "@/lib/tmdb/API/people";
+
+import {
+  getMediaTitle,
+  getMediaDate,
+  getMediaType,
+} from "@/lib/tmdb/media-details";
+import { getPoster } from "@/lib/tmdb/getPoster";
 import { calculateAge } from "@/lib/utils/calculateAge";
 import { convertDate } from "@/lib/utils/convertDate";
 import { slugify } from "@/lib/utils/slugify";
-import { Circle, Minus } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
-import { Params } from "@/lib/tmdb/tmdbTypes";
+
+import PersonBiography from "@/components/person-biography";
+import DataField from "@/components/single-media-page/data-field";
+import { Circle, ImageOff, Minus } from "lucide-react";
 
 export default async function PersonPage({ params }: Params) {
   const { id } = await params;
@@ -21,15 +28,20 @@ export default async function PersonPage({ params }: Params) {
     <div className="flex-1 bg-neutral-900/98 p-20 text-neutral-100">
       <div className="flex gap-10">
         <div className="space-y-20">
-          <div className="relative w-full min-w-2xs">
-            <Image
-              src={getPoster("w780", person.profile_path)}
-              alt="Person"
-              width={400}
-              height={200}
-              className="rounded-xl object-top"
-            />
-          </div>
+          {person.profile_path ? (
+            <div className="relative w-full min-w-2xs">
+              <Image
+                src={getPoster("w780", person.profile_path)}
+                alt="Person"
+                width={400}
+                height={200}
+                className="rounded-xl object-top"
+              />
+            </div>
+          ) : (
+            <ImageOff />
+          )}
+
           <div className="space-y-8">
             <h1 className="text-2xl font-semibold">Personal Info</h1>
             <DataField title="Known For" data={person.known_for_department} />
@@ -53,7 +65,7 @@ export default async function PersonPage({ params }: Params) {
             <div>
               <h1 className="text-lg font-semibold">Also Known As</h1>
               <span className="text-neutral-300 italic">
-                {person.also_known_as.length !== 0
+                {person.also_known_as
                   ? person.also_known_as.map((i) => <p key={i}>{i}</p>)
                   : "-"}
               </span>
@@ -69,27 +81,34 @@ export default async function PersonPage({ params }: Params) {
             <div className="flex gap-10">
               {person.combined_credits.cast
                 .filter(
-                  (m, index, self) =>
-                    m.vote_count > 3000 &&
-                    index === self.findIndex((t) => t.id === m.id),
+                  (media, index, self) =>
+                    media.vote_count > 3000 &&
+                    index === self.findIndex((t) => t.id === media.id),
                 )
                 .sort((a, b) => b.popularity - a.popularity)
                 .slice(0, 5)
-                .map((m) => (
-                  <div key={m.id} className="w-40">
+                .map((media) => (
+                  <div key={media.id} className="w-40">
                     <Link
-                      href={`/${getMediaType(m)}/${m.id}-${slugify(getMediaTitle(m))}`}
+                      href={`/${getMediaType(
+                        media,
+                      )}/${media.id}-${slugify(getMediaTitle(media))}`}
                     >
-                      <div className="relative aspect-2/3">
-                        <Image
-                          src={getPoster("w500", m.poster_path)}
-                          alt="Poster"
-                          fill
-                          className="rounded-lg object-top"
-                        />
-                      </div>
+                      {media.poster_path ? (
+                        <div className="relative aspect-2/3">
+                          <Image
+                            src={getPoster("w500", media.poster_path)}
+                            alt="Poster"
+                            fill
+                            className="rounded-lg object-top"
+                          />
+                        </div>
+                      ) : (
+                        <ImageOff />
+                      )}
+
                       <div className="p-4 pt-2 text-center font-semibold">
-                        {m.title || m.name}
+                        {getMediaTitle(media)}
                       </div>
                     </Link>
                   </div>
@@ -101,30 +120,26 @@ export default async function PersonPage({ params }: Params) {
             <h1 className="text-2xl font-semibold">Acting</h1>
             <div className="flex flex-col overflow-hidden rounded-4xl shadow-2xl">
               {person.combined_credits.cast
-                .filter((m, index, self) => {
+                .filter((media, index, self) => {
                   const isUnique =
-                    index === self.findIndex((t) => t.id === m.id);
-                  const hasDate = m.release_date || m.first_air_date;
-                  return isUnique && hasDate && m.vote_count > 500;
+                    index === self.findIndex((t) => t.id === media.id);
+                  const hasDate = getMediaDate(media);
+                  return isUnique && hasDate && media.vote_count > 500;
                 })
                 .sort((a, b) => {
-                  const dateA = new Date(
-                    a.release_date || a.first_air_date,
-                  ).getTime();
-                  const dateB = new Date(
-                    b.release_date || b.first_air_date,
-                  ).getTime();
+                  const dateA = new Date(getMediaDate(a)).getTime();
+                  const dateB = new Date(getMediaDate(b)).getTime();
 
                   return dateB - dateA || b.popularity - a.popularity;
                 })
-                .map((m) => (
+                .map((media) => (
                   <div
-                    key={m.id}
+                    key={media.id}
                     className="flex items-center gap-6 border-b-2 border-neutral-800 bg-neutral-900 p-5 last:border-none"
                   >
                     <div className="flex w-full max-w-15 justify-center text-lg font-bold">
-                      {m.release_date || m.first_air_date ? (
-                        (m.release_date || m.first_air_date).slice(0, 4)
+                      {getMediaDate(media) ? (
+                        getMediaDate(media).slice(0, 4)
                       ) : (
                         <Minus />
                       )}
@@ -132,14 +147,16 @@ export default async function PersonPage({ params }: Params) {
                     <Circle size={15} className="w-full max-w-15" />
                     <div className="w-full">
                       <Link
-                        href={`/${getMediaType(m)}/${m.id}-${slugify(getMediaTitle(m))}`}
+                        href={`/${getMediaType(
+                          media,
+                        )}/${media.id}-${slugify(getMediaTitle(media))}`}
                       >
-                        <h1 className="font-bold">{m.name || m.title}</h1>
+                        <h1 className="font-bold">{getMediaTitle(media)}</h1>
                       </Link>
 
                       <p className="text-neutral-200">
                         <span className="text-neutral-400">as </span>
-                        {m.character}
+                        {media.character}
                       </p>
                     </div>
                   </div>

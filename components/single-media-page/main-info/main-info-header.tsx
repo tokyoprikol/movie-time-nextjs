@@ -6,6 +6,7 @@ import { convertMinToHours } from "@/lib/utils/convertTime";
 import { CalendarDays, Clapperboard, Clock8 } from "lucide-react";
 
 import UserVote from "./user-vote";
+import { getMediaDate, getMediaTitle } from "@/lib/tmdb/media-details";
 
 export default function MainInfoHeader({
   data,
@@ -29,11 +30,9 @@ export default function MainInfoHeader({
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-3">
-        <h1 className="text-3xl font-bold">
-          {isMovie ? data.title : data.name}
-        </h1>
+        <h1 className="text-3xl font-bold">{getMediaTitle(data)}</h1>
         <p className="text-4xl font-bold text-neutral-400">
-          {(isMovie ? data.release_date : data.first_air_date).slice(0, 4)}
+          {getMediaDate(data)?.slice(0, 4) || "-"}
         </p>
       </div>
       <div className="flex gap-4 font-medium">
@@ -45,11 +44,11 @@ export default function MainInfoHeader({
 
         <p className="flex items-center gap-1">
           <CalendarDays size={20} />
-          {convertDate(isMovie ? data.release_date : data.first_air_date)}
+          {convertDate(getMediaDate(data))}
         </p>
         <p className="flex items-center gap-1">
           <Clapperboard size={20} />
-          {data.genres?.map((g) => g.name).join(", ")}
+          {data.genres.map((g) => g.name).join(", ")}
         </p>
         {isMovie && (
           <p className="flex items-center gap-1">

@@ -1,10 +1,10 @@
 "use client";
 
-import { People } from "@/lib/tmdb/types";
+import { PersonDetails } from "@/lib/tmdb/tmdbTypes";
 import { Button } from "./ui/button";
 import { useState } from "react";
 
-export default function PersonBiography({ person }: { person: People }) {
+export default function PersonBiography({ person }: { person: PersonDetails }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (

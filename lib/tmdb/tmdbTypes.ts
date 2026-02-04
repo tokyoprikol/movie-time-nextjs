@@ -241,7 +241,7 @@ export interface PersonDetails {
   known_for_department: string;
 
   combined_credits: {
-    cast: ((MovieListItem | TvListItem)[] & {
+    cast: ((MovieListItem | TvListItem) & {
       character: string;
     })[];
   };
