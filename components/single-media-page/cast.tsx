@@ -1,24 +1,25 @@
-import { getPoster } from "@/lib/tmdb/getPoster";
-import { CreditsCast, Movie, TvSeries } from "@/lib/tmdb/types";
 import Image from "next/image";
 import Link from "next/link";
+
+import { MovieDetails, TvDetails } from "@/lib/tmdb/tmdbTypes";
+
+import { getPoster } from "@/lib/tmdb/getPoster";
+
 import { ImageOff } from "lucide-react";
 
-export default function Cast({ data }: { data: Movie | TvSeries }) {
-  function getMediaCredits(data: Movie | TvSeries) {
-    if ("credits" in data) return data.credits;
-    if ("aggregate_credits" in data) return data.aggregate_credits;
-  }
-
-  const credits = getMediaCredits(data) as { cast: CreditsCast[] };
+export default function Cast({ data }: { data: MovieDetails | TvDetails }) {
+  const cast =
+    data.media_type === "movie"
+      ? data.credits.cast
+      : data.aggregate_credits.cast;
 
   return (
     <div className="space-y-5">
       <h1 className="text-3xl font-bold">Cast</h1>
       <div className="flex flex-nowrap justify-center gap-5 overflow-hidden">
-        {credits?.cast.slice(0, 6).map((item) => (
+        {cast.slice(0, 6).map((item) => (
           <div
-            key={item.cast_id || item.id}
+            key={item.id}
             className="w-full max-w-43 rounded-lg bg-neutral-900 shadow-2xl"
           >
             <div className="relative aspect-3/4 w-full">
@@ -40,11 +41,11 @@ export default function Cast({ data }: { data: Movie | TvSeries }) {
             <div className="space-y-3 p-3">
               <div className="text-sm font-semibold">{item.name}</div>
               <div className="text-xs text-neutral-300">
-                {item.character || item.roles?.[0].character}
+                {"character" in item ? item.character : item.roles[0].character}
               </div>
-              {item.roles?.[0].episode_count && (
+              {"roles" in item && (
                 <div className="text-xs text-neutral-400">
-                  {item.roles?.[0].episode_count} Episodes
+                  {item.roles[0].episode_count} Episodes
                 </div>
               )}
             </div>

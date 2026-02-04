@@ -1,10 +1,12 @@
 import { MovieDetails, TvDetails } from "@/lib/tmdb/tmdbTypes";
-import AdditionalInfo from "./additional-info";
+
 import MainInfo from "./main-info/main-info";
-import Medias from "./medias";
-import Reviews from "./reviews";
-import { Separator } from "../ui/separator";
 import Cast from "./cast";
+import Reviews from "./reviews";
+import Medias from "./medias";
+import AdditionalInfo from "./additional-info";
+
+import { Separator } from "../ui/separator";
 
 export default function SingleMediaPage({
   data,
