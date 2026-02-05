@@ -4,8 +4,8 @@ import { ImageOff } from "lucide-react";
 import Image from "next/image";
 
 export default function CastList({ data }: { data: MovieDetails | TvDetails }) {
-  const cast =
-    "credits" in data ? data.credits.cast : data.aggregate_credits.cast;
+  const isMovieCredits = "credits" in data;
+  const cast = isMovieCredits ? data.credits.cast : data.aggregate_credits.cast;
   return (
     <div className="space-y-5">
       <h1 className="flex items-center gap-2 text-3xl font-semibold">
@@ -14,7 +14,10 @@ export default function CastList({ data }: { data: MovieDetails | TvDetails }) {
       </h1>
       <div className="space-y-8">
         {cast.map((item) => (
-          <div key={item.cast_id} className="flex items-center gap-8">
+          <div
+            key={isMovieCredits ? item.cast_id : item.id}
+            className="flex items-center gap-8"
+          >
             {item.profile_path ? (
               <Image
                 src={getPoster("w500", item.profile_path)}
