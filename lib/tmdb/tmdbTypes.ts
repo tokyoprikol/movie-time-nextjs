@@ -138,9 +138,17 @@ export interface MovieDetails extends BaseMediaDetails {
   credits: {
     cast: {
       id: number;
+      cast_id: number;
       name: string;
       character: string;
       profile_path: string | null;
+    }[];
+    crew: {
+      id: number;
+      credit_id: number;
+      name: string;
+      job: string;
+      profile_path: string;
     }[];
   };
 
@@ -187,12 +195,22 @@ export interface TvDetails extends BaseMediaDetails {
   aggregate_credits: {
     cast: {
       id: number;
+      cast_id: number;
       name: string;
       profile_path: string | null;
       roles: {
         character: string;
         episode_count: number;
       }[];
+    }[];
+    crew: {
+      id: number;
+      credit_id: number;
+      name: string;
+      jobs: {
+        job: string;
+      }[];
+      profile_path: string;
     }[];
   };
 

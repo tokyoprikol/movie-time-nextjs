@@ -6,6 +6,8 @@ import { MovieDetails, TvDetails } from "@/lib/tmdb/tmdbTypes";
 import { getPoster } from "@/lib/tmdb/getPoster";
 
 import { ImageOff } from "lucide-react";
+import { slugify } from "@/lib/utils/slugify";
+import { getMediaTitle } from "@/lib/tmdb/media-details";
 
 export default function Cast({ data }: { data: MovieDetails | TvDetails }) {
   const cast =
@@ -58,7 +60,7 @@ export default function Cast({ data }: { data: MovieDetails | TvDetails }) {
       </div>
       <div>
         <Link
-          href=""
+          href={`${data.id}-${slugify(getMediaTitle(data))}/cast`}
           className="border-b text-lg font-semibold hover:border-b-neutral-300 hover:text-neutral-300"
         >
           Full Cast & Crew
