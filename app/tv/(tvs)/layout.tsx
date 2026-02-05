@@ -1,4 +1,4 @@
-import Sidebar from "@/components/sidebar";
+import Sidebar from "@/components/sidebar/sidebar";
 import { getAllTvSeriesGenres } from "@/lib/tmdb/API/tv-series";
 import React from "react";
 

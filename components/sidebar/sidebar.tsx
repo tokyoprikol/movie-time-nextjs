@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import FilterAccordion from "@/components/filter-accordion";
+import FilterAccordion from "@/components/sidebar/filter-accordion";
 import { GenresResponse } from "@/lib/tmdb/tmdbTypes";
 
 export default function Sidebar({ genres }: GenresResponse) {

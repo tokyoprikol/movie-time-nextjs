@@ -1,7 +1,7 @@
 "use client";
 
 import { PersonDetails } from "@/lib/tmdb/tmdbTypes";
-import { Button } from "./ui/button";
+import { Button } from "../ui/button";
 import { useState } from "react";
 
 export default function PersonBiography({ person }: { person: PersonDetails }) {

@@ -1,4 +1,4 @@
-import Sidebar from "@/components/sidebar";
+import Sidebar from "@/components/sidebar/sidebar";
 import { getAllMovieGenres } from "@/lib/tmdb/API/movies";
 import React from "react";
 

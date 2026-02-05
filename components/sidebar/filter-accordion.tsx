@@ -7,8 +7,8 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-import SelectSort from "@/components/select-sort";
-import { Button } from "./ui/button";
+import SelectSort from "@/components/sidebar/select-sort";
+import { Button } from "../ui/button";
 import { Genre } from "@/lib/tmdb/types";
 import { useState } from "react";
 
