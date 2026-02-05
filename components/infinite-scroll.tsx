@@ -13,20 +13,22 @@ import {
 
 type MediaType = "movie" | "tv" | "people";
 
-type MovieCategory = "popular" | "top-rated" | "upcoming";
-type TvCategory = "popular" | "top-rated" | "on-the-air";
+type MovieCategory = "popular" | "now-playing" | "upcoming" | "top-rated";
+type TvCategory = "popular" | "airing-today" | "on-the-air" | "top-rated";
 type PeopleCategory = "popular";
 
 import {
   getPopularMovies,
-  getTopRatedMovies,
+  getNowPlayingMovies,
   getUpcomingMovies,
+  getTopRatedMovies,
 } from "@/lib/tmdb/API/movies";
 
 import {
   getPopularTvSeries,
-  getTopRatedTvSeries,
+  getAiringTodayTvSeries,
   getOnTheAirTvSeries,
+  getTopRatedTvSeries,
 } from "@/lib/tmdb/API/tv-series";
 
 import { getPopularPeople } from "@/lib/tmdb/API/people";
@@ -45,14 +47,16 @@ interface InfiniteScrollProps {
 
 const MovieCategoryToFetch = {
   popular: getPopularMovies,
-  "top-rated": getTopRatedMovies,
+  "now-playing": getNowPlayingMovies,
   upcoming: getUpcomingMovies,
+  "top-rated": getTopRatedMovies,
 } as const;
 
 const TvCategoryToFetch = {
   popular: getPopularTvSeries,
-  "top-rated": getTopRatedTvSeries,
+  "airing-today": getAiringTodayTvSeries,
   "on-the-air": getOnTheAirTvSeries,
+  "top-rated": getTopRatedTvSeries,
 } as const;
 
 const PeopleCategoryToFetch = {

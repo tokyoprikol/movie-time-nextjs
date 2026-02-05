@@ -15,12 +15,12 @@ export async function getPopularMovies(
   );
 }
 
-export async function getTopRatedMovies(
+export async function getNowPlayingMovies(
   page: number = 1,
   language: string = "en-US",
 ): Promise<MediaResponse<MovieListItem[]>> {
   return fetchTmdb<MediaResponse<MovieListItem[]>>(
-    `/movie/top_rated?language=${language}&page=${page}`,
+    `/movie/now_playing?language=${language}&page=${page}`,
   );
 }
 
@@ -30,6 +30,15 @@ export async function getUpcomingMovies(
 ): Promise<MediaResponse<MovieListItem[]>> {
   return fetchTmdb<MediaResponse<MovieListItem[]>>(
     `/movie/upcoming?language=${language}&page=${page}`,
+  );
+}
+
+export async function getTopRatedMovies(
+  page: number = 1,
+  language: string = "en-US",
+): Promise<MediaResponse<MovieListItem[]>> {
+  return fetchTmdb<MediaResponse<MovieListItem[]>>(
+    `/movie/top_rated?language=${language}&page=${page}`,
   );
 }
 

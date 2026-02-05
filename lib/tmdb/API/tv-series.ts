@@ -15,12 +15,12 @@ export async function getPopularTvSeries(
   );
 }
 
-export async function getTopRatedTvSeries(
+export async function getAiringTodayTvSeries(
   page: number = 1,
   language: string = "en-US",
 ): Promise<MediaResponse<TvListItem[]>> {
   return fetchTmdb<MediaResponse<TvListItem[]>>(
-    `/tv/top_rated?language=${language}&page=${page}`,
+    `/tv/airing_today?language=${language}&page=${page}`,
   );
 }
 
@@ -30,6 +30,15 @@ export async function getOnTheAirTvSeries(
 ): Promise<MediaResponse<TvListItem[]>> {
   return fetchTmdb<MediaResponse<TvListItem[]>>(
     `/tv/on_the_air?language=${language}&page=${page}`,
+  );
+}
+
+export async function getTopRatedTvSeries(
+  page: number = 1,
+  language: string = "en-US",
+): Promise<MediaResponse<TvListItem[]>> {
+  return fetchTmdb<MediaResponse<TvListItem[]>>(
+    `/tv/top_rated?language=${language}&page=${page}`,
   );
 }
 
