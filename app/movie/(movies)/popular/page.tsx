@@ -1,6 +1,6 @@
 import { getPopularMovies } from "@/lib/tmdb/API/movies";
 
-import InfiniteScrollMovie from "@/components/infinite-scroll-movie";
+import InfiniteScroll from "@/components/infinite-scroll";
 
 export default async function MoviesPopular() {
   const initialData = await getPopularMovies();
@@ -8,9 +8,10 @@ export default async function MoviesPopular() {
   console.log(initialData.results);
 
   return (
-    <InfiniteScrollMovie
+    <InfiniteScroll
       title="Popular Movies"
       initialData={initialData}
+      mediaType="movie"
       category="popular"
     />
   );

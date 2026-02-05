@@ -1,4 +1,4 @@
-import InfiniteScrollMovie from "@/components/infinite-scroll-movie";
+import InfiniteScroll from "@/components/infinite-scroll";
 import { getUpcomingMovies } from "@/lib/tmdb/API/movies";
 
 export default async function MoviesPopular() {
@@ -7,9 +7,10 @@ export default async function MoviesPopular() {
   console.log(initialData.results);
 
   return (
-    <InfiniteScrollMovie
+    <InfiniteScroll
       title="Upcoming Movies"
       initialData={initialData}
+      mediaType="movie"
       category="upcoming"
     />
   );

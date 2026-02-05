@@ -163,7 +163,9 @@ export default async function PersonPage({ params }: Params) {
                           media,
                         )}/${media.id}-${slugify(getMediaTitle(media))}`}
                       >
-                        <h1 className="font-bold">{getMediaTitle(media)}</h1>
+                        <h1 className="font-bold hover:underline">
+                          {getMediaTitle(media)}
+                        </h1>
                       </Link>
 
                       <p className="text-neutral-200">

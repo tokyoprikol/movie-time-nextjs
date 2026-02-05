@@ -13,14 +13,9 @@ import {
   getOnTheAirTvSeries,
 } from "@/lib/tmdb/API/tv-series";
 
-import { getPoster } from "@/lib/tmdb/getPoster";
-import { convertDate } from "@/lib/utils/convertDate";
-import { slugify } from "@/lib/utils/slugify";
+import MediaList from "./media-list";
 
-import Image from "next/image";
-import Link from "next/link";
-
-import { ImageOff, LoaderCircle } from "lucide-react";
+import { LoaderCircle } from "lucide-react";
 
 interface InfiniteScrollProps {
   title: string;
@@ -49,13 +44,7 @@ export default function InfiniteScrollTv({
   });
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status } =
-    useInfiniteQuery<
-      MediaResponse<TvListItem[]>,
-      Error,
-      InfiniteData<MediaResponse<TvListItem[]>, number>,
-      ["tv", Category],
-      number
-    >({
+    useInfiniteQuery({
       queryKey: ["tv", category],
       queryFn: ({ pageParam = 1 }) => fetcher(pageParam),
       initialPageParam: 1,
@@ -81,39 +70,7 @@ export default function InfiniteScrollTv({
 
   return (
     <div className="space-y-10">
-      <h1 className="text-5xl font-bold text-neutral-200">{title}</h1>
-
-      <div className="grid grid-cols-5 gap-10">
-        {tv.map((dataItem: TvListItem) => (
-          <div
-            key={dataItem.id + crypto.randomUUID()}
-            className="cursor-pointer overflow-hidden rounded-lg border border-neutral-700 bg-neutral-800 shadow-2xl"
-          >
-            <Link href={`/tv/${dataItem.id}-${slugify(dataItem.name)}`}>
-              {dataItem.poster_path ? (
-                <div className="relative aspect-2/3 w-full">
-                  <Image
-                    src={getPoster("w342", dataItem.poster_path)}
-                    fill
-                    sizes=""
-                    alt="Poster"
-                    className="object-cover"
-                  />
-                </div>
-              ) : (
-                <ImageOff />
-              )}
-
-              <div className="space-y-2 p-3">
-                <h1 className="font-semibold">{dataItem.name}</h1>
-                <h3 className="text-neutral-400">
-                  {convertDate(dataItem.first_air_date)}
-                </h3>
-              </div>
-            </Link>
-          </div>
-        ))}
-      </div>
+      <MediaList title={title} data={tv} />
 
       <div ref={ref} className="py-10 text-center">
         {isFetchingNextPage && (

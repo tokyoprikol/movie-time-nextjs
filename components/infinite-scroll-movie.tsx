@@ -5,7 +5,6 @@ import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
 
 import { MediaResponse, MovieListItem } from "@/lib/tmdb/tmdbTypes";
-
 type Category = "popular" | "top-rated" | "upcoming";
 
 import {
@@ -14,14 +13,9 @@ import {
   getUpcomingMovies,
 } from "@/lib/tmdb/API/movies";
 
-import { getPoster } from "@/lib/tmdb/getPoster";
-import { convertDate } from "@/lib/utils/convertDate";
-import { slugify } from "@/lib/utils/slugify";
+import MediaList from "./media-list";
 
-import Image from "next/image";
-import Link from "next/link";
-
-import { ImageOff, LoaderCircle } from "lucide-react";
+import { LoaderCircle } from "lucide-react";
 
 interface InfiniteScrollProps {
   title: string;
@@ -50,13 +44,7 @@ export default function InfiniteScrollMovie({
   });
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status } =
-    useInfiniteQuery<
-      MediaResponse<MovieListItem[]>,
-      Error,
-      InfiniteData<MediaResponse<MovieListItem[]>, number>,
-      ["movies", Category],
-      number
-    >({
+    useInfiniteQuery({
       queryKey: ["movies", category],
       queryFn: ({ pageParam = 1 }) => fetcher(pageParam),
       initialPageParam: 1,
@@ -82,39 +70,7 @@ export default function InfiniteScrollMovie({
 
   return (
     <div className="space-y-10">
-      <h1 className="text-5xl font-bold text-neutral-200">{title}</h1>
-
-      <div className="grid grid-cols-5 gap-10">
-        {movies.map((dataItem: MovieListItem) => (
-          <div
-            key={dataItem.id + crypto.randomUUID()}
-            className="cursor-pointer overflow-hidden rounded-lg border border-neutral-700 bg-neutral-800 shadow-2xl"
-          >
-            <Link href={`/movie/${dataItem.id}-${slugify(dataItem.title)}`}>
-              {dataItem.poster_path ? (
-                <div className="relative aspect-2/3 w-full">
-                  <Image
-                    src={getPoster("w342", dataItem.poster_path)}
-                    fill
-                    sizes=""
-                    alt="Poster"
-                    className="object-cover"
-                  />
-                </div>
-              ) : (
-                <ImageOff />
-              )}
-
-              <div className="space-y-2 p-3">
-                <h1 className="font-semibold">{dataItem.title}</h1>
-                <h3 className="text-neutral-400">
-                  {convertDate(dataItem.release_date)}
-                </h3>
-              </div>
-            </Link>
-          </div>
-        ))}
-      </div>
+      <MediaList title={title} data={movies} />
 
       <div ref={ref} className="py-10 text-center">
         {isFetchingNextPage && (

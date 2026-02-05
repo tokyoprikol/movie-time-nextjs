@@ -1,4 +1,4 @@
-import InfiniteScrollTv from "@/components/infinite-scroll-tv";
+import InfiniteScroll from "@/components/infinite-scroll";
 import { getTopRatedTvSeries } from "@/lib/tmdb/API/tv-series";
 
 export default async function MoviesPopular() {
@@ -6,9 +6,10 @@ export default async function MoviesPopular() {
 
   console.log(initialData.results);
   return (
-    <InfiniteScrollTv
+    <InfiniteScroll
       title="Top Rated TV Shows"
       initialData={initialData}
+      mediaType="tv"
       category="top-rated"
     />
   );
