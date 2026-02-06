@@ -208,6 +208,7 @@ export interface TvDetails extends BaseMediaDetails {
       credit_id: number;
       name: string;
       jobs: {
+        credit_id: number;
         job: string;
       }[];
       profile_path: string;

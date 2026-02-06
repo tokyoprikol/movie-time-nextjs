@@ -5,8 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function CrewList({ data }: { data: MovieDetails | TvDetails }) {
-  const crew =
-    "credits" in data ? data.credits.crew : data.aggregate_credits.crew;
+  const isMovieCredits = "credits" in data;
+  const crew = isMovieCredits ? data.credits.crew : data.aggregate_credits.crew;
   return (
     <div className="space-y-5">
       <h1 className="flex items-center gap-2 text-3xl font-semibold">
@@ -15,7 +15,10 @@ export default function CrewList({ data }: { data: MovieDetails | TvDetails }) {
       </h1>
       <div className="space-y-8">
         {crew.map((item) => (
-          <div key={item.credit_id} className="flex items-center gap-8">
+          <div
+            key={isMovieCredits ? item.id : item.jobs[0].credit_id}
+            className="flex items-center gap-8"
+          >
             <Link href={`/people/${item.id}`}>
               {item.profile_path ? (
                 <Image
