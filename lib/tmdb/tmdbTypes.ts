@@ -37,6 +37,7 @@ export interface Videos {
     name: string;
     site: string;
     type: string;
+    official: boolean;
   }[];
 }
 
