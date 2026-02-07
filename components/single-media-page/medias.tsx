@@ -1,6 +1,8 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
+
 import { useState } from "react";
 
 import { MovieDetails, TvDetails } from "@/lib/tmdb/tmdbTypes";
@@ -9,9 +11,14 @@ import { getPoster } from "@/lib/tmdb/getPoster";
 
 import { ScrollArea, ScrollBar } from "../ui/scroll-area";
 import { Button } from "../ui/button";
+import { slugify } from "@/lib/utils/slugify";
+import { getMediaTitle } from "@/lib/tmdb/media-details";
 
 export default function Medias({ data }: { data: MovieDetails | TvDetails }) {
   const [selectedTab, setSelectedTab] = useState("videos");
+
+  const isImages = selectedTab === "backdrops" || selectedTab === "posters";
+  const idAndSlugUrl = `${data.id}-${slugify(getMediaTitle(data))}`;
 
   return (
     <div className="space-y-10">
@@ -56,13 +63,15 @@ export default function Medias({ data }: { data: MovieDetails | TvDetails }) {
         </div>
 
         <Button variant={"secondary"}>
-          View All {selectedTab === "videos" && "Videos"}
-          {selectedTab === "backdrops" && "Backdrops"}
-          {selectedTab === "posters" && "Posters"}
+          <Link
+            href={`${idAndSlugUrl}/${isImages ? `images/${selectedTab}` : "videos/"}`}
+          >
+            View all {selectedTab}
+          </Link>
         </Button>
       </div>
       <ScrollArea>
-        <div className="mb-3 flex flex-nowrap justify-center gap-2">
+        <div className="mb-3 flex flex-nowrap justify-center gap-3">
           {selectedTab === "videos" &&
             data.videos.results
               ?.filter(
@@ -89,10 +98,9 @@ export default function Medias({ data }: { data: MovieDetails | TvDetails }) {
             data.images.backdrops.slice(0, 8).map((i) => (
               <div key={i.file_path} className="relative aspect-video min-h-70">
                 <Image
-                  src={getPoster("w500", i.file_path)}
+                  src={getPoster("w780", i.file_path)}
                   alt="image"
                   fill
-                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 50vw, 50vw"
                   className="rounded-lg"
                 />
               </div>
@@ -105,7 +113,6 @@ export default function Medias({ data }: { data: MovieDetails | TvDetails }) {
                   src={getPoster("w500", i.file_path)}
                   alt="image"
                   fill
-                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 16vw"
                   className="rounded-lg"
                 />
               </div>

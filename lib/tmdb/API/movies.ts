@@ -49,7 +49,7 @@ export async function getMovieById(
 ): Promise<MovieDetails> {
   const query = append ? `&append_to_response=${append}` : "";
   const data = await fetchTmdb<MovieDetails>(
-    `/movie/${id}?language=${language}${query}`,
+    `/movie/${id}?language=${language}${query}&include_image_language=en-US,ja-JP,xx-XX`,
   );
   return { ...data, media_type: "movie" };
 }

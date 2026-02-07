@@ -9,10 +9,12 @@ export interface MediaResponse<T> {
   total_results: number;
 }
 
-interface ImageFile {
+export interface ImageFile {
   file_path: string;
   width: number;
   height: number;
+  iso_639_1: string;
+  iso_3166_1: string;
 }
 
 export interface GenresResponse {

@@ -1,9 +1,14 @@
 import { MovieDetails, TvDetails } from "@/lib/tmdb/tmdbTypes";
 import Link from "next/link";
 import Image from "next/image";
-import { getMediaDate, getMediaTitle } from "@/lib/tmdb/media-details";
+import {
+  getMediaDate,
+  getMediaTitle,
+  getMediaType,
+} from "@/lib/tmdb/media-details";
 import { ArrowLeft, ImageOff } from "lucide-react";
 import { getPoster } from "@/lib/tmdb/getPoster";
+import { slugify } from "@/lib/utils/slugify";
 
 export default function SubpageHeader({
   data,
@@ -11,7 +16,7 @@ export default function SubpageHeader({
   data: MovieDetails | TvDetails;
 }) {
   return (
-    <div className="flex items-center gap-5 bg-neutral-950 px-15 py-5">
+    <div className="flex items-center gap-5 bg-neutral-900 px-15 py-5">
       <div>
         {data.poster_path ? (
           <Image
@@ -27,7 +32,10 @@ export default function SubpageHeader({
       </div>
       <div className="space-y-5">
         <h1 className="text-4xl font-bold">
-          <Link href="./" className="hover:underline">
+          <Link
+            href={`/${getMediaType(data)}/${data.id}-${slugify(getMediaTitle(data))}`}
+            className="hover:underline"
+          >
             {getMediaTitle(data)}{" "}
           </Link>
           <span className="font-semibold text-neutral-300">
@@ -35,7 +43,7 @@ export default function SubpageHeader({
           </span>{" "}
         </h1>
         <Link
-          href="./"
+          href={`/${getMediaType(data)}/${data.id}-${slugify(getMediaTitle(data))}`}
           className="flex items-center gap-1 text-lg hover:underline"
         >
           <ArrowLeft size={15} /> Back to main

@@ -24,16 +24,17 @@ export default function MainInfo({ data }: { data: MovieDetails | TvDetails }) {
         <ImageOff />
       )}
 
-      <div className="absolute inset-0 z-10 bg-linear-to-r from-black/80 to-black/50"></div>
+      <div className="absolute inset-0 z-10 bg-linear-to-r from-black/80 to-black/70"></div>
       <div className="relative z-20 flex h-full items-center space-x-15 px-15">
         {data.poster_path ? (
-          <Image
-            src={getPoster("w500", data.poster_path)}
-            width={300}
-            height={150}
-            alt="Poster"
-            className="rounded-lg shadow-2xl"
-          />
+          <div className="relative aspect-2/3 min-w-90">
+            <Image
+              src={getPoster("w500", data.poster_path)}
+              fill
+              alt="Poster"
+              className="rounded-lg object-cover object-center shadow-2xl"
+            />
+          </div>
         ) : (
           <ImageOff />
         )}

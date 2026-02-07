@@ -1,9 +1,9 @@
 import ReviewItem from "@/components/single-media-page/review-item";
-import SubpageHeader from "@/components/single-media-page/subpage-header";
+import SubpageHeader from "@/components/single-media-page/subpage/subpage-header";
 import { getTvSeriesById } from "@/lib/tmdb/API/tv-series";
 import { Params } from "@/lib/tmdb/tmdbTypes";
 
-export default async function FullTvReviews({ params }: Params) {
+export default async function FullTvReviewsList({ params }: Params) {
   const { id } = await params;
   const mediaId = id.split("-")[0];
 
