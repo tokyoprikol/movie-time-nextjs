@@ -1,6 +1,6 @@
 import { MovieDetails, TvDetails } from "@/lib/tmdb/tmdbTypes";
-import Cast from "@/components/single-media-page/cast-list";
-import Crew from "@/components/single-media-page/crew-list";
+import Cast from "@/components/single-media-page/subpage/cast-list";
+import Crew from "@/components/single-media-page/subpage/crew-list";
 import SubpageHeader from "./subpage-header";
 
 export default async function FullCastCrew({

@@ -6,9 +6,15 @@ import NavSearchBar from "./navbar/nav-searchbar";
 import NavAuth from "./navbar/nav-auth";
 
 import { signOut, useSession } from "@/lib/auth-client";
-import { Button } from "./ui/button";
-import { Avatar, AvatarFallback } from "./ui/avatar";
+
 import { useRouter } from "next/navigation";
+import { Avatar, AvatarFallback } from "./ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
 
 export default function Header() {
   const { data: session, isPending, error, refetch } = useSession();
@@ -33,19 +39,24 @@ export default function Header() {
 
       {session && <NavSearchBar />}
       {session && (
-        <div className="flex items-center gap-5">
-          <Avatar>
-            <AvatarFallback className="bg-neutral-500 text-neutral-50">
-              {session?.user.name[0].toUpperCase()}
-            </AvatarFallback>
-          </Avatar>
-          <Button
-            className="border border-neutral-700 bg-neutral-800 hover:bg-neutral-800/70"
-            onClick={handleSignOut}
-          >
-            Sign Out
-          </Button>
-        </div>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Avatar>
+              <AvatarFallback className="cursor-pointer bg-neutral-100 text-neutral-900">
+                {session?.user.name[0].toUpperCase()}
+              </AvatarFallback>
+            </Avatar>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className="border-neutral-800 bg-neutral-900 text-neutral-50">
+            <DropdownMenuItem>Profile</DropdownMenuItem>
+            <DropdownMenuItem
+              className="text-xs font-semibold"
+              onClick={handleSignOut}
+            >
+              Sign Out
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
       )}
       {!session && <NavAuth />}
     </header>

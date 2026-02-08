@@ -1,6 +1,6 @@
 import { getTvSeriesById } from "@/lib/tmdb/API/tv-series";
 import { Params } from "@/lib/tmdb/tmdbTypes";
-import FullCastCrew from "@/components/single-media-page/full-cast-crew";
+import FullCastCrew from "@/components/single-media-page/subpage/full-cast-crew";
 
 export default async function FullCastAndCrew({ params }: Params) {
   const { id } = await params;

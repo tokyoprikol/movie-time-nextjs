@@ -16,7 +16,7 @@ export default function CrewList({ data }: { data: MovieDetails | TvDetails }) {
       <div className="space-y-8">
         {crew.map((item) => (
           <div
-            key={isMovieCredits ? item.id : item.jobs[0].credit_id}
+            key={isMovieCredits ? item.credit_id : item.jobs[0].credit_id}
             className="flex items-center gap-8"
           >
             <Link href={`/people/${item.id}`}>
