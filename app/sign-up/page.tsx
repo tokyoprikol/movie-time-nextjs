@@ -28,6 +28,7 @@ export default function SignUp() {
 
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   const handleSignUp = async () => {
     setError("");
@@ -48,6 +49,7 @@ export default function SignUp() {
             setIsLoading(true);
           },
           onSuccess: (ctx) => {
+            setSuccess("Sign-up complete! Redirecting you now...");
             router.push("/movie/popular");
           },
           onError: (ctx) => {
@@ -80,6 +82,11 @@ export default function SignUp() {
             {error && (
               <span className="mt-2 rounded-sm border border-red-300 bg-red-200 p-2 text-red-500">
                 {error}
+              </span>
+            )}
+            {success && (
+              <span className="mt-2 rounded-sm border border-green-300 bg-green-200 p-2 text-green-500">
+                {success}
               </span>
             )}
           </CardDescription>
