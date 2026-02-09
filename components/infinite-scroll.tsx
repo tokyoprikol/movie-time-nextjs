@@ -117,7 +117,7 @@ export default function InfiniteScroll({
       className={`${
         mediaType === "movie" || mediaType === "tv"
           ? "space-y-10"
-          : "flex-1 space-y-10 bg-neutral-900/98 px-15 py-15 text-white"
+          : "flex-1 space-y-10 px-15 py-15"
       }`}
     >
       {mediaType === "movie" || mediaType === "tv" ? (

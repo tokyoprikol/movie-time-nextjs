@@ -8,7 +8,7 @@ export default function DataField({
   return (
     <div>
       <h1 className="text-lg font-semibold">{title}</h1>
-      <span className="text-neutral-300 italic">{data}</span>
+      <span className="text-neutral-400 italic">{data}</span>
     </div>
   );
 }

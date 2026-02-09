@@ -26,10 +26,10 @@ export default function CastList({ data }: { data: MovieDetails | TvDetails }) {
                   alt="poster"
                   width={80}
                   height={80}
-                  className="rounded-lg border-3 border-neutral-700 shadow-2xl"
+                  className="rounded-lg border shadow-lg"
                 />
               ) : (
-                <div className="flex h-30 w-20 items-center justify-center rounded-lg border-3 border-neutral-700 py-3 shadow-2xl">
+                <div className="flex h-30 w-20 items-center justify-center rounded-lg border py-3 shadow-lg">
                   <ImageOff size={50} />
                 </div>
               )}
@@ -42,7 +42,7 @@ export default function CastList({ data }: { data: MovieDetails | TvDetails }) {
                 </h1>
               </Link>
 
-              <span className="text-neutral-200">
+              <span className="text-neutral-400">
                 {"character" in item ? item.character : item.roles[0].character}
               </span>
             </div>

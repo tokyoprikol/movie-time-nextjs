@@ -11,7 +11,7 @@ export default async function FullMovieReviewsList({ params }: Params) {
   console.log(data);
 
   return (
-    <div className="flex-1 bg-neutral-900/98 text-neutral-50">
+    <div className="flex-1">
       <SubpageHeader data={data} />
       <div className="space-y-10 px-15 py-10">
         {data.reviews.results.map((item) => (

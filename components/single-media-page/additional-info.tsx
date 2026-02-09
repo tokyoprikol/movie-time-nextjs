@@ -11,7 +11,7 @@ export default function AdditionalInfo({
 }: {
   data: MovieDetails | TvDetails;
 }) {
-  const isMovie = data.media_type === "movie";
+  const isMovie = "budget" in data;
   const keywords = isMovie ? data.keywords.keywords : data.keywords.results;
 
   return (
@@ -40,12 +40,7 @@ export default function AdditionalInfo({
         <h1 className="text-lg font-semibold">Keywords</h1>
         <div className="flex flex-wrap gap-2">
           {keywords?.map((word) => (
-            <Button
-              key={word.id}
-              className="border border-neutral-700 bg-neutral-800 hover:bg-neutral-100 hover:text-neutral-950"
-            >
-              {word.name}
-            </Button>
+            <Button key={word.id}>{word.name}</Button>
           ))}
         </div>
       </div>

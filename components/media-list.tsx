@@ -20,13 +20,13 @@ interface MediaListPageProps {
 export default function MediaList({ title, data }: MediaListPageProps) {
   return (
     <>
-      <h1 className="text-5xl font-bold text-neutral-200">{title}</h1>
+      <h1 className="text-5xl font-bold">{title}</h1>
 
       <div className="grid grid-cols-5 gap-10">
         {data.map((dataItem: MovieListItem | TvListItem) => (
           <div
             key={dataItem.id + crypto.randomUUID()}
-            className="cursor-pointer overflow-hidden rounded-lg border border-neutral-700 bg-neutral-800 shadow-2xl"
+            className="cursor-pointer overflow-hidden rounded-lg border shadow-xl dark:bg-neutral-900/50"
           >
             <Link
               href={`/${getMediaType(dataItem)}/${dataItem.id}-${slugify(getMediaTitle(dataItem))}`}

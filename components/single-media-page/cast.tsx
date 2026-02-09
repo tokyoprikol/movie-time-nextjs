@@ -7,22 +7,20 @@ import { getPoster } from "@/lib/tmdb/getPoster";
 
 import { ImageOff } from "lucide-react";
 import { slugify } from "@/lib/utils/slugify";
-import { getMediaTitle } from "@/lib/tmdb/media-details";
+import { getMediaTitle, getMediaType } from "@/lib/tmdb/media-details";
 
 export default function Cast({ data }: { data: MovieDetails | TvDetails }) {
   const cast =
-    data.media_type === "movie"
-      ? data.credits?.cast
-      : data.aggregate_credits?.cast;
+    "credits" in data ? data.credits?.cast : data.aggregate_credits?.cast;
 
   return (
     <div className="space-y-5">
       <h1 className="text-3xl font-bold">Cast</h1>
-      <div className="flex flex-nowrap justify-center gap-5 overflow-hidden">
+      <div className="flex flex-nowrap justify-center gap-5">
         {cast?.slice(0, 6).map((item) => (
           <div
             key={item.id}
-            className="w-full max-w-43 rounded-lg bg-neutral-900 shadow-2xl"
+            className="w-full max-w-43 rounded-lg border shadow-lg dark:bg-neutral-900/50"
           >
             <Link href={`/people/${item.id}`}>
               <div className="relative aspect-3/4 w-full">
@@ -43,7 +41,7 @@ export default function Cast({ data }: { data: MovieDetails | TvDetails }) {
 
               <div className="space-y-3 p-3">
                 <div className="text-sm font-semibold">{item.name}</div>
-                <div className="text-xs text-neutral-300">
+                <div className="text-xs text-neutral-400">
                   {"character" in item
                     ? item.character
                     : item.roles[0].character}
@@ -61,7 +59,7 @@ export default function Cast({ data }: { data: MovieDetails | TvDetails }) {
       <div>
         <Link
           href={`${data.id}-${slugify(getMediaTitle(data))}/cast`}
-          className="border-b text-lg font-semibold hover:border-b-neutral-300 hover:text-neutral-300"
+          className="border-b text-lg font-semibold hover:text-neutral-400"
         >
           Full Cast & Crew
         </Link>

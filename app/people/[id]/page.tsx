@@ -14,7 +14,7 @@ export default async function PersonPage({ params }: Params) {
   console.log(person);
 
   return (
-    <div className="flex-1 bg-neutral-900/98 p-20 text-neutral-100">
+    <div className="flex-1 p-20">
       <div className="flex gap-10">
         <div className="space-y-20">
           <PersonImage person={person} />

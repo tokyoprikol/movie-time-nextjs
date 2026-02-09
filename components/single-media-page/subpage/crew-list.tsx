@@ -16,7 +16,13 @@ export default function CrewList({ data }: { data: MovieDetails | TvDetails }) {
       <div className="space-y-8">
         {crew.map((item) => (
           <div
-            key={isMovieCredits ? item.credit_id : item.jobs[0].credit_id}
+            key={
+              isMovieCredits
+                ? item.credit_id
+                : "jobs" in item
+                  ? item.jobs[0].credit_id
+                  : item.job
+            }
             className="flex items-center gap-8"
           >
             <Link href={`/people/${item.id}`}>
@@ -26,10 +32,10 @@ export default function CrewList({ data }: { data: MovieDetails | TvDetails }) {
                   alt="poster"
                   width={80}
                   height={80}
-                  className="rounded-lg border-3 border-neutral-700 shadow-2xl"
+                  className="rounded-lg border shadow-lg"
                 />
               ) : (
-                <div className="flex h-30 w-20 items-center justify-center rounded-lg border-3 border-neutral-700 py-3 shadow-2xl">
+                <div className="flex h-30 w-20 items-center justify-center rounded-lg border py-3 shadow-lg">
                   <ImageOff size={50} />
                 </div>
               )}
@@ -42,7 +48,7 @@ export default function CrewList({ data }: { data: MovieDetails | TvDetails }) {
                 </h1>
               </Link>
 
-              <span className="text-neutral-200">
+              <span className="text-neutral-400">
                 {"job" in item ? item.job : item.jobs[0].job}
               </span>
             </div>

@@ -73,20 +73,15 @@ export default function SignUp() {
   };
 
   return (
-    <div className="flex flex-1 items-center justify-center bg-neutral-900/98">
-      <Card className="w-full max-w-lg border-neutral-700 bg-neutral-800 text-neutral-200">
+    <div className="flex flex-1 items-center justify-center">
+      <Card className="w-full max-w-xl">
         <CardHeader>
           <CardTitle className="text-2xl font-bold">Sign Up</CardTitle>
-          <CardDescription className="flex flex-col text-neutral-300">
+          <CardDescription className="flex flex-col text-neutral-400">
             Enter your credentials below to create account
             {error && (
               <span className="mt-2 rounded-sm border border-red-300 bg-red-200 p-2 text-red-500">
                 {error}
-              </span>
-            )}
-            {success && (
-              <span className="mt-2 rounded-sm border border-green-300 bg-green-200 p-2 text-green-500">
-                {success}
               </span>
             )}
           </CardDescription>
@@ -97,7 +92,6 @@ export default function SignUp() {
               <div className="space-y-2">
                 <Label htmlFor="email">Name</Label>
                 <Input
-                  className="border-neutral-700 bg-neutral-900/40 focus-visible:ring-0"
                   type="text"
                   id="name"
                   placeholder="John Doe"
@@ -109,7 +103,6 @@ export default function SignUp() {
               <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
                 <Input
-                  className="border-neutral-700 bg-neutral-900/40 focus-visible:ring-0"
                   type="email"
                   id="email"
                   placeholder="johndoe@example.com"
@@ -122,7 +115,6 @@ export default function SignUp() {
                 <Label htmlFor="password">Password</Label>
                 <Input
                   minLength={8}
-                  className="border-neutral-700 bg-neutral-900/40 focus-visible:ring-0"
                   type="password"
                   id="password"
                   value={password}
@@ -134,7 +126,6 @@ export default function SignUp() {
                 <Label htmlFor="password">Confirm password</Label>
                 <Input
                   minLength={8}
-                  className="border-neutral-700 bg-neutral-900/40 focus-visible:ring-0"
                   type="password"
                   id="password"
                   value={confirmPassword}
@@ -147,7 +138,7 @@ export default function SignUp() {
         </CardContent>
         <CardFooter className="flex flex-col gap-3">
           <Button
-            className="w-full bg-neutral-900"
+            className="w-full"
             disabled={isLoading}
             onClick={handleSignUp}
           >

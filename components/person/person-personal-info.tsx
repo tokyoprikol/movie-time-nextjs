@@ -34,8 +34,8 @@ export default function PersonPersonalInfo({
 
       <div>
         <h1 className="text-lg font-semibold">Also Known As</h1>
-        <span className="text-neutral-300 italic">
-          {person.also_known_as
+        <span className="text-neutral-400 italic">
+          {person.also_known_as.length > 0
             ? person.also_known_as.map((i: string) => <p key={i}>{i}</p>)
             : "-"}
         </span>

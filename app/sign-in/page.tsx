@@ -15,6 +15,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { signIn } from "@/lib/auth-client";
+import { LoginForm } from "@/components/login-form";
 
 export default function SignIn() {
   const router = useRouter();
@@ -64,20 +65,15 @@ export default function SignIn() {
   };
 
   return (
-    <div className="flex flex-1 items-center justify-center bg-neutral-900/98">
-      <Card className="w-full max-w-lg border-neutral-700 bg-neutral-800 text-neutral-200">
+    <div className="flex flex-1 items-center justify-center">
+      <Card className="w-full max-w-xl">
         <CardHeader>
           <CardTitle className="text-2xl font-bold">Sign In</CardTitle>
-          <CardDescription className="flex flex-col text-neutral-300">
+          <CardDescription className="flex flex-col text-neutral-400">
             Enter your email below to login to your account
             {error && (
               <span className="mt-2 rounded-sm border border-red-300 bg-red-200 p-2 text-red-500">
                 {error}
-              </span>
-            )}
-            {success && (
-              <span className="mt-2 rounded-sm border border-green-300 bg-green-200 p-2 text-green-500">
-                {success}
               </span>
             )}
           </CardDescription>
@@ -88,7 +84,6 @@ export default function SignIn() {
               <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
                 <Input
-                  className="border-neutral-700 bg-neutral-900/40 focus-visible:ring-0"
                   type="email"
                   id="email"
                   placeholder="johndoe@example.com"
@@ -100,7 +95,6 @@ export default function SignIn() {
               <div className="space-y-2">
                 <Label htmlFor="password">Password</Label>
                 <Input
-                  className="border-neutral-700 bg-neutral-900/40 focus-visible:ring-0"
                   type="password"
                   id="password"
                   value={password}
@@ -113,7 +107,7 @@ export default function SignIn() {
         </CardContent>
         <CardFooter className="flex flex-col gap-3">
           <Button
-            className="w-full bg-neutral-900"
+            className="w-full"
             disabled={isLoading}
             onClick={handleSignIn}
           >

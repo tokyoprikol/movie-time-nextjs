@@ -27,21 +27,15 @@ export default function FilterAccordion({ genres }: { genres: Genre[] }) {
     <Accordion
       type="multiple"
       defaultValue={["item-2"]}
-      className="space-y-3 rounded-lg border-b border-neutral-800"
+      className="space-y-3 rounded-lg border-b"
     >
-      <AccordionItem
-        value="item-1"
-        className="rounded-lg border border-neutral-800 bg-neutral-900 px-4"
-      >
+      <AccordionItem value="item-1" className="rounded-lg border px-4">
         <AccordionTrigger>Sort</AccordionTrigger>
         <AccordionContent>
           <SelectSort />
         </AccordionContent>
       </AccordionItem>
-      <AccordionItem
-        value="item-2"
-        className="rounded-lg border border-neutral-800 bg-neutral-900 px-4"
-      >
+      <AccordionItem value="item-2" className="rounded-lg border px-4">
         <AccordionTrigger>Filters</AccordionTrigger>
         <AccordionContent>
           <h1 className="mb-3 text-neutral-400">Genres</h1>
@@ -49,12 +43,13 @@ export default function FilterAccordion({ genres }: { genres: Genre[] }) {
             {genres.map((genre: Genre) => (
               <Button
                 key={genre.id}
-                onClick={() => handleSelectGenre(genre)}
-                className={`border border-neutral-700 bg-neutral-800 hover:bg-neutral-100 hover:text-neutral-950 ${
+                size={"sm"}
+                variant={
                   selectedGenres.some((g) => g.id === genre.id)
-                    ? "border-neutral-500 bg-neutral-100 text-neutral-950"
-                    : "bg-neutral-800"
-                }`}
+                    ? "default"
+                    : "outline"
+                }
+                onClick={() => handleSelectGenre(genre)}
               >
                 {genre.name}
               </Button>

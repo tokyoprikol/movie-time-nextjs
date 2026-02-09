@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function Page() {
   return (
-    <div className="flex-1 bg-neutral-100 dark:bg-neutral-900">
+    <div className="flex-1">
       <div className="mt-20 space-y-10 text-center">
         <h1 className="text-6xl font-bold">Welcome to MovieTime</h1>
         <p className="text-2xl">

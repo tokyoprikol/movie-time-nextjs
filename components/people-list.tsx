@@ -15,12 +15,12 @@ interface PeopleListProps {
 export default function PeopleList({ title, data }: PeopleListProps) {
   return (
     <>
-      <h1 className="text-5xl font-bold text-neutral-200">{title}</h1>
+      <h1 className="text-5xl font-bold">{title}</h1>
       <div className="grid grid-cols-5 gap-10">
         {data.map((person: PersonListItem) => (
           <div
             key={person.id + crypto.randomUUID()}
-            className="cursor-pointer overflow-hidden rounded-lg border border-neutral-700 bg-neutral-800 shadow-2xl"
+            className="cursor-pointer overflow-hidden rounded-lg border shadow-xl dark:bg-neutral-900/50"
           >
             <Link href={`/people/${person.id}-${slugify(person.name)}`}>
               {person.profile_path ? (
@@ -41,7 +41,7 @@ export default function PeopleList({ title, data }: PeopleListProps) {
 
               <div className="space-y-2 p-3">
                 <p className="font-semibold">{person.name}</p>
-                <div className="text-xs text-neutral-300">
+                <div className="text-xs text-neutral-400">
                   {person.known_for
                     .map((item) => getMediaTitle(item))
                     .join(", ")}

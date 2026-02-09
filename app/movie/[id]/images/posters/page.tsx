@@ -14,17 +14,17 @@ export default async function PostersPage({ params }: Params) {
 
   console.log(data);
   return (
-    <div className="flex-1 bg-neutral-900/98 text-neutral-50">
+    <div className="flex-1">
       <SubpageHeader data={data} />
-      <div className="flex gap-10 px-15 py-10">
+      <div className="flex items-start gap-10 px-15 py-10">
         <SubpageFilterCard title="Posters" data={data} />
         <div className="grid grid-cols-4 gap-10">
           {data.images.posters.map((image) => (
             <div
               key={image.file_path}
-              className="rounded-lg bg-neutral-900 shadow-xl"
+              className="overflow-hidden rounded-lg border shadow-lg dark:bg-neutral-900/50"
             >
-              <div className="relative aspect-2/3 w-60 overflow-hidden rounded-t-lg">
+              <div className="relative aspect-2/3 w-60">
                 <Image
                   src={getPoster("w500", image.file_path)}
                   alt="poster"

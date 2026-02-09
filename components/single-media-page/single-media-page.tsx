@@ -14,24 +14,24 @@ export default function SingleMediaPage({
   data: MovieDetails | TvDetails;
 }) {
   return (
-    <div className="flex-1 space-y-10 bg-neutral-900/98 pb-20 text-white">
+    <div className="flex-1 space-y-10 pb-20">
       <MainInfo data={data} />
       <div className="flex justify-between px-15">
         <div className="w-full max-w-6xl">
           <Cast data={data} />
 
-          <Separator className="my-10 bg-neutral-600 px-10" />
+          <Separator className="my-10 px-10" />
 
           <Reviews data={data} />
 
-          <Separator className="my-10 bg-neutral-600 px-10" />
+          <Separator className="my-10 px-10" />
 
           <Medias data={data} />
         </div>
 
         <div className="w-xs pl-10">
           <AdditionalInfo data={data} />
-          <Separator className="my-10 bg-neutral-600" />
+          <Separator className="my-10" />
         </div>
       </div>
     </div>

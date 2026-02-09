@@ -123,11 +123,4 @@
   body {
     @apply bg-background text-foreground;
   }
-  button {
-    cursor: pointer;
-  }
-  input:-webkit-autofill {
-    -webkit-text-fill-color: theme("colors.white");
-    transition: background-color 600000s cubic-bezier(0.4, 0, 0.2, 1) 0s;
-  }
 }

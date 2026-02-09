@@ -6,13 +6,13 @@ import { ImageOff } from "lucide-react";
 
 export default function PersonImage({ person }: { person: PersonDetails }) {
   return person.profile_path ? (
-    <div className="relative w-full min-w-2xs">
+    <div className="relative w-full min-w-2xs overflow-hidden rounded-lg border shadow-lg">
       <Image
         src={getPoster("w780", person.profile_path)}
         alt="Person"
         width={400}
         height={200}
-        className="rounded-xl object-top"
+        className="object-cover"
       />
     </div>
   ) : (

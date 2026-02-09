@@ -22,7 +22,6 @@ import {
 } from "./ui/dropdown-menu";
 import { Switch } from "./ui/switch";
 import { Label } from "./ui/label";
-import { useState } from "react";
 
 export default function Header() {
   const { data: session, isPending, error, refetch } = useSession();
@@ -45,7 +44,7 @@ export default function Header() {
   };
 
   return (
-    <header className="flex items-center justify-between px-15 py-5">
+    <header className="flex items-center justify-between border-b-2 px-15 py-3">
       <div className="flex items-center gap-15">
         <NavLogo />
         {session && <NavMenu />}
@@ -54,9 +53,14 @@ export default function Header() {
       {session && <NavSearchBar />}
 
       <div className="flex items-center gap-2">
-        <Switch id="switchTheme" onCheckedChange={handleTheme} />
-        <Label htmlFor="switchTheme" asChild>
-          {isLight ? <Sun /> : <Moon />}
+        <Switch
+          id="switchTheme"
+          checked={isLight}
+          onCheckedChange={handleTheme}
+        />
+        <Label htmlFor="switchTheme" className="relative">
+          <Sun className="opacity-100 dark:opacity-0" />
+          <Moon className="absolute inset-0 opacity-0 dark:opacity-100" />
         </Label>
       </div>
 

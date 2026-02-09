@@ -35,7 +35,7 @@ export default function PersonKnowFor({ person }: { person: PersonDetails }) {
                         src={getPoster("w500", media.poster_path)}
                         alt="Poster"
                         fill
-                        className="rounded-lg object-top"
+                        className="rounded-lg border object-top shadow-xl"
                       />
                     </div>
                   ) : (

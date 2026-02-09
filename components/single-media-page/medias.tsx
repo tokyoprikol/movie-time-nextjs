@@ -27,42 +27,27 @@ export default function Medias({ data }: { data: MovieDetails | TvDetails }) {
           <h1 className="text-3xl font-bold">Media</h1>
           <div className="flex items-center gap-7">
             <Button
-              variant={"secondary"}
+              variant={selectedTab === "videos" ? "secondary" : "ghost"}
               onClick={() => setSelectedTab("videos")}
-              className={`hover:border-neutral-600 hover:bg-neutral-700 hover:text-neutral-100 ${
-                selectedTab === "videos"
-                  ? "border border-neutral-700 bg-neutral-800 text-neutral-100"
-                  : "border hover:border-neutral-600 hover:bg-neutral-700 hover:text-neutral-100"
-              }`}
             >
               Videos
             </Button>
             <Button
-              variant={"secondary"}
+              variant={selectedTab === "backdrops" ? "secondary" : "ghost"}
               onClick={() => setSelectedTab("backdrops")}
-              className={`hover:border-neutral-600 hover:bg-neutral-700 hover:text-neutral-100 ${
-                selectedTab === "backdrops"
-                  ? "border border-neutral-700 bg-neutral-800 text-neutral-100"
-                  : "border hover:border-neutral-600 hover:bg-neutral-700 hover:text-neutral-100"
-              }`}
             >
               Backdrops
             </Button>
             <Button
-              variant={"secondary"}
+              variant={selectedTab === "posters" ? "secondary" : "ghost"}
               onClick={() => setSelectedTab("posters")}
-              className={`hover:border-neutral-600 hover:bg-neutral-700 hover:text-neutral-100 ${
-                selectedTab === "posters"
-                  ? "border border-neutral-700 bg-neutral-800 text-neutral-100"
-                  : "border hover:border-neutral-600 hover:bg-neutral-700 hover:text-neutral-100"
-              }`}
             >
               Posters
             </Button>
           </div>
         </div>
 
-        <Button variant={"secondary"}>
+        <Button variant={"outline"}>
           <Link
             href={`${idAndSlugUrl}/${isImages ? `images/${selectedTab}` : "videos/"}`}
           >
@@ -82,7 +67,7 @@ export default function Medias({ data }: { data: MovieDetails | TvDetails }) {
               .map((item) => (
                 <div
                   key={item.id}
-                  className="aspect-video min-h-70 min-w-100 overflow-hidden rounded-lg"
+                  className="aspect-video min-h-70 overflow-hidden rounded-lg"
                 >
                   <iframe
                     width="100%"

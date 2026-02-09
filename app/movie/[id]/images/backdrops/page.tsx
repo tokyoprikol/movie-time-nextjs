@@ -14,22 +14,21 @@ export default async function BackdropsPage({ params }: Params) {
 
   console.log(data);
   return (
-    <div className="flex-1 bg-neutral-900/98 text-neutral-50">
+    <div className="flex-1">
       <SubpageHeader data={data} />
-      <div className="flex gap-10 px-15 py-10">
+      <div className="flex items-start gap-10 px-15 py-10">
         <SubpageFilterCard title="Backdrops" data={data} />
         <div className="grid grid-cols-3 gap-10">
           {data.images.backdrops.map((image) => (
             <div
               key={image.file_path}
-              className="overflow-hidden rounded-lg bg-neutral-900 shadow-xl"
+              className="overflow-hidden rounded-lg border shadow-lg dark:bg-neutral-900/50"
             >
               <Image
                 src={getPoster("w500", image.file_path)}
                 alt="backdrop"
                 width={400}
                 height={100}
-                className=""
               />
               <ImageDetails image={image} />
             </div>

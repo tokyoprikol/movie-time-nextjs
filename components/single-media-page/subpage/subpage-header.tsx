@@ -16,7 +16,7 @@ export default function SubpageHeader({
   data: MovieDetails | TvDetails;
 }) {
   return (
-    <div className="flex items-center gap-5 bg-neutral-900 px-15 py-5">
+    <div className="flex items-center gap-5 border-b-2 px-15 py-5">
       <div>
         {data.poster_path ? (
           <Image
@@ -38,7 +38,7 @@ export default function SubpageHeader({
           >
             {getMediaTitle(data)}{" "}
           </Link>
-          <span className="font-semibold text-neutral-300">
+          <span className="font-semibold text-neutral-400">
             ({getMediaDate(data).slice(0, 4)})
           </span>{" "}
         </h1>

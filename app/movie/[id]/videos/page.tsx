@@ -13,7 +13,7 @@ export default async function VideosPage({ params }: Params) {
 
   console.log(data);
   return (
-    <div className="flex-1 bg-neutral-900/98 text-neutral-50">
+    <div className="flex-1">
       <SubpageHeader data={data} />
       <div className="flex gap-10 px-15 py-10">
         <VideosFilterCard data={data} />
@@ -24,7 +24,7 @@ export default async function VideosPage({ params }: Params) {
             .map((video) => (
               <div
                 key={video.id}
-                className="rounded-lg bg-neutral-900 shadow-xl"
+                className="overflow-hidden rounded-lg border shadow-lg"
               >
                 <iframe
                   width="100%"
