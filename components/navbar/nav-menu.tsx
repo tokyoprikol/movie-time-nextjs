@@ -15,7 +15,7 @@ export default function NavMenu() {
       {NAV_ITEMS.map((menuItem) => (
         <DropdownMenu key={menuItem.title} modal={false}>
           <DropdownMenuTrigger asChild>
-            <Button variant={"outline"} size={"sm"}>
+            <Button variant={"secondary"} size={"sm"}>
               {menuItem.title}
             </Button>
           </DropdownMenuTrigger>

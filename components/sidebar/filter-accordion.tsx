@@ -47,7 +47,7 @@ export default function FilterAccordion({ genres }: { genres: Genre[] }) {
                 variant={
                   selectedGenres.some((g) => g.id === genre.id)
                     ? "default"
-                    : "outline"
+                    : "secondary"
                 }
                 onClick={() => handleSelectGenre(genre)}
               >
