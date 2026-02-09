@@ -48,10 +48,9 @@ export async function getMovieById(
   append: string = "credits,reviews,release_dates,keywords,images,videos",
 ): Promise<MovieDetails> {
   const query = append ? `&append_to_response=${append}` : "";
-  const data = await fetchTmdb<MovieDetails>(
+  return fetchTmdb<MovieDetails>(
     `/movie/${id}?language=${language}${query}&include_image_language=en-US,ja-JP,xx-XX`,
   );
-  return { ...data, media_type: "movie" };
 }
 
 export async function getAllMovieGenres(

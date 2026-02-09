@@ -19,6 +19,5 @@ export async function fetchTmdb<T>(
     throw new Error(`TMDB ${res.status} - ${res.statusText}`);
   }
 
-  const data = (await res.json()) as Promise<T>;
-  return JSON.parse(JSON.stringify(data));
+  return res.json() as Promise<T>;
 }

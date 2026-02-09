@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { Params } from "@/lib/tmdb/tmdbTypes";
 import { getTvSeriesById } from "@/lib/tmdb/API/tv-series";
 import SubpageHeader from "@/components/single-media-page/subpage/subpage-header";

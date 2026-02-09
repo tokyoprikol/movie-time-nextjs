@@ -4,6 +4,7 @@ import NavMenu from "./navbar/nav-menu";
 import NavLogo from "./navbar/nav-logo";
 import NavSearchBar from "./navbar/nav-searchbar";
 import NavAuth from "./navbar/nav-auth";
+import { Settings, User, LogOut } from "lucide-react";
 
 import { signOut, useSession } from "@/lib/auth-client";
 
@@ -12,7 +13,10 @@ import { Avatar, AvatarFallback } from "./ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
 
@@ -31,7 +35,7 @@ export default function Header() {
   };
 
   return (
-    <header className="flex items-center justify-between bg-neutral-900 px-15 py-5">
+    <header className="flex items-center justify-between px-15 py-5">
       <div className="flex items-center gap-15">
         <NavLogo />
         {session && <NavMenu />}
@@ -42,17 +46,24 @@ export default function Header() {
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Avatar>
-              <AvatarFallback className="cursor-pointer bg-neutral-100 text-neutral-900">
+              <AvatarFallback className="cursor-pointer">
                 {session?.user.name[0].toUpperCase()}
               </AvatarFallback>
             </Avatar>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="border-neutral-800 bg-neutral-900 text-neutral-50">
-            <DropdownMenuItem>Profile</DropdownMenuItem>
-            <DropdownMenuItem
-              className="text-xs font-semibold"
-              onClick={handleSignOut}
-            >
+          <DropdownMenuContent>
+            <DropdownMenuLabel>My Account</DropdownMenuLabel>
+            <DropdownMenuItem>
+              <User />
+              Profile
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <Settings />
+              Settings
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem onClick={handleSignOut}>
+              <LogOut />
               Sign Out
             </DropdownMenuItem>
           </DropdownMenuContent>

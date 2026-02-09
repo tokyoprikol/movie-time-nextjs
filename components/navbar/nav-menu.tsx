@@ -15,14 +15,11 @@ export default function NavMenu() {
       {NAV_ITEMS.map((menuItem) => (
         <DropdownMenu key={menuItem.title} modal={false}>
           <DropdownMenuTrigger asChild>
-            <Button className="border border-neutral-700 bg-neutral-800 hover:bg-neutral-800/70">
+            <Button variant={"outline"} size={"sm"}>
               {menuItem.title}
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent
-            align="start"
-            className="border-neutral-700 bg-neutral-800 text-neutral-200"
-          >
+          <DropdownMenuContent align="start">
             {menuItem.items.map((item) => (
               <DropdownMenuItem key={item.title} asChild>
                 <Link href={item.href}>{item.title}</Link>
