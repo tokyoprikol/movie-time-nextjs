@@ -170,6 +170,10 @@ export interface MovieDetails extends BaseMediaDetails {
       name: string;
     }[];
   };
+
+  recommendations: {
+    results: MovieDetails[] | TvDetails[];
+  };
 }
 
 //-------------------------------- TV TYPES ----------------------------------
@@ -186,6 +190,8 @@ export interface TvDetails extends BaseMediaDetails {
   name: string;
   first_air_date: string;
   last_air_date: string;
+
+  type: string;
 
   created_by: {
     id: number;
@@ -230,6 +236,10 @@ export interface TvDetails extends BaseMediaDetails {
       id: number;
       name: string;
     }[];
+  };
+
+  recommendations: {
+    results: MovieDetails[] | TvDetails[];
   };
 }
 

@@ -45,7 +45,7 @@ export async function getTopRatedTvSeries(
 export async function getTvSeriesById(
   id: string,
   language: string = "en-US",
-  append: string = "aggregate_credits,reviews,content_ratings,keywords,images,videos",
+  append: string = "aggregate_credits,reviews,content_ratings,keywords,images,videos,recommendations",
 ): Promise<TvDetails> {
   const query = append ? `&append_to_response=${append}` : "";
   return fetchTmdb<TvDetails>(`/tv/${id}?language=${language}${query}`);

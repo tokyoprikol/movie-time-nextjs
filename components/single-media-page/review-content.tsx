@@ -17,7 +17,7 @@ export default function ReviewContent({ review }: { review: Review }) {
       <div className="flex justify-end">
         <Button
           size={"xs"}
-          variant={"outline"}
+          variant={"secondary"}
           onClick={() => setIsOpen(!isOpen)}
         >
           {isOpen ? "close" : "read more"}

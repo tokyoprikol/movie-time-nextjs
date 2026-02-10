@@ -7,6 +7,7 @@ import Medias from "./medias";
 import AdditionalInfo from "./additional-info";
 
 import { Separator } from "../ui/separator";
+import Recommendations from "./recommendations";
 
 export default function SingleMediaPage({
   data,
@@ -27,6 +28,10 @@ export default function SingleMediaPage({
           <Separator className="my-10 px-10" />
 
           <Medias data={data} />
+
+          <Separator className="my-10 px-10" />
+
+          <Recommendations data={data} />
         </div>
 
         <div className="w-xs pl-10">

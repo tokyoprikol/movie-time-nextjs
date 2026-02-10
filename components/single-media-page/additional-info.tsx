@@ -17,6 +17,7 @@ export default function AdditionalInfo({
   return (
     <div className="space-y-10">
       <DataField title="Status" data={data.status} />
+      {"type" in data && <DataField title="Type" data={data.type} />}
       <DataField
         title="Original Language"
         data={LANGUAGES[data.original_language as keyof typeof LANGUAGES]}
@@ -40,7 +41,7 @@ export default function AdditionalInfo({
         <h1 className="text-lg font-semibold">Keywords</h1>
         <div className="flex flex-wrap gap-2">
           {keywords?.map((word) => (
-            <Button variant={"secondary"} key={word.id}>
+            <Button size="sm" variant={"secondary"} key={word.id}>
               {word.name}
             </Button>
           ))}
