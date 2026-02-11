@@ -1,21 +1,12 @@
 import {
   MovieDetails,
   MovieListItem,
+  PersonListItem,
   TvDetails,
   TvListItem,
 } from "./tmdbTypes";
 type AnyMedia = MovieDetails | MovieListItem | TvDetails | TvListItem;
 
-// IF OBJECT HAS A 'media_type' VALUE USE THIS FUNCTION:
-// export const getMediaType = (item: AnyMedia) => item.media_type;
-
-// export const getMediaTitle = (item: AnyMedia) =>
-//   item.media_type === "movie" ? item.title : item.name;
-
-// export const getMediaDate = (item: AnyMedia) =>
-//   item.media_type === "movie" ? item.release_date : item.first_air_date;
-
-// IF OBJECT DOES NOT HAVE A 'media_type' VALUE:
 export const getMediaType = (item: AnyMedia) =>
   "title" in item ? "movie" : "tv";
 
@@ -24,3 +15,29 @@ export const getMediaTitle = (item: AnyMedia) =>
 
 export const getMediaDate = (item: AnyMedia) =>
   "release_date" in item ? item.release_date : item.first_air_date;
+
+// --------------------------------------------------------
+export type SearchItem =
+  | (MovieListItem & { media_type: "movie" })
+  | (TvListItem & { media_type: "tv" })
+  | (PersonListItem & { media_type: "person" });
+
+export const getSearchItemTitle = (item: SearchItem) => {
+  if (item.media_type === "movie") return item.title;
+  else if (item.media_type === "tv") return item.name;
+  else if (item.media_type === "person") return item.name;
+  else return null;
+};
+
+export const getSearchItemPoster = (item: SearchItem) => {
+  if (item.media_type === "movie") return item.poster_path;
+  else if (item.media_type === "tv") return item.poster_path;
+  else if (item.media_type === "person") return item.profile_path;
+  return null;
+};
+
+export const getSearchItemDate = (item: SearchItem) => {
+  if (item.media_type === "movie") return item.release_date;
+  else if (item.media_type === "tv") return item.first_air_date;
+  else return null;
+};

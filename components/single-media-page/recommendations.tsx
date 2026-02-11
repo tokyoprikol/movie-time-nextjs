@@ -1,9 +1,11 @@
 import { getPoster } from "@/lib/tmdb/getPoster";
-import { getMediaTitle } from "@/lib/tmdb/media-details";
+import { getMediaTitle, getMediaType } from "@/lib/tmdb/media-details";
 import { MovieDetails, TvDetails } from "@/lib/tmdb/tmdbTypes";
 import { ImageOff } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { ScrollArea, ScrollBar } from "../ui/scroll-area";
+import { slugify } from "@/lib/utils/slugify";
 
 export default function Recommendations({
   data,
@@ -14,23 +16,32 @@ export default function Recommendations({
     <div className="space-y-5">
       <h1 className="text-3xl font-bold">Recommendations</h1>
       <ScrollArea>
-        <div className="mb-8 flex flex-nowrap gap-9">
+        <div className="mb-4 flex flex-nowrap gap-9">
           {data.recommendations.results.length > 0 ? (
             data.recommendations.results.slice(0, 10).map((item) => (
-              <div className="space-y-3">
-                <div className="relative aspect-2/3 h-60 overflow-hidden rounded-lg shadow-lg">
-                  {item.poster_path ? (
-                    <Image
-                      src={getPoster("w500", item.poster_path)}
-                      alt="poster"
-                      fill
-                      className="border object-top"
-                    />
-                  ) : (
-                    <ImageOff />
-                  )}
-                </div>
-                <h1 className="text-center">{getMediaTitle(item)}</h1>
+              <div key={item.id}>
+                <Link
+                  className="space-y-3"
+                  href={`/${getMediaType(
+                    item,
+                  )}/${item.id}-${slugify(getMediaTitle(item))}`}
+                >
+                  <div className="relative aspect-2/3 h-60 overflow-hidden rounded-lg shadow-lg">
+                    {item.poster_path ? (
+                      <Image
+                        src={getPoster("w500", item.poster_path)}
+                        alt="poster"
+                        fill
+                        className="border object-top"
+                      />
+                    ) : (
+                      <ImageOff />
+                    )}
+                  </div>
+                  <h1 className="cursor-pointer text-center hover:underline">
+                    {getMediaTitle(item)}
+                  </h1>
+                </Link>
               </div>
             ))
           ) : (
