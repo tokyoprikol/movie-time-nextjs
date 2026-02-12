@@ -44,7 +44,7 @@ export default function SearchedMediaList({
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status } =
     useInfiniteQuery({
-      queryKey: ["search", selectedType, query],
+      queryKey: ["search", query],
       queryFn: ({ pageParam = 1 }) => getMultiSearchResponse(pageParam, query),
       initialPageParam: 1,
       getNextPageParam: (lastPage) => {
@@ -76,10 +76,11 @@ export default function SearchedMediaList({
   );
 
   if (media) {
-    SEARCH_CATEGORIES.forEach(({ category }) => {
-      categoryCounts[category] = media.filter(
-        (item) => item.media_type === category,
-      ).length;
+    media.forEach((item) => {
+      const type = item.media_type;
+      if (type in categoryCounts) {
+        categoryCounts[type] += 1;
+      }
     });
   }
 
@@ -122,7 +123,11 @@ export default function SearchedMediaList({
           <div className="space-y-4">
             {media.length !== 0 ? (
               media
-                .filter((item) => item.media_type === selectedType)
+                .filter(
+                  (item) =>
+                    item.media_type === selectedType &&
+                    (item.poster_path || item.profile_path),
+                )
                 .map((item) => {
                   const poster = getSearchItemPoster(item);
                   const itemDate = getSearchItemDate(item);
@@ -131,7 +136,7 @@ export default function SearchedMediaList({
                     <Link
                       key={item.id}
                       href={`/${item.media_type === "person" ? "people" : item.media_type}/${item.id}`}
-                      className="flex items-center overflow-hidden rounded-lg border shadow-lg"
+                      className="flex w-full max-w-5xl items-center overflow-hidden rounded-lg border shadow-lg"
                     >
                       <div className="relative aspect-2/3 h-40 border-r-2">
                         {poster ? (

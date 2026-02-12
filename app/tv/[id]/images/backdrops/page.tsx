@@ -5,37 +5,50 @@ import SubpageFilterCard from "@/components/single-media-page/subpage/subpage-fi
 import SubpageHeader from "@/components/single-media-page/subpage/subpage-header";
 import { getPoster } from "@/lib/tmdb/getPoster";
 import ImageDetails from "@/components/single-media-page/subpage/image-details";
+import ImageList from "@/components/single-media-page/subpage/image-list";
+import {
+  IMAGE_CATEGORIES,
+  ImageCategory,
+} from "@/lib/config/filter-categories";
 
 export default async function BackdropsPage({ params }: Params) {
   const { id } = await params;
   const mediaId = id.split("-")[0];
 
   const data = await getTvSeriesById(mediaId);
-
+  const backdrops = data.images.backdrops;
   console.log(data);
+
+  const categoriesCounts = IMAGE_CATEGORIES.reduce(
+    (acc, { category }) => {
+      acc[category] = 0;
+      return acc;
+    },
+    {} as Record<ImageCategory, number>,
+  );
+
+  if (backdrops) {
+    IMAGE_CATEGORIES.forEach(
+      ({ category, iso_639_1 }) =>
+        (categoriesCounts[category] = backdrops.filter(
+          (item) => item.iso_639_1 === iso_639_1,
+        ).length),
+    );
+  }
+
+  const categoriesWithCounts = IMAGE_CATEGORIES.map((item) => ({
+    ...item,
+    quantity: categoriesCounts[item.category],
+  }));
+
   return (
-    <div className="flex-1 bg-neutral-900/98 text-neutral-50">
+    <div className="flex-1">
       <SubpageHeader data={data} />
-      <div className="flex gap-10 px-15 py-10">
-        <SubpageFilterCard title="Backdrops" data={data} />
-        <div className="grid grid-cols-3 gap-10">
-          {data.images.backdrops.map((image) => (
-            <div
-              key={image.file_path}
-              className="overflow-hidden rounded-lg bg-neutral-900 shadow-xl"
-            >
-              <Image
-                src={getPoster("w500", image.file_path)}
-                alt="backdrop"
-                width={400}
-                height={100}
-                className=""
-              />
-              <ImageDetails image={image} />
-            </div>
-          ))}
-        </div>
-      </div>
+      <ImageList
+        images={backdrops}
+        categoriesWithCounts={categoriesWithCounts}
+        type="Backdrops"
+      />
     </div>
   );
 }
