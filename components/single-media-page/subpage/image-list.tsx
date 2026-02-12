@@ -51,7 +51,9 @@ export default function ImageList({
           ))}
         </div>
       </div>
-      <div className="grid grid-cols-3 gap-10">
+      <div
+        className={`grid grid-cols-3 justify-center gap-10 ${type === "Posters" ? "grid-cols-4" : "grid-cols-3"}`}
+      >
         {images
           .filter((item) => item.iso_639_1 === selectedCategory)
           .map((image) => (
@@ -67,7 +69,7 @@ export default function ImageList({
                   height={100}
                 />
               ) : (
-                <div className="relative aspect-2/3 w-70">
+                <div className="relative aspect-2/3 w-60">
                   <Image
                     src={getPoster("w500", image.file_path)}
                     alt="poster"

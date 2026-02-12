@@ -69,7 +69,7 @@ export default function SearchedMediaList({
                 return (
                   <Link
                     key={item.id}
-                    href={`/${item.media_type}/${item.id}`}
+                    href={`/${item.media_type === "person" ? "people" : item.media_type}/${item.id}`}
                     className="flex items-center overflow-hidden rounded-lg border shadow-lg"
                   >
                     <div className="relative aspect-2/3 h-40 border-r-2">
