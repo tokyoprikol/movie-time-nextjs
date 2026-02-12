@@ -1,74 +1,53 @@
-import Image from "next/image";
 import { Params } from "@/lib/tmdb/tmdbTypes";
 import { getMovieById } from "@/lib/tmdb/API/movies";
-import SubpageFilterCard from "@/components/single-media-page/subpage/subpage-filter-card";
 import SubpageHeader from "@/components/single-media-page/subpage/subpage-header";
-import { getPoster } from "@/lib/tmdb/getPoster";
-import ImageDetails from "@/components/single-media-page/subpage/image-details";
-import { Button } from "@/components/ui/button";
+import ImageList from "@/components/single-media-page/subpage/image-list";
+
+type ImageCategory = (typeof IMAGE_CATEGORIES)[number]["category"];
+
+const IMAGE_CATEGORIES = [
+  { category: "No Languages", iso_639_1: null },
+  { category: "English", iso_639_1: "en" },
+  { category: "Japanese", iso_639_1: "ja" },
+  { category: "Russian", iso_639_1: "ru" },
+] as const;
 
 export default async function BackdropsPage({ params }: Params) {
   const { id } = await params;
   const mediaId = id.split("-")[0];
 
   const data = await getMovieById(mediaId);
+  const backdrops = data.images.backdrops;
+  console.log(backdrops);
 
-  const IMAGE_CATEGORIES = [
-    {
-      category: "No Languages",
+  const categoriesCounts = IMAGE_CATEGORIES.reduce(
+    (acc, { category }) => {
+      acc[category] = 0;
+      return acc;
     },
-    {
-      category: "English",
-    },
-    {
-      category: "Japanese",
-    },
-  ];
+    {} as Record<ImageCategory, number>,
+  );
 
-  const imageCounter = {
-    no_language: 0,
-    english: 0,
-    japanese: 0,
+  if (backdrops) {
+    IMAGE_CATEGORIES.forEach(({ category, iso_639_1 }) => {
+      categoriesCounts[category] = backdrops.filter(
+        (item) => item.iso_639_1 === iso_639_1,
+      ).length;
+    });
   }
 
-  data.images.backdrops.forEach(item => )
+  const categoriesWithCounts = IMAGE_CATEGORIES.map((item) => ({
+    ...item,
+    quantity: categoriesCounts[item.category] ?? 0,
+  }));
 
-  console.log(data);
   return (
     <div className="flex-1">
       <SubpageHeader data={data} />
-      <div className="flex items-start gap-10 px-15 py-10">
-        <div className="w-full max-w-xs rounded-lg border shadow-lg">
-              <div className="border-b px-6 py-3">
-                <h1 className="text-xl font-semibold"></h1>
-              </div>
-                        <div className="space-y-3 py-5">
-                          <div className="flex items-center justify-between px-6">
-                <Button variant={"outline"} size={"sm"} className="w-full max-w-50">
-                </Button>
-                <span className="rounded-lg border px-3 py-1 dark:bg-neutral-900">
-                  32
-                </span>
-              </div>
-              </div>
-            </div>
-        <div className="grid grid-cols-3 gap-10">
-          {data.images.backdrops.map((image) => (
-            <div
-              key={image.file_path}
-              className="overflow-hidden rounded-lg border shadow-lg dark:bg-neutral-900/50"
-            >
-              <Image
-                src={getPoster("w500", image.file_path)}
-                alt="backdrop"
-                width={400}
-                height={100}
-              />
-              <ImageDetails image={image} />
-            </div>
-          ))}
-        </div>
-      </div>
+      <ImageList
+        backdrops={backdrops}
+        categoriesWithCounts={categoriesWithCounts}
+      />
     </div>
   );
 }
