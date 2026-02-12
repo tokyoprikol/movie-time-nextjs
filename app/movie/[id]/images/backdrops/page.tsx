@@ -5,7 +5,7 @@ import ImageList from "@/components/single-media-page/subpage/image-list";
 import {
   IMAGE_CATEGORIES,
   ImageCategory,
-} from "@/lib/config/images-categories";
+} from "@/lib/config/filter-categories";
 
 export default async function BackdropsPage({ params }: Params) {
   const { id } = await params;
