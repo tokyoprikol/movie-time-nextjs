@@ -3,8 +3,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 export default function Loading() {
   return (
     <div className="flex-1">
-      <div className="space-y-10">
-        <Skeleton className="mb h-10 w-80 rounded-lg" />
+      <div className="space-y-10 px-15 py-15">
+        <Skeleton className="mb h-10 w-85 rounded-lg" />
 
         <div className="grid grid-cols-5 gap-10">
           {Array.from({ length: 10 }).map((_, i) => (

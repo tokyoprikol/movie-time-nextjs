@@ -1,15 +1,6 @@
 import { MovieDetails, TvDetails } from "@/lib/tmdb/tmdbTypes";
 import SubpageFilterListItem from "./subpage-filter-list-item";
 
-const VIDEO_CATEGORIES = [
-  "Trailers",
-  "Teaser",
-  "Clips",
-  "Behind the Scenes",
-  "Bloopers",
-  "Featurettes",
-];
-
 export default function VideosFilterCard({
   data,
 }: {

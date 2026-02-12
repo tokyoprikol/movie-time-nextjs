@@ -10,7 +10,7 @@ export default function Loading() {
           {Array.from({ length: 10 }).map((_, i) => (
             <div
               key={i}
-              className="cursor-pointer overflow-hidden rounded-lg border border-neutral-700 bg-neutral-800 shadow-2xl"
+              className="cursor-pointer overflow-hidden rounded-lg border shadow-lg dark:bg-neutral-900/50"
             >
               <Skeleton className="aspect-2/3 w-full rounded-b-none" />
 

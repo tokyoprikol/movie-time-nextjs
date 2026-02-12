@@ -49,7 +49,7 @@ export async function getTvSeriesById(
 ): Promise<TvDetails> {
   const query = append ? `&append_to_response=${append}` : "";
   return fetchTmdb<TvDetails>(
-    `/tv/${id}?language=${language}${query}&include_image_language=en-US,ja-JP,ru-RU,xx-XX`,
+    `/tv/${id}?language=${language}${query}&include_image_language=en-US,ja-JP,ru-RU,xx-XX&include_video_language=en-US,ja-JP,ru-RU,xx-XX`,
   );
 }
 
