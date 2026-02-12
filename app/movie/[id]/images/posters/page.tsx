@@ -1,43 +1,50 @@
-import Image from "next/image";
 import { Params } from "@/lib/tmdb/tmdbTypes";
 import { getMovieById } from "@/lib/tmdb/API/movies";
-import SubpageFilterCard from "@/components/single-media-page/subpage/subpage-filter-card";
 import SubpageHeader from "@/components/single-media-page/subpage/subpage-header";
-import { getPoster } from "@/lib/tmdb/getPoster";
-import ImageDetails from "@/components/single-media-page/subpage/image-details";
+import ImageList from "@/components/single-media-page/subpage/image-list";
+import {
+  IMAGE_CATEGORIES,
+  ImageCategory,
+} from "@/lib/config/images-categories";
 
 export default async function PostersPage({ params }: Params) {
   const { id } = await params;
   const mediaId = id.split("-")[0];
 
   const data = await getMovieById(mediaId);
+  const posters = data.images.posters;
+  console.log(posters);
 
-  console.log(data);
+  const categoriesCounts = IMAGE_CATEGORIES.reduce(
+    (acc, { category }) => {
+      acc[category] = 0;
+      return acc;
+    },
+    {} as Record<ImageCategory, number>,
+  );
+
+  if (posters) {
+    IMAGE_CATEGORIES.forEach(
+      ({ category, iso_639_1 }) =>
+        (categoriesCounts[category] = posters.filter(
+          (item) => item.iso_639_1 === iso_639_1,
+        ).length),
+    );
+  }
+
+  const categoriesWithCounts = IMAGE_CATEGORIES.map((item) => ({
+    ...item,
+    quantity: categoriesCounts[item.category] ?? 0,
+  }));
+
   return (
     <div className="flex-1">
       <SubpageHeader data={data} />
-      <div className="flex items-start gap-10 px-15 py-10">
-        <SubpageFilterCard title="Posters" data={data} />
-        <div className="grid grid-cols-4 gap-10">
-          {data.images.posters.map((image) => (
-            <div
-              key={image.file_path}
-              className="overflow-hidden rounded-lg border shadow-lg dark:bg-neutral-900/50"
-            >
-              <div className="relative aspect-2/3 w-60">
-                <Image
-                  src={getPoster("w500", image.file_path)}
-                  alt="poster"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-
-              <ImageDetails image={image} />
-            </div>
-          ))}
-        </div>
-      </div>
+      <ImageList
+        images={posters}
+        categoriesWithCounts={categoriesWithCounts}
+        type="Posters"
+      />
     </div>
   );
 }

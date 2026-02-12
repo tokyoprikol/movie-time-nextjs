@@ -5,17 +5,20 @@ import ImageDetails from "./image-details";
 import { Button } from "@/components/ui/button";
 import { getPoster } from "@/lib/tmdb/getPoster";
 import { useState } from "react";
+import { ImageFile } from "@/lib/tmdb/tmdbTypes";
 
 export default function ImageList({
-  backdrops,
+  images,
   categoriesWithCounts,
+  type,
 }: {
-  backdrops: any[];
+  images: ImageFile[];
   categoriesWithCounts: {
     category: string;
     iso_639_1: string | null;
     quantity: number;
   }[];
+  type: "Backdrops" | "Posters";
 }) {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
@@ -23,7 +26,7 @@ export default function ImageList({
     <div className="flex items-start gap-10 px-15 py-10">
       <div className="w-full max-w-xs rounded-lg border shadow-lg">
         <div className="border-b px-6 py-3">
-          <h1 className="text-xl font-semibold">Backdrops</h1>
+          <h1 className="text-xl font-semibold">{type}</h1>
         </div>
         <div className="space-y-3 py-5">
           {categoriesWithCounts.map((item) => (
@@ -49,19 +52,31 @@ export default function ImageList({
         </div>
       </div>
       <div className="grid grid-cols-3 gap-10">
-        {backdrops
+        {images
           .filter((item) => item.iso_639_1 === selectedCategory)
           .map((image) => (
             <div
               key={image.file_path}
               className="overflow-hidden rounded-lg border shadow-lg dark:bg-neutral-900/50"
             >
-              <Image
-                src={getPoster("w500", image.file_path)}
-                alt="backdrop"
-                width={400}
-                height={100}
-              />
+              {type === "Backdrops" ? (
+                <Image
+                  src={getPoster("w500", image.file_path)}
+                  alt="backdrop"
+                  width={400}
+                  height={100}
+                />
+              ) : (
+                <div className="relative aspect-2/3 w-70">
+                  <Image
+                    src={getPoster("w500", image.file_path)}
+                    alt="poster"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              )}
+
               <ImageDetails image={image} />
             </div>
           ))}
