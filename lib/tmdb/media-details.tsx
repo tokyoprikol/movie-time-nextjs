@@ -16,6 +16,8 @@ export const getMediaTitle = (item: AnyMedia) =>
 export const getMediaDate = (item: AnyMedia) =>
   "release_date" in item ? item.release_date : item.first_air_date;
 
+import { Film, Tv, CircleUserRound } from "lucide-react";
+
 // --------------------------------------------------------
 export type SearchItem =
   | (MovieListItem & { media_type: "movie" })
@@ -39,5 +41,12 @@ export const getSearchItemPoster = (item: SearchItem) => {
 export const getSearchItemDate = (item: SearchItem) => {
   if (item.media_type === "movie") return item.release_date;
   else if (item.media_type === "tv") return item.first_air_date;
+  else return null;
+};
+
+export const getSearchItemIcon = (item: SearchItem) => {
+  if (item.media_type === "movie") return <Film size={20} />;
+  else if (item.media_type === "tv") return <Tv size={20} />;
+  else if (item.media_type === "person") return <CircleUserRound size={20} />;
   else return null;
 };

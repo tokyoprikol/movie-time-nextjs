@@ -16,6 +16,8 @@ export default function PersonImage({ person }: { person: PersonDetails }) {
       />
     </div>
   ) : (
-    <ImageOff />
+    <div className="relative flex aspect-2/3 w-full min-w-2xs items-center justify-center overflow-hidden rounded-lg border shadow-lg">
+      <ImageOff size={200} />
+    </div>
   );
 }
