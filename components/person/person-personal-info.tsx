@@ -9,8 +9,10 @@ export default function PersonPersonalInfo({
   person: PersonDetails;
 }) {
   return (
-    <div className="space-y-8">
-      <h1 className="text-2xl font-semibold">Personal Info</h1>
+    <div className="space-y-8 max-[400px]:hidden">
+      <h1 className="text-lg font-semibold md:text-xl lg:text-2xl">
+        Personal Info
+      </h1>
       <DataField title="Known For" data={person.known_for_department} />
       <DataField
         title="Known Credits"
@@ -33,7 +35,7 @@ export default function PersonPersonalInfo({
       <DataField title="Place of Birth" data={person.place_of_birth} />
 
       <div>
-        <h1 className="text-lg font-semibold">Also Known As</h1>
+        <h1 className="sm:text-md text-sm font-semibold">Also Known As</h1>
         <span className="text-neutral-400 italic">
           {person.also_known_as.length > 0
             ? person.also_known_as.map((i: string) => <p key={i}>{i}</p>)

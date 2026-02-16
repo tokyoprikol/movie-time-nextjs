@@ -7,7 +7,7 @@ export default function DataField({
 }) {
   return (
     <div>
-      <h1 className="text-sm font-semibold sm:text-lg">{title}</h1>
+      <h1 className="sm:text-md text-sm font-semibold">{title}</h1>
       <span className="text-sm text-neutral-400 italic sm:text-base">
         {data}
       </span>

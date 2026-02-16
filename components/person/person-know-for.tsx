@@ -8,9 +8,11 @@ import { PersonDetails } from "@/lib/tmdb/tmdbTypes";
 
 export default function PersonKnowFor({ person }: { person: PersonDetails }) {
   return (
-    <div className="space-y-2">
-      <h1 className="text-2xl font-semibold">Known For</h1>
-      <div className="flex flex-nowrap gap-10 overflow-x-auto">
+    <div className="space-y-2 max-[400px]:hidden">
+      <h1 className="text-lg font-semibold md:text-xl lg:text-2xl">
+        Known For
+      </h1>
+      <div className="flex w-full min-w-0 gap-10 overflow-x-auto">
         {person.combined_credits.cast.length > 0 ? (
           person.combined_credits.cast
             .filter(
@@ -24,7 +26,7 @@ export default function PersonKnowFor({ person }: { person: PersonDetails }) {
             .slice(0, 5)
             .map((media) => (
               <Link
-                className="w-full max-w-36"
+                className="w-full max-w-24 min-w-24 shrink-0 md:max-w-36 md:min-w-36"
                 key={media.id}
                 href={`/${getMediaType(
                   media,
@@ -43,7 +45,7 @@ export default function PersonKnowFor({ person }: { person: PersonDetails }) {
                   <ImageOff />
                 )}
 
-                <div className="p-4 pt-2 text-center font-semibold">
+                <div className="p-4 pt-2 text-center text-sm font-semibold">
                   {getMediaTitle(media)}
                 </div>
               </Link>

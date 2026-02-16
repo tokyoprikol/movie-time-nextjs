@@ -9,8 +9,12 @@ export default function PersonBiography({ person }: { person: PersonDetails }) {
 
   return (
     <div className="space-y-2">
-      <h1 className="text-2xl font-semibold">Biography</h1>
-      <p className={`${isOpen ? "line-clamp-none" : "line-clamp-5"}`}>
+      <h1 className="text-lg font-semibold md:text-xl lg:text-2xl">
+        Biography
+      </h1>
+      <p
+        className={`text-sm md:text-base ${isOpen ? "line-clamp-none" : "line-clamp-5"}`}
+      >
         {person.biography ? (
           person.biography
         ) : (

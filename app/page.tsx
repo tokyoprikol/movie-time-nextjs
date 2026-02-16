@@ -4,10 +4,12 @@ import Link from "next/link";
 
 export default function Page() {
   return (
-    <div className="flex-1">
-      <div className="mt-20 space-y-10 text-center">
-        <h1 className="text-6xl font-bold">Welcome to MovieTime</h1>
-        <p className="text-2xl">
+    <div className="flex flex-1 items-center justify-center">
+      <div className="space-y-10 px-7 text-center sm:px-10 md:px-15">
+        <h1 className="text-4xl font-bold md:text-5xl lg:text-6xl">
+          Welcome to MovieTime
+        </h1>
+        <p className="text-base sm:text-lg md:text-xl lg:text-2xl">
           Discover millions of movies, TV shows, and people. Explore what's
           popular, trending, and highly rated.
         </p>

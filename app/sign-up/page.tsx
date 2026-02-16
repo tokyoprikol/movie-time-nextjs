@@ -73,11 +73,11 @@ export default function SignUp() {
   };
 
   return (
-    <div className="flex flex-1 items-center justify-center">
+    <div className="flex flex-1 items-center justify-center px-7 py-3">
       <Card className="w-full max-w-xl">
         <CardHeader>
-          <CardTitle className="text-2xl font-bold">Sign Up</CardTitle>
-          <CardDescription className="flex flex-col text-neutral-400">
+          <CardTitle className="font-bold sm:text-2xl">Sign Up</CardTitle>
+          <CardDescription className="flex flex-col text-xs text-neutral-400 sm:text-sm">
             Enter your credentials below to create account
             {error && (
               <span className="mt-2 rounded-sm border border-red-300 bg-red-200 p-2 text-red-500">
@@ -92,6 +92,7 @@ export default function SignUp() {
               <div className="space-y-2">
                 <Label htmlFor="email">Name</Label>
                 <Input
+                  className="text-sm"
                   type="text"
                   id="name"
                   placeholder="John Doe"
@@ -103,6 +104,7 @@ export default function SignUp() {
               <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
                 <Input
+                  className="text-sm"
                   type="email"
                   id="email"
                   placeholder="johndoe@example.com"
@@ -114,6 +116,7 @@ export default function SignUp() {
               <div className="space-y-2">
                 <Label htmlFor="password">Password</Label>
                 <Input
+                  className="text-sm"
                   minLength={8}
                   type="password"
                   id="password"
@@ -125,6 +128,7 @@ export default function SignUp() {
               <div className="space-y-2">
                 <Label htmlFor="password">Confirm password</Label>
                 <Input
+                  className="text-sm"
                   minLength={8}
                   type="password"
                   id="password"
@@ -139,12 +143,13 @@ export default function SignUp() {
         <CardFooter className="flex flex-col gap-3">
           <Button
             className="w-full"
+            size={"sm"}
             disabled={isLoading}
             onClick={handleSignUp}
           >
             {isLoading ? "Signing Up..." : "Sign Up"}
           </Button>
-          <span>
+          <span className="text-sm sm:text-base">
             Already have an account?{" "}
             <Link href={"/sign-in"} className="font-bold hover:underline">
               Sign in

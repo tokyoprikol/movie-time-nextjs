@@ -11,8 +11,8 @@ import { Minus, Circle } from "lucide-react";
 
 export default function PersonActing({ person }: { person: PersonDetails }) {
   return (
-    <div className="space-y-5">
-      <h1 className="text-2xl font-semibold">Acting</h1>
+    <div className="space-y-5 max-[400px]:hidden">
+      <h1 className="text-lg font-semibold md:text-xl lg:text-2xl">Acting</h1>
       <div className="flex flex-col overflow-hidden rounded-lg border shadow-lg dark:bg-neutral-900/50">
         {person.combined_credits.cast
           .filter((media, index, self) => {
@@ -29,17 +29,17 @@ export default function PersonActing({ person }: { person: PersonDetails }) {
           .map((media) => (
             <div
               key={media.id}
-              className="flex items-center gap-6 border-b-2 p-5 last:border-none"
+              className="flex items-center gap-10 border-b-2 px-3 py-2 last:border-none md:gap-6 md:px-5"
             >
-              <div className="flex w-full max-w-15 justify-center text-lg font-bold">
+              <div className="flex justify-center text-sm font-bold md:text-lg">
                 {getMediaDate(media) ? (
                   getMediaDate(media).slice(0, 4)
                 ) : (
                   <Minus />
                 )}
               </div>
-              <Circle size={15} className="w-full max-w-15" />
-              <div className="w-full">
+              <Circle size={15} />
+              <div className="text-sm md:text-base">
                 <Link
                   href={`/${getMediaType(
                     media,
