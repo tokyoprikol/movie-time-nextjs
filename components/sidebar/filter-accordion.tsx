@@ -21,6 +21,8 @@ export default function FilterAccordion({ genres }: { genres: Genre[] }) {
         ? prev.filter((g) => g.id != genre.id)
         : [...prev, genre],
     );
+
+    console.log(selectedGenres);
   };
 
   return (
@@ -43,7 +45,7 @@ export default function FilterAccordion({ genres }: { genres: Genre[] }) {
             {genres.map((genre: Genre) => (
               <Button
                 key={genre.id}
-                size={"sm"}
+                size={"xs"}
                 variant={
                   selectedGenres.some((g) => g.id === genre.id)
                     ? "default"

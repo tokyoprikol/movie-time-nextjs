@@ -9,7 +9,9 @@ import ReviewItem from "./review-item";
 export default function Reviews({ data }: { data: MovieDetails | TvDetails }) {
   return (
     <div className="space-y-5">
-      <h1 className="text-3xl font-bold">Reviews</h1>
+      <h1 className="text-lg font-bold sm:text-xl lg:text-2xl xl:text-3xl">
+        Reviews
+      </h1>
       <div className="space-y-12">
         {data.reviews.results.slice(0, 3).map((review) => (
           <ReviewItem key={review.id} review={review} />

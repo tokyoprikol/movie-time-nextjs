@@ -10,7 +10,7 @@ export default function ReviewContent({ review }: { review: Review }) {
   return (
     <div className="space-y-3">
       <div
-        className={`line-clamp-3 overflow-hidden ${isOpen ? "line-clamp-none" : "line-clamp-3"}`}
+        className={`line-clamp-3 overflow-hidden text-sm sm:text-base ${isOpen ? "line-clamp-none" : "line-clamp-3"}`}
       >
         {review.content}
       </div>

@@ -11,7 +11,7 @@ import { NAV_ITEMS } from "@/lib/config/nav-items";
 
 export default function NavMenu() {
   return (
-    <nav className="flex gap-4">
+    <nav className="hidden gap-1 lg:flex lg:gap-2 xl:gap-4">
       {NAV_ITEMS.map((menuItem) => (
         <DropdownMenu key={menuItem.title} modal={false}>
           <DropdownMenuTrigger asChild>

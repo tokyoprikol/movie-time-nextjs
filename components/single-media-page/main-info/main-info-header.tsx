@@ -34,31 +34,33 @@ export default function MainInfoHeader({
   }
 
   return (
-    <div className="space-y-4 text-white">
-      <div className="flex items-center gap-3">
-        <h1 className="text-3xl font-bold">{getMediaTitle(data)}</h1>
-        <p className="text-4xl font-bold text-neutral-300">
+    <div className="space-y-1 text-xs text-white sm:space-y-3 md:text-sm lg:text-base">
+      <div className="flex gap-1 max-[420px]:flex-col max-[375px]:hidden sm:items-center sm:gap-3">
+        <h1 className="text-lg font-bold sm:text-xl lg:text-2xl xl:text-3xl">
+          {getMediaTitle(data)}
+        </h1>
+        <p className="text-lg font-bold text-neutral-300 sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl">
           {getMediaDate(data)?.slice(0, 4) || "-"}
         </p>
       </div>
-      <div className="flex gap-4 font-medium">
+      <div className="flex flex-col items-start gap-4 font-medium max-[375px]:hidden sm:flex-row">
         {usCertification && (
-          <p className="rounded border-2 border-neutral-300 px-1 text-neutral-200">
+          <p className="flex items-center rounded border-2 border-neutral-300 px-1 text-neutral-200">
             {usCertification}
           </p>
         )}
 
         <p className="flex items-center gap-1">
-          <CalendarDays size={20} />
+          <CalendarDays className="size-5" />
           {convertDate(getMediaDate(data))}
         </p>
         <p className="flex items-center gap-1">
-          <Clapperboard size={20} />
+          <Clapperboard className="size-5" />
           {data.genres.map((g) => g.name).join(", ")}
         </p>
-        {isMovie && (
+        {"runtime" in data && (
           <p className="flex items-center gap-1">
-            <Clock8 size={20} />
+            <Clock8 className="size-5" />
             {"runtime" in data && convertMinToHours(data.runtime ?? 0)}
           </p>
         )}

@@ -55,25 +55,26 @@ export default function NavSearchBar() {
 
   return (
     <form
-      className="relative flex w-full max-w-100 items-center gap-1"
+      className="relative hidden w-full max-w-60 items-center gap-1 sm:flex sm:max-w-70 lg:max-w-70 xl:max-w-100"
       onSubmit={handleSearch}
     >
-      <InputGroup>
+      <InputGroup className="h-8 lg:h-9">
         <InputGroupAddon>
           <SearchIcon />
         </InputGroupAddon>
         <InputGroupInput
+          className="text-sm"
           placeholder="Search..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
       </InputGroup>
-      <Button variant={"outline"} type="submit">
+      <Button variant={"outline"} type="submit" className="h-8 lg:h-9">
         <SearchIcon />
       </Button>
 
       {showDropdownSearch && (
-        <div className="absolute top-full left-0 z-100 mt-3 w-full max-w-lg rounded-md border bg-neutral-50 p-4 shadow-lg dark:bg-neutral-900">
+        <div className="absolute top-full left-0 z-100 mt-3 w-full rounded-md border bg-neutral-50 p-4 shadow-lg lg:max-w-lg dark:bg-neutral-900">
           <div className="text-sm">
             {isLoading ? (
               "Loading..."

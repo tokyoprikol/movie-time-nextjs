@@ -4,7 +4,14 @@ import NavMenu from "./navbar/nav-menu";
 import NavLogo from "./navbar/nav-logo";
 import NavSearchBar from "./navbar/nav-searchbar";
 import NavAuth from "./navbar/nav-auth";
-import { Settings, User, LogOut, Moon, Sun } from "lucide-react";
+import {
+  Settings,
+  User,
+  LogOut,
+  Moon,
+  Sun,
+  EllipsisVertical,
+} from "lucide-react";
 
 import { signOut, useSession } from "@/lib/auth-client";
 
@@ -20,10 +27,33 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { Switch } from "./ui/switch";
 import { Label } from "./ui/label";
+import { useState } from "react";
+import BurgerMenu from "./navbar/burger-menu";
+import Link from "next/link";
+import { Button } from "./ui/button";
+import { NAV_ITEMS } from "@/lib/config/nav-items";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "./ui/accordion";
 
 export default function Header() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   const { data: session, isPending, error, refetch } = useSession();
   const router = useRouter();
   const { theme, setTheme } = useTheme();
@@ -44,15 +74,15 @@ export default function Header() {
   };
 
   return (
-    <header className="flex items-center justify-between border-b-2 px-15 py-3">
-      <div className="flex items-center gap-15">
+    <header className="flex items-center justify-between border-b-2 px-7 py-3 sm:px-10 md:px-15">
+      <div className="flex items-center gap-3 lg:gap-5 xl:gap-15">
         <NavLogo />
         {session && <NavMenu />}
       </div>
 
       {session && <NavSearchBar />}
 
-      <div className="flex items-center gap-2">
+      <div className="hidden items-center gap-2 lg:flex">
         <Switch
           id="switchTheme"
           checked={isLight}
@@ -64,33 +94,37 @@ export default function Header() {
         </Label>
       </div>
 
-      {session && (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Avatar>
-              <AvatarFallback className="cursor-pointer">
-                {session?.user.name[0].toUpperCase()}
-              </AvatarFallback>
-            </Avatar>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
-            <DropdownMenuItem>
-              <User />
-              Profile
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Settings />
-              Settings
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem onClick={handleSignOut}>
-              <LogOut />
-              Sign Out
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      )}
+      <div className="relative flex items-center gap-3">
+        {session && <BurgerMenu />}
+
+        {session && (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Avatar>
+                <AvatarFallback className="cursor-pointer">
+                  {session?.user.name[0].toUpperCase()}
+                </AvatarFallback>
+              </Avatar>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuLabel>My Account</DropdownMenuLabel>
+              <DropdownMenuItem>
+                <User />
+                Profile
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Settings />
+                Settings
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={handleSignOut}>
+                <LogOut />
+                Sign Out
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        )}
+      </div>
       {!session && <NavAuth />}
     </header>
   );

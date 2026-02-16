@@ -114,10 +114,10 @@ export default function InfiniteScroll({
 
   return (
     <div
-      className={`${
+      className={`flex-1 ${
         mediaType === "movie" || mediaType === "tv"
-          ? "space-y-10"
-          : "flex-1 space-y-10 px-15 py-15"
+          ? "space-y-3 sm:space-y-5 md:space-y-8 lg:space-y-10"
+          : "flex-1 space-y-3 px-7 py-7 sm:space-y-5 sm:px-10 sm:py-10 md:space-y-8 md:px-15 md:py-15 lg:space-y-10"
       }`}
     >
       {mediaType === "movie" || mediaType === "tv" ? (

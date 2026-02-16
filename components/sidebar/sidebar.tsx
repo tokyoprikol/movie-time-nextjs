@@ -4,7 +4,7 @@ import { GenresResponse } from "@/lib/tmdb/tmdbTypes";
 
 export default function Sidebar({ genres }: GenresResponse) {
   return (
-    <div className="flex w-full max-w-60 flex-col space-y-5">
+    <div className="hidden w-full max-w-40 flex-col space-y-5 md:max-w-40 lg:flex lg:max-w-50">
       <FilterAccordion genres={genres} />
       <Button variant={"secondary"}>Search</Button>
     </div>

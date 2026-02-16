@@ -41,7 +41,7 @@ export default function AdditionalInfo({
         <h1 className="text-lg font-semibold">Keywords</h1>
         <div className="flex flex-wrap gap-2">
           {keywords?.map((word) => (
-            <Button size="sm" variant={"secondary"} key={word.id}>
+            <Button size="xs" variant={"secondary"} key={word.id}>
               {word.name}
             </Button>
           ))}

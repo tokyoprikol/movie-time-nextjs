@@ -15,12 +15,14 @@ export default function Cast({ data }: { data: MovieDetails | TvDetails }) {
 
   return (
     <div className="space-y-5">
-      <h1 className="text-3xl font-bold">Cast</h1>
-      <div className="flex flex-nowrap justify-center gap-5">
+      <h1 className="text-lg font-bold sm:text-xl lg:text-2xl xl:text-3xl">
+        Cast
+      </h1>
+      <div className="flex gap-5 overflow-x-auto">
         {cast?.slice(0, 6).map((item) => (
           <div
             key={item.id}
-            className="w-full max-w-43 rounded-lg border shadow-lg dark:bg-neutral-900/50"
+            className="w-full max-w-40 min-w-40 rounded-lg border shadow-lg dark:bg-neutral-900/50"
           >
             <Link href={`/people/${item.id}`}>
               <div className="relative aspect-3/4 w-full">

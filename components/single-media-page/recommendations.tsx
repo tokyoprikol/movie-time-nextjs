@@ -14,7 +14,9 @@ export default function Recommendations({
 }) {
   return (
     <div className="space-y-5">
-      <h1 className="text-3xl font-bold">Recommendations</h1>
+      <h1 className="text-lg font-bold sm:text-xl lg:text-2xl xl:text-3xl">
+        Recommendations
+      </h1>
       <ScrollArea>
         <div className="mb-4 flex flex-nowrap gap-9">
           {data.recommendations.results.length > 0 ? (
@@ -47,8 +49,7 @@ export default function Recommendations({
           ) : (
             <h1>
               We don't have enough data to suggest any movies based on{" "}
-              <span className="font-semibold">{getMediaTitle(data)}</span>. You
-              can help by rating movies you've seen.
+              <span className="font-semibold">{getMediaTitle(data)}</span>.
             </h1>
           )}
         </div>

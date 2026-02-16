@@ -9,13 +9,19 @@ import {
 export default function SelectSort() {
   return (
     <Select>
-      <SelectTrigger>
-        <SelectValue placeholder="Choose sort method" />
+      <SelectTrigger size="sm" className="text-xs">
+        <SelectValue placeholder="Sort method" />
       </SelectTrigger>
       <SelectContent position="popper">
-        <SelectItem value="title">Sort by Title</SelectItem>
-        <SelectItem value="date">Sort by Date</SelectItem>
-        <SelectItem value="default">Default</SelectItem>
+        <SelectItem className="text-xs" value="title">
+          Sort by Title
+        </SelectItem>
+        <SelectItem className="text-xs" value="date">
+          Sort by Date
+        </SelectItem>
+        <SelectItem className="text-xs" value="default">
+          Default
+        </SelectItem>
       </SelectContent>
     </Select>
   );

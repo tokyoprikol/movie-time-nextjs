@@ -15,39 +15,39 @@ import { slugify } from "@/lib/utils/slugify";
 import { getMediaTitle } from "@/lib/tmdb/media-details";
 
 export default function Medias({ data }: { data: MovieDetails | TvDetails }) {
-  const [selectedTab, setSelectedTab] = useState("videos");
+  const [selectedTab, setSelectedTab] = useState("backdrops");
 
   const isImages = selectedTab === "backdrops" || selectedTab === "posters";
   const idAndSlugUrl = `${data.id}-${slugify(getMediaTitle(data))}`;
 
   return (
     <div className="space-y-10">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-30">
-          <h1 className="text-3xl font-bold">Media</h1>
-          <div className="flex items-center gap-7">
-            <Button
-              variant={selectedTab === "videos" ? "secondary" : "ghost"}
-              onClick={() => setSelectedTab("videos")}
-            >
-              Videos
-            </Button>
-            <Button
-              variant={selectedTab === "backdrops" ? "secondary" : "ghost"}
-              onClick={() => setSelectedTab("backdrops")}
-            >
-              Backdrops
-            </Button>
-            <Button
-              variant={selectedTab === "posters" ? "secondary" : "ghost"}
-              onClick={() => setSelectedTab("posters")}
-            >
-              Posters
-            </Button>
-          </div>
+      <h1 className="text-lg font-bold sm:text-xl lg:text-2xl xl:text-3xl">
+        Media
+      </h1>
+      <div className="flex flex-col items-center justify-between sm:flex-row">
+        <div className="flex items-center">
+          <Button
+            variant={selectedTab === "videos" ? "secondary" : "ghost"}
+            onClick={() => setSelectedTab("videos")}
+          >
+            Videos
+          </Button>
+          <Button
+            variant={selectedTab === "backdrops" ? "secondary" : "ghost"}
+            onClick={() => setSelectedTab("backdrops")}
+          >
+            Backdrops
+          </Button>
+          <Button
+            variant={selectedTab === "posters" ? "secondary" : "ghost"}
+            onClick={() => setSelectedTab("posters")}
+          >
+            Posters
+          </Button>
         </div>
 
-        <Button variant={"outline"}>
+        <Button variant={"outline"} className="mt-4 sm:mt-0">
           <Link
             href={`${idAndSlugUrl}/${isImages ? `images/${selectedTab}` : "videos/"}`}
           >
@@ -67,7 +67,7 @@ export default function Medias({ data }: { data: MovieDetails | TvDetails }) {
               .map((item) => (
                 <div
                   key={item.id}
-                  className="aspect-video min-h-70 overflow-hidden rounded-lg"
+                  className="aspect-video min-h-40 overflow-hidden rounded-lg sm:min-h-60"
                 >
                   <iframe
                     width="100%"
@@ -81,7 +81,10 @@ export default function Medias({ data }: { data: MovieDetails | TvDetails }) {
               ))}
           {selectedTab === "backdrops" &&
             data.images.backdrops.slice(0, 8).map((i) => (
-              <div key={i.file_path} className="relative aspect-video min-h-70">
+              <div
+                key={i.file_path}
+                className="relative aspect-video min-h-40 sm:min-h-60"
+              >
                 <Image
                   src={getPoster("w780", i.file_path)}
                   alt="image"
@@ -93,7 +96,10 @@ export default function Medias({ data }: { data: MovieDetails | TvDetails }) {
 
           {selectedTab === "posters" &&
             data.images.posters.slice(0, 8).map((i) => (
-              <div key={i.file_path} className="relative aspect-2/3 min-h-70">
+              <div
+                key={i.file_path}
+                className="relative aspect-2/3 min-h-40 sm:min-h-60"
+              >
                 <Image
                   src={getPoster("w500", i.file_path)}
                   alt="image"
