@@ -13,7 +13,7 @@ A modern, responsive movie discovery application built with **Next.js 16**, **Ty
 
 ## 🛠️ Tech Stack
 
-- **Framework:** [Next.js 15](https://nextjs.org/)
+- **Framework:** [Next.js 16](https://nextjs.org/)
 - **Language:** [TypeScript](https://www.typescriptlang.org/)
 - **Styling:** [Tailwind CSS](https://tailwindcss.com/)
 - **API:** [The Movie Database (TMDB)](https://www.themoviedb.org/documentation/api)
