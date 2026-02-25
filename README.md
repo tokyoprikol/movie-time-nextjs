@@ -2,10 +2,6 @@
 
 A modern, responsive movie discovery application built with **Next.js 15**, **TypeScript**, and **Tailwind CSS**. This project leverages the **TMDB API** to provide real-time data about trending movies, TV shows, and detailed information about cinema.
 
-![License](https://img.shields.io/github/license/tokyoprikol/movie-time-nextjs?style=flat-square)
-![Next.js](https://img.shields.io/badge/Next.js-15-black?style=flat-square&logo=next.dot.js)
-![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=flat-square&logo=typescript)
-
 ## 🌟 Features
 
 - ⚡ **Next.js 15 (App Router)** – Utilizing the latest React features and Server Components.
