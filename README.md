@@ -43,28 +43,4 @@ A modern, responsive movie discovery application built with **Next.js 15**, **Ty
 Bash
 npm install
 
-# or
-
-yarn install
-Set up Environment Variables:
-Create a .env.local file in the root directory and add your TMDB API key:
-
-Code snippet
-NEXT_PUBLIC_TMDB_API_KEY=your_api_key_here
-Run the development server:
-
-Bash
-npm run dev
-Open http://localhost:3000 with your browser to see the result.
-
-📂 Project Structure
-Plaintext
-├── app/ # Next.js App Router (pages & layouts)
-├── components/ # Reusable UI components
-├── lib/ # Utility functions and API fetching logic
-├── public/ # Static assets (images, icons)
-└── types/ # TypeScript interfaces and types
-📝 License
-This project is licensed under the MIT License - see the LICENSE file for details.
-
 Developed with ❤️ by tokyoprikol
