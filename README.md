@@ -1,6 +1,6 @@
 # 🎬 Movie Time
 
-A modern, responsive movie discovery application built with **Next.js 15**, **TypeScript**, and **Tailwind CSS**. This project leverages the **TMDB API** to provide real-time data about trending movies, TV shows, and detailed information about cinema.
+A modern, responsive movie discovery application built with **Next.js 16**, **TypeScript**, and **Tailwind CSS**. This project leverages the **TMDB API** to provide real-time data about trending movies, TV shows, and detailed information about cinema.
 
 ## 🌟 Features
 
