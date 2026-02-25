@@ -44,6 +44,7 @@ export async function getFilteredMovies(
 
   let query = `/discover/movie
     ?sort_by=${cfg.sort_by}
+    &with_genres=${genres}
     &language=${language}
     &page=${page}`;
 

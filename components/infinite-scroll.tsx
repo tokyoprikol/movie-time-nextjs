@@ -4,6 +4,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
 
+// ------------------TYPES-----------------
 import {
   MediaResponse,
   MovieListItem,
@@ -16,7 +17,9 @@ type MediaType = "movie" | "tv" | "people";
 type MovieCategory = "popular" | "now-playing" | "upcoming" | "top-rated";
 type TvCategory = "popular" | "airing-today" | "on-the-air" | "top-rated";
 type PeopleCategory = "popular";
+// ----------------------------------------
 
+// -----------------FETCH FUNCTIONS------------------
 import {
   getPopularMovies,
   getNowPlayingMovies,
@@ -32,11 +35,15 @@ import {
 } from "@/lib/tmdb/API/tv-series";
 
 import { getPopularPeople } from "@/lib/tmdb/API/people";
+// --------------------------------------------------
 
+// -----------------COMPONENTS ETC.---------------------
 import MediaList from "./media-list";
-
-import { LoaderCircle } from "lucide-react";
 import PeopleList from "./people-list";
+import { LoaderCircle } from "lucide-react";
+import { useGenresStore } from "@/lib/selectedGenresStore";
+import { getFilteredMovies } from "@/lib/tmdb/API/discover";
+// ------------------------------------------------------
 
 interface InfiniteScrollProps {
   title: string;
@@ -75,6 +82,9 @@ export default function InfiniteScroll({
   mediaType,
   category,
 }: InfiniteScrollProps) {
+  const { selectedGenres, isFilterActive } = useGenresStore();
+  const genresIds = selectedGenres.map((g) => g.id).join(",");
+
   const fetcher = (pageParam: number) => {
     const categoryGroup = fetchMap[mediaType] as any;
     const fetchFn = categoryGroup[category];
@@ -89,8 +99,15 @@ export default function InfiniteScroll({
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status } =
     useInfiniteQuery({
-      queryKey: [mediaType, category],
-      queryFn: ({ pageParam = 1 }) => fetcher(pageParam),
+      queryKey: [mediaType, category, isFilterActive, selectedGenres],
+      queryFn: ({ pageParam = 1 }) => {
+        if (isFilterActive && genresIds.length > 0) {
+          return getFilteredMovies("popular", genresIds);
+        }
+
+        return fetcher(pageParam);
+      },
+
       initialPageParam: 1,
       getNextPageParam: (lastPage) => {
         const next = lastPage.page + 1;

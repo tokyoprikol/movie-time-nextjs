@@ -9,21 +9,12 @@ import {
 
 import SelectSort from "@/components/sidebar/select-sort";
 import { Button } from "../ui/button";
-import { Genre } from "@/lib/tmdb/types";
-import { useState } from "react";
 
-export default function FilterAccordion({ genres }: { genres: Genre[] }) {
-  const [selectedGenres, setSelectedGenres] = useState<Genre[]>([]);
+import { useGenresStore } from "@/lib/selectedGenresStore";
+import { Genres } from "@/lib/tmdb/tmdbTypes";
 
-  const handleSelectGenre = (genre: Genre) => {
-    setSelectedGenres((prev) =>
-      prev.some((g) => g.id === genre.id)
-        ? prev.filter((g) => g.id != genre.id)
-        : [...prev, genre],
-    );
-
-    console.log(selectedGenres);
-  };
+export default function FilterAccordion({ genres }: { genres: Genres[] }) {
+  const { selectedGenres, setSelectedGenres } = useGenresStore();
 
   return (
     <Accordion
@@ -42,7 +33,7 @@ export default function FilterAccordion({ genres }: { genres: Genre[] }) {
         <AccordionContent>
           <h1 className="mb-3 text-neutral-400">Genres</h1>
           <div className="flex flex-wrap gap-2">
-            {genres.map((genre: Genre) => (
+            {genres.map((genre: Genres) => (
               <Button
                 key={genre.id}
                 size={"xs"}
@@ -51,7 +42,7 @@ export default function FilterAccordion({ genres }: { genres: Genre[] }) {
                     ? "default"
                     : "secondary"
                 }
-                onClick={() => handleSelectGenre(genre)}
+                onClick={() => setSelectedGenres(genre)}
               >
                 {genre.name}
               </Button>
