@@ -126,7 +126,7 @@ export default function SearchedMediaList({
                 .filter(
                   (item) =>
                     item.media_type === selectedType &&
-                    (item.poster_path || item.profile_path),
+                    getSearchItemPoster(item),
                 )
                 .map((item) => {
                   const poster = getSearchItemPoster(item);

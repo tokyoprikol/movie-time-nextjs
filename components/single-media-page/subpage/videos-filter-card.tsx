@@ -1,4 +1,5 @@
 import { MovieDetails, TvDetails } from "@/lib/tmdb/tmdbTypes";
+import { VIDEO_CATEGORIES } from "@/lib/config/filter-categories";
 import SubpageFilterListItem from "./subpage-filter-list-item";
 
 export default function VideosFilterCard({
@@ -13,7 +14,11 @@ export default function VideosFilterCard({
       </div>
       <div className="space-y-3 py-5">
         {VIDEO_CATEGORIES.map((category) => (
-          <SubpageFilterListItem key={category} title={category} data={data} />
+          <SubpageFilterListItem
+            key={category.category}
+            title={category.category_name}
+            data={data}
+          />
         ))}
       </div>
     </div>
