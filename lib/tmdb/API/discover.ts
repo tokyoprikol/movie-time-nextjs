@@ -42,11 +42,7 @@ export async function getFilteredMovies(
 ): Promise<MediaResponse<MovieListItem[]>> {
   const cfg = SORT_PRESETS[preset];
 
-  let query = `/discover/movie
-    ?sort_by=${cfg.sort_by}
-    &with_genres=${genres}
-    &language=${language}
-    &page=${page}`;
+  let query = `/discover/movie?sort_by=${cfg.sort_by}&with_genres=${genres}&language=${language}&page=${page}`;
 
   if (cfg.extra) query += cfg.extra;
 

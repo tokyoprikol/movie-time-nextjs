@@ -28,7 +28,7 @@ export default function MediaList({ title, data }: MediaListPageProps) {
         {data.map((dataItem: MovieListItem | TvListItem) => (
           <div
             key={dataItem.id}
-            className="cursor-pointer overflow-hidden rounded-lg border shadow-xl dark:bg-neutral-900/50"
+            className="cursor-pointer overflow-hidden rounded-lg border shadow-lg ring-neutral-700 transition hover:shadow-2xl dark:bg-neutral-900/50 dark:hover:ring-1"
           >
             <Link
               href={`/${getMediaType(dataItem)}/${dataItem.id}-${slugify(getMediaTitle(dataItem))}`}

@@ -99,7 +99,7 @@ export default function InfiniteScroll({
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status } =
     useInfiniteQuery({
-      queryKey: [mediaType, category, isFilterActive, selectedGenres],
+      queryKey: [mediaType, category, isFilterActive],
       queryFn: ({ pageParam = 1 }) => {
         if (isFilterActive && genresIds.length > 0) {
           return getFilteredMovies("popular", genresIds);

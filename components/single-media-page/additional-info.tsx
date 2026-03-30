@@ -23,14 +23,14 @@ export default function AdditionalInfo({
         data={LANGUAGES[data.original_language as keyof typeof LANGUAGES]}
       />
 
-      {isMovie && data.budget && (
+      {isMovie && data.budget !== 0 && (
         <DataField
           title="Budget"
           data={currencyFormatter.format(data.budget)}
         />
       )}
 
-      {isMovie && data.revenue && (
+      {isMovie && data.revenue !== 0 && (
         <DataField
           title="Revenue"
           data={currencyFormatter.format(data.revenue)}

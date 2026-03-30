@@ -82,7 +82,7 @@ export default function SingleMediaPage({
           </div>
         </div>
 
-        <div className="hidden w-xs pl-10">
+        <div className="w-xs pl-10">
           <AdditionalInfo data={data} />
           <Separator className="my-10" />
         </div>
